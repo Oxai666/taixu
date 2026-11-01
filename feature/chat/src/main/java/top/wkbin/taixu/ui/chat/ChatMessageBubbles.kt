@@ -152,7 +152,7 @@ internal fun UserBubble(
 
             // 🌟 2. 用户文字气泡（clipBubbleShape 只裁绘制：四角异径的 Surface 会在图层轮廓里
             // 生成 Path，超长消息下半部分触摸判定会因 float 精度失效）
-            if (message.text.isNotBlank()) {
+            val visibleText = top.wkbin.taixu.harness.session.stripLegacyAttachmentPrompt(message.text).orEmpty(); if (visibleText.isNotBlank()) {
                 Box(
                     modifier = Modifier
                         .widthIn(max = 560.dp)
@@ -162,8 +162,8 @@ internal fun UserBubble(
                 ) {
                     val mentionColor = MaterialTheme.colorScheme.primary
                     val mentionBg = MaterialTheme.colorScheme.primary.copy(alpha = 0.18f)
-                    val annotatedText = remember(message.text, knownMentionNames, mentionColor, mentionBg) {
-                        formatMentionText(message.text, knownMentionNames, mentionColor, mentionBg)
+                    val annotatedText = remember(visibleText, knownMentionNames, mentionColor, mentionBg) {
+                        formatMentionText(visibleText, knownMentionNames, mentionColor, mentionBg)
                     }
                     SelectionContainer {
                         Text(

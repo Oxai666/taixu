@@ -209,7 +209,7 @@ internal fun ChatMessageList(
                                     onDismiss = { onDismissSkillSuggestion(message.id) },
                                 )
                             }
-                            is ModelSwitchEvent -> ModelSwitchCard(message)
+                            is ModelSwitchEvent -> Unit  // 切换模型的横幅不再显示：它是过程噪音，不是对话内容
                             is TurnChangesEvent -> TurnChangesCard(message)
                             is UserMessage -> UserBubble(
                                 message = message,

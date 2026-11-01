@@ -272,7 +272,7 @@ object ApiMessageProjector {
  * 而它们对模型的唯一作用是「去读一个不存在的文件」，然后得到「图片我这边没拿到」。
  * UI 仍显示原文（用户看得见自己发过什么），只把发给模型的那份洗干净。
  */
-internal fun stripLegacyAttachmentPrompt(text: String?): String? {
+fun stripLegacyAttachmentPrompt(text: String?): String? {
     if (text.isNullOrBlank()) return text
     var out = text
     // 中文旧版：从标题标记删到访问提示结尾
