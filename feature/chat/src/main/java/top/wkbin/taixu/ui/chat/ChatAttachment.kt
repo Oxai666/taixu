@@ -105,9 +105,13 @@ object AttachmentHelper {
         }
 
         // 统一复制到所有发行版共用的 Runtime 目录，PRoot 固定挂载为 /attachments。
+        // 图片不再落沙箱：压缩成 base64 直接内联给模型（image_url）。
+        // 沙箱副本唯一用途是让 Agent 用 read 打开，但图片走的是 image_url，多留一份只是白占空间，
+        // 还会让用户以为「发图必须先传进沙箱」。文档类附件照旧进沙箱，Agent 需要 read。
         val attachmentsDir = File(context.filesDir, "linux-runtime/attachments").apply { mkdirs() }
         val safeName = name.replace(Regex("[^a-zA-Z0-9._-]"), "_")
-        val targetFile = File(attachmentsDir, "${System.currentTimeMillis()}_$safeName")
+        val targetFile = if (isImage) File(context.cacheDir, "${System.currentTimeMillis()}_$safeName")
+        else File(attachmentsDir, "${System.currentTimeMillis()}_$safeName")
 
         return try {
             contentResolver.openInputStream(uri)?.use { input ->
@@ -120,7 +124,7 @@ object AttachmentHelper {
             } ?: return AttachmentProcessResult.Failed(name)
             if (size == 0L) size = targetFile.length()
 
-            val guestPath = "/attachments/${targetFile.name}"
+            val guestPath = if (isImage) null else "/attachments/${targetFile.name}"
             val sourceMimeType = contentResolver.getType(uri)
                 ?.takeIf { it.startsWith("image/", ignoreCase = true) }
                 ?: "image/jpeg"
@@ -167,6 +171,8 @@ object AttachmentHelper {
                     }
                 }.getOrNull()
             } else null
+            // 图片压缩完即删：临时文件在 cacheDir，不留在任何可利用的位置
+            if (isImage) runCatching { targetFile.delete() }
 
             // 文档类附件（.docx）挂载即抽取正文为同名 .txt：Agent read 二进制 OOXML 全是乱码
             val extractedTextGuestPath = if (!isImage && name.endsWith(".docx", ignoreCase = true)) {
@@ -178,7 +184,7 @@ object AttachmentHelper {
                     isImage = isImage,
                     sizeBytes = size,
                     uri = uri,
-                    hostFilePath = targetFile.absolutePath,
+                    hostFilePath = if (isImage) null else targetFile.absolutePath,
                     guestFilePath = guestPath,
                     extractedTextGuestPath = extractedTextGuestPath,
                     base64DataUrl = base64,
