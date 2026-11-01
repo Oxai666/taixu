@@ -321,9 +321,8 @@ private fun FloatingChatPanel(
     var inputText by remember { mutableStateOf("") }
     val listState = rememberLazyListState()
 
-    val displayMessages = remember(messages) {
-        messages.filter { it !is ToolResult }.takeLast(20)
-    }
+    // 不再 filter 掉 ToolResult：结果与思考都要留在窗里
+    val displayMessages = remember(messages) { messages.takeLast(40) }
 
     LaunchedEffect(displayMessages.size, running) {
         if (displayMessages.isNotEmpty()) {
@@ -521,6 +520,7 @@ private fun FloatingChatPanel(
                                                 }
                                             }
                                         }
+                                        msg.reasoning?.takeIf { it.isNotBlank() }?.let { FloatingReasoningBubble(it) }
                                         if (msg.text.isNotBlank()) {
                                             Surface(
                                                 color = MaterialTheme.colorScheme.surfaceContainerHighest,
@@ -562,6 +562,7 @@ private fun FloatingChatPanel(
                                         }
                                     }
                                 }
+                                is ToolResult -> FloatingToolResultBubble(msg)
                                 is ModelSwitchEvent -> {
                                     Text(
                                         text = stringResource(
