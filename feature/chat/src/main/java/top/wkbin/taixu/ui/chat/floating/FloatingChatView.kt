@@ -520,20 +520,7 @@ private fun FloatingChatPanel(
                                             }
                                         }
                                         msg.reasoning?.takeIf { it.isNotBlank() }?.let { FloatingReasoningBubble(it) }
-                                        if (msg.text.isNotBlank()) {
-                                            Surface(
-                                                color = MaterialTheme.colorScheme.surfaceContainerHighest,
-                                                shape = RoundedCornerShape(10.dp),
-                                                modifier = Modifier.widthIn(max = 260.dp),
-                                            ) {
-                                                Text(
-                                                    text = msg.text,
-                                                    style = MaterialTheme.typography.bodySmall.copy(fontSize = 11.5.sp),
-                                                    color = MaterialTheme.colorScheme.onSurface,
-                                                    modifier = Modifier.padding(horizontal = 8.dp, vertical = 5.dp),
-                                                )
-                                            }
-                                        }
+                                        if (msg.text.isNotBlank()) FloatingAssistantBody(msg.text)
                                     }
                                 }
                                 is ToolCall -> {

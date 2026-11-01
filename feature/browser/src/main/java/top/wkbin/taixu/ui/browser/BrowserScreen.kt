@@ -193,7 +193,7 @@ private fun BrowserStatusBar(
     networkCount: Int,
     onExit: (() -> Unit)? = null,
 ) {
-    val openFloatingChat = rememberFloatingChatLauncher()  // 悬浮小窗入口，直接在此取，免穿参
+    val openFloatingChat = rememberFloatingChatLauncher(minimizeApp = false)  // 浏览器里原地浮层，不退后台
     Surface(
         color = MaterialTheme.colorScheme.surfaceContainerLow.copy(alpha = 0.65f),
         modifier = Modifier.fillMaxWidth(),

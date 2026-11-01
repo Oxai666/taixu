@@ -30,7 +30,7 @@ import top.wkbin.taixu.ui.components.RuntimeTextButton
 
 /** Keeps permission/result state alive when the workbench sheet closes. */
 @Composable
-fun rememberFloatingChatLauncher(): (() -> Unit)? {
+fun rememberFloatingChatLauncher(minimizeApp: Boolean = true): (() -> Unit)? {
     val context = LocalContext.current
     val activity = floatingChatActivity(context) ?: return null
     val lifecycle = LocalLifecycleOwner.current.lifecycle
@@ -47,7 +47,8 @@ fun rememberFloatingChatLauncher(): (() -> Unit)? {
             ) {
                 runCatching {
                     FloatingChatService.start(activity)
-                    activity.moveTaskToBack(true)
+                    // 浏览器等「原地浮一层」的场景不该把宿主退到后台，否则一点就回桌面。
+                    if (minimizeApp) activity.moveTaskToBack(true)
                 }.onFailure {
                     Toast.makeText(context, R.string.chat_floating_launch_failed, Toast.LENGTH_SHORT).show()
                 }
