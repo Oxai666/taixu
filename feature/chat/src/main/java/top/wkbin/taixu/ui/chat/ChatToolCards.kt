@@ -415,8 +415,7 @@ internal fun toolIcon(tool: HarnessTool): RuntimeIconName = when (tool) {
     HarnessTool.BUILD_SCRIPT -> RuntimeIconName.Hammer
     HarnessTool.SUBAGENT -> RuntimeIconName.Bot
     HarnessTool.MCP -> RuntimeIconName.Extension
-    HarnessTool.LOAD_RULE -> RuntimeIconName.BookOpen
-    HarnessTool.LOAD_SKILL -> RuntimeIconName.BookOpen
+    HarnessTool.LOAD_RULE, HarnessTool.LOAD_SKILL -> RuntimeIconName.BookOpen
     HarnessTool.COMPRESS -> RuntimeIconName.Compress
     HarnessTool.ASK_USER -> RuntimeIconName.Chat
     HarnessTool.RENDER_SURFACE -> RuntimeIconName.Palette
