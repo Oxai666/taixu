@@ -9,7 +9,7 @@ val appVersionName = "1.8.0"
 val appVersionCode = 46
 
 // TaiXuDev 双包构建开关：CI（.github/workflows/taixudev-build.yml）设 TAIXU_DEV_BUILD=1 时，
-// 产出独立预览包 top.wkbin.taixu.dev / 应用名 TaiXuDev / 版本后缀 -dev，
+// 产出独立预览包 top.wkbin.gulong.dev / 应用名 古龙预览 / 版本后缀 -dev，
 // 与正式版（top.wkbin.taixu）及本地调试包（top.wkbin.taixu.debug）完全共存互不干扰。
 val taiXuDevBuild = System.getenv("TAIXU_DEV_BUILD") == "1"
 
@@ -26,13 +26,15 @@ extensions.configure<ApplicationExtension> {
     ndkVersion = "30.0.15729638"
 
     defaultConfig {
-        applicationId = if (taiXuDevBuild) "top.wkbin.taixu.dev" else "top.wkbin.taixu"
+        // 古龙独立包名：与太墟（top.wkbin.taixu）互不覆盖，可以并存安装。
+        // namespace 保持 top.wkbin.taixu 不动——那是 Java 包路径，与安装标识无关。
+        applicationId = if (taiXuDevBuild) "top.wkbin.gulong.dev" else "top.wkbin.gulong"
         minSdk = 29
         targetSdk = 37
         versionCode = appVersionCode
         versionName = appVersionName
-        // 应用名统一走 manifest placeholder：TaiXuDev 构建显示 "TaiXuDev"，其余显示 "太墟"。
-        manifestPlaceholders["appLabel"] = if (taiXuDevBuild) "TaiXuDev" else "太墟"
+        // 应用名统一走 manifest placeholder：开发预览构建显示 "古龙预览"，其余显示 "古龙"。
+        manifestPlaceholders["appLabel"] = if (taiXuDevBuild) "古龙预览" else "古龙"
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
         ndk {
             abiFilters += "arm64-v8a"
@@ -90,7 +92,7 @@ extensions.configure<ApplicationExtension> {
         debug {
             // TaiXuDev 双包构建：包名与应用名已在 defaultConfig 按 taiXuDevBuild 分流，
             // 此处只控制后缀——本地调试包保持 top.wkbin.taixu.debug/-debug，
-            // TaiXuDev 预览包（top.wkbin.taixu.dev）不再叠加额外后缀，版本后缀为 -dev。
+            // TaiXuDev 预览包（top.wkbin.gulong.dev）不再叠加额外后缀，版本后缀为 -dev。
             if (!taiXuDevBuild) {
                 applicationIdSuffix = ".debug"
             }
@@ -100,7 +102,7 @@ extensions.configure<ApplicationExtension> {
             }
         }
         release {
-            manifestPlaceholders["appLabel"] = if (taiXuDevBuild) "TaiXuDev" else "太墟"
+            manifestPlaceholders["appLabel"] = if (taiXuDevBuild) "古龙预览" else "古龙"
             isMinifyEnabled = true
             isShrinkResources = true
             proguardFiles(

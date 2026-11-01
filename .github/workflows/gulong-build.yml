@@ -60,8 +60,9 @@ jobs:
         continue-on-error: true
 
       - name: Build Gulong APK
-        env:
-          TAIXU_DEV_BUILD: "1"
+        # 不设 TAIXU_DEV_BUILD：古龙线走标准 debug 身份
+        # （top.wkbin.gulong.debug + 应用名「古龙」），与太墟 top.wkbin.taixu[.debug] 完全独立，
+        # 两台包可以同时装在一台机器上，互不覆盖、互不共享数据目录。
         run: ./gradlew assembleDebug --no-daemon --stacktrace
 
       - name: Identify and Rename Output APK
