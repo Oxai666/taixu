@@ -12,21 +12,14 @@ internal fun buildComposerMessage(
     trimmedInput: String,
     attachments: List<ChatAttachment>,
 ): String {
-    val imageUrls = attachments.mapNotNull { it.base64DataUrl }
     val nonImageFiles = attachments.filter { !it.isImage }
     return buildString {
+        // 纯图片消息不拼任何文字：图片本身已经内联在消息里，模型直接就能看见，
+        // 再加一句「请分析附带的图片」是纯噪音，还会把它推去「找文件」。
         if (trimmedInput.isNotBlank()) {
             append(trimmedInput)
         } else if (nonImageFiles.isNotEmpty()) {
             append(context.getString(R.string.chat_attachment_files_prompt))
-        } else if (imageUrls.isNotEmpty()) {
-            append(context.getString(R.string.chat_attachment_images_prompt))
-        }
-        // 图片走 image_url 内联，沙箱里根本没有文件——再说「挂载到沙箱、用 base 读」
-        // 就是给出一个必然失败的指令（模型会去 read 一个不存在的路径）。
-        val imageCount = attachments.count { it.isImage }
-        if (imageCount > 0) {
-            append(context.getString(R.string.chat_attachment_images_inline, imageCount))
         }
         if (nonImageFiles.isNotEmpty()) {
             append(context.getString(R.string.chat_attachment_mount_header))
