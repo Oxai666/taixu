@@ -49,6 +49,16 @@ internal fun ModelDialog(
         )
         return
     }
+    // 当前选中模型的账户余额：拿不到就静默不显示，不占位、不报错
+    val providerRepo = org.koin.compose.koinInject<top.wkbin.taixu.core.tools.ProviderRepository>()
+    val activeProfile = models.firstOrNull { it.id == selectedProfileId }
+    var balanceText by remember(activeProfile?.id) { mutableStateOf<String?>(null) }
+    LaunchedEffect(activeProfile?.id) {
+        val p = activeProfile ?: return@LaunchedEffect
+        val key = providerRepo.readModelApiKeys(p.secretRef).firstOrNull()
+            ?: providerRepo.readApiKey().orEmpty()
+        balanceText = top.wkbin.taixu.harness.ProviderBalanceClient.fetch(p.baseUrl, key)
+    }
     val filtered = remember(models, query, selectedProfileId, selectedModelVariant) {
         models.filter { query.isBlank() || listOfNotNull(it.name, it.provider, it.model, selectedModelVariant.takeIf { _ -> it.id == selectedProfileId }).any { value -> value.contains(query.trim(), true) } }
     }
@@ -66,6 +76,11 @@ internal fun ModelDialog(
     ) {
         RuntimeSearchBar(query, { query = it }, Modifier.fillMaxWidth(),
             placeholder = stringResource(R.string.chat_search_provider))
+        balanceText?.let {
+            Text("余额 $it", Modifier.padding(top = 6.dp, bottom = 2.dp),
+                style = MaterialTheme.typography.bodyMedium,
+                color = MaterialTheme.colorScheme.primary)
+        }
         LazyColumn(Modifier.fillMaxWidth().weight(1f, fill = false), verticalArrangement = Arrangement.spacedBy(8.dp)) {
             if (filtered.isEmpty()) item {
                 Text(stringResource(if (models.isEmpty()) R.string.chat_no_models else R.string.chat_no_matching_models),
