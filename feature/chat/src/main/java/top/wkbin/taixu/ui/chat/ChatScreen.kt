@@ -179,7 +179,7 @@ fun ChatScreen(
     var showMemorySheet by rememberSaveable { mutableStateOf(false) }
     val timelineFocus = rememberSaveable(currentSessionId) { mutableStateOf<String?>(null) }
     val timelineItems = remember(currentSessionId) { mutableStateOf(ChatTimelineSnapshot()) }
-    var showReasoningSlider by rememberSaveable { mutableStateOf(false) }
+    var showReasoningSlider by rememberSaveable { mutableStateOf(false) }; var reasoningOpenedAt by remember { androidx.compose.runtime.mutableLongStateOf(0L) }
     var branchFromMessageId by rememberSaveable { mutableStateOf<String?>(null) }
     // 编辑目标消息只保存 id，避免把不可保存的实体放进状态保存器
     var editTargetMessageId by rememberSaveable { mutableStateOf<String?>(null) }
@@ -379,7 +379,7 @@ fun ChatScreen(
 
     // 模型回复里的 /workspace、/attachments 等沙箱路径在此翻译为宿主真实文件，
     // 否则 Coil 会按 Android 根文件系统路径加载而必然失败。
-    CompositionLocalProvider(LocalReasoningOpener provides { showReasoningSlider = true }, LocalSandboxHostRoots provides (viewModel?.sandboxHostRoots ?: emptyMap()), LocalA2uiSessionId provides currentSessionId, LocalChatTimelineFocus provides timelineFocus, LocalChatTimelineItems provides timelineItems, LocalChatContextLimit provides contextUsage.limitTokens) {
+    CompositionLocalProvider(LocalReasoningOpener provides { reasoningOpenedAt = System.currentTimeMillis(); showReasoningSlider = true }, LocalSandboxHostRoots provides (viewModel?.sandboxHostRoots ?: emptyMap()), LocalA2uiSessionId provides currentSessionId, LocalChatTimelineFocus provides timelineFocus, LocalChatTimelineItems provides timelineItems, LocalChatContextLimit provides contextUsage.limitTokens) {
     Scaffold(
         containerColor = MaterialTheme.colorScheme.background,
         snackbarHost = { SnackbarHost(snackbarHostState) },
@@ -610,9 +610,9 @@ fun ChatScreen(
             onDismiss = { showRunModes = false }) }
 
     if (showReasoningSlider) {
-        PlainBackdropModalBottomSheet(onDismissRequest = { showReasoningSlider = false }) { ReasoningEffortSlider(
+        PlainBackdropModalBottomSheet(onDismissRequest = { if (System.currentTimeMillis() - reasoningOpenedAt > 300L) showReasoningSlider = false }) { ReasoningEffortSlider(
             currentMode = activeModel?.reasoningMode, currentEffort = activeModel?.reasoningEffort,
-            onSelect = { mode, effort -> viewModel?.updateActiveModelReasoning(mode, effort); showReasoningSlider = false },
+            onSelect = { mode, effort -> viewModel?.updateActiveModelReasoning(mode, effort) },
             onClose = { showReasoningSlider = false }) }
     }
 

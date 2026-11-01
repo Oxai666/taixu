@@ -402,9 +402,7 @@ internal fun SkillsAndMcpSheet(
     }
 }
 
-/**
- * ⚡ 思考/推理强度悬浮调节面板（ChatGPT 同款平滑胶囊滑块）
- */
+/** 思考/推理强度悬浮调节面板（平滑胶囊滑块）。 */
 @Composable
 @OptIn(ExperimentalMaterial3Api::class, androidx.compose.material3.ExperimentalMaterial3ExpressiveApi::class)
 internal fun ReasoningEffortSlider(
@@ -418,6 +416,7 @@ internal fun ReasoningEffortSlider(
         Triple(stringResource(R.string.chat_reasoning_low), stringResource(R.string.chat_reasoning_low_description), "enabled" to "low"),
         Triple(stringResource(R.string.chat_reasoning_medium), stringResource(R.string.chat_reasoning_medium_description), "enabled" to "medium"),
         Triple(stringResource(R.string.chat_reasoning_high), stringResource(R.string.chat_reasoning_high_description), "enabled" to "high"),
+        Triple(stringResource(R.string.chat_reasoning_xhigh), stringResource(R.string.chat_reasoning_xhigh_description), "enabled" to "xhigh"),
         Triple(stringResource(R.string.chat_reasoning_extreme), stringResource(R.string.chat_reasoning_extreme_description), "enabled" to "max"),
     )
 
@@ -426,7 +425,8 @@ internal fun ReasoningEffortSlider(
         currentMode == "enabled" && currentEffort == "low" -> 1
         currentMode == "enabled" && currentEffort == "medium" -> 2
         currentMode == "enabled" && currentEffort == "high" -> 3
-        currentMode == "enabled" && (currentEffort == "extreme" || currentEffort == "max") -> 4
+        currentMode == "enabled" && currentEffort == "xhigh" -> 4
+        currentMode == "enabled" && (currentEffort == "extreme" || currentEffort == "max") -> 5
         else -> 2 // 默认中推理
     }
 
@@ -515,7 +515,6 @@ internal fun ReasoningEffortSlider(
                 )
             },
         )
-
         // 💡 说明提示：必须模型支持才生效
         Surface(
             color = MaterialTheme.colorScheme.surfaceContainer,
@@ -549,13 +548,14 @@ private fun reasoningLevelShape(index: Int): androidx.graphics.shapes.RoundedPol
     1 -> androidx.compose.material3.MaterialShapes.Cookie4Sided
     2 -> androidx.compose.material3.MaterialShapes.Cookie6Sided
     3 -> androidx.compose.material3.MaterialShapes.Cookie9Sided
+    4 -> androidx.compose.material3.MaterialShapes.Cookie12Sided
     else -> androidx.compose.material3.MaterialShapes.SoftBurst
 }
 
 @OptIn(androidx.compose.material3.ExperimentalMaterial3ExpressiveApi::class)
 @Composable
 private fun ReasoningHero(index: Int, modifier: Modifier = Modifier) {
-    val shapes = remember { (0..4).map { reasoningLevelShape(it) } }
+    val shapes = remember { (0..5).map { reasoningLevelShape(it) } }
     val morphs = remember(shapes) { shapes.zipWithNext { from, to -> Morph(from, to) } }
     val position by animateFloatAsState(
         targetValue = index.toFloat(),
