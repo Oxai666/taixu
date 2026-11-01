@@ -413,13 +413,15 @@ internal class ChatApi(
                                         put("type", JsonPrimitive("text"))
                                         put("text", JsonPrimitive(msg.content))
                                     })
+                                } else {
+                                    // 纯图片也要保留一个 text 元素：部分反代按 content[0] 必须是 text 解析，
+                                    // 只有 image_url 会把整个 content 判无效、图片被静默丢掉
+                                    add(buildJsonObject { put("type", JsonPrimitive("text")); put("text", JsonPrimitive(" ")) })
                                 }
                                 msg.imageUrls.forEach { url ->
                                     add(buildJsonObject {
                                         put("type", JsonPrimitive("image_url"))
-                                        put("image_url", buildJsonObject {
-                                            put("url", JsonPrimitive(url))
-                                        })
+                                        put("image_url", buildJsonObject { put("url", JsonPrimitive(url)); put("detail", JsonPrimitive("auto")) })
                                     })
                                 }
                             })
