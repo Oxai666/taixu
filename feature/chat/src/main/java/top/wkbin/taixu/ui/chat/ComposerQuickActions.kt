@@ -29,8 +29,31 @@ internal fun ComposerQuickActions(
     onOpenAttachSheet: () -> Unit,
     approvalMode: ApprovalMode,
     onOpenApprovalModes: () -> Unit,
+    reasoningMode: String? = null,
+    reasoningEffort: String? = null,
 ) {
     val openReasoning = LocalReasoningOpener.current
+    // 档位 → 图标 + 颜色：让按钮本身反映当前选择，而不是恒定一颗灰脑袋
+    val reasonTint = when {
+        reasoningMode != "enabled" -> MaterialTheme.colorScheme.onSurfaceVariant.copy(alpha = 0.45f)
+        reasoningEffort == "low" -> MaterialTheme.colorScheme.primary.copy(alpha = 0.55f)
+        reasoningEffort == "medium" -> MaterialTheme.colorScheme.primary
+        reasoningEffort == "high" -> MaterialTheme.colorScheme.tertiary
+        reasoningEffort == "xhigh" -> MaterialTheme.colorScheme.error.copy(alpha = 0.8f)
+        reasoningEffort == "max" || reasoningEffort == "extreme" -> MaterialTheme.colorScheme.error
+        else -> MaterialTheme.colorScheme.primary
+    }
+    val reasonIcon = if (reasoningMode == "enabled" && (reasoningEffort == "max" || reasoningEffort == "extreme" || reasoningEffort == "xhigh"))
+        RuntimeIconName.Sparkles else RuntimeIconName.Brain
+    val reasonLabel = when {
+        reasoningMode != "enabled" -> "思考强度：关闭"
+        reasoningEffort == "low" -> "思考强度：低"
+        reasoningEffort == "medium" -> "思考强度：中"
+        reasoningEffort == "high" -> "思考强度：高"
+        reasoningEffort == "xhigh" -> "思考强度：超高"
+        reasoningEffort == "max" || reasoningEffort == "extreme" -> "思考强度：极限"
+        else -> "思考强度"
+    }
     Row(verticalAlignment = Alignment.CenterVertically) {
         RuntimeIconButton(
             onClick = onOpenModels,
@@ -64,9 +87,9 @@ internal fun ComposerQuickActions(
         RuntimeIconButton(
             onClick = openReasoning,
             modifier = Modifier.size(48.dp),
-            contentDescription = "思考强度",
+            contentDescription = reasonLabel,
         ) {
-            RuntimeIcon(RuntimeIconName.Brain, Modifier.size(22.dp), MaterialTheme.colorScheme.onSurfaceVariant)
+            RuntimeIcon(reasonIcon, Modifier.size(22.dp), reasonTint)
         }
         RuntimeIconButton(
             onClick = onOpenAttachSheet,

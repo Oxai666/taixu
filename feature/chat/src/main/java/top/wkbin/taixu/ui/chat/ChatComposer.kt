@@ -349,10 +349,10 @@ internal fun ChatComposer(
                 horizontalArrangement = Arrangement.SpaceBetween,
             ) {
                 ComposerQuickActions(
-                    approvalMode = approvalMode, onOpenApprovalModes = onOpenApprovalModes,
-                    activeModel = activeModel,
+                    approvalMode = approvalMode, onOpenApprovalModes = onOpenApprovalModes, activeModel = activeModel,
                     onOpenModels = onOpenModels,
                     onOpenAttachSheet = { showAttachSheet = true },
+                    reasoningMode = activeModel?.reasoningMode, reasoningEffort = activeModel?.reasoningEffort,
                 )
                 // 右侧发送 / 停止控制区。
                 val canSend = !initializing && (input.isNotBlank() || attachments.isNotEmpty())
