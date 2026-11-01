@@ -18,6 +18,7 @@ import androidx.compose.foundation.BorderStroke
 import androidx.compose.foundation.background
 import androidx.compose.foundation.border
 import androidx.compose.foundation.clickable
+import androidx.compose.foundation.combinedClickable
 import androidx.compose.foundation.interaction.DragInteraction
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
@@ -145,6 +146,7 @@ internal fun UserBubble(
                             imageUrl = imageUrl,
                             cacheKey = "chat-image-${message.id}-$index",
                             onClick = { previewUrl = imageUrl },
+                            onLongClick = { showMenu = true },
                         )
                     }
                 }
@@ -171,22 +173,6 @@ internal fun UserBubble(
                             modifier = Modifier.padding(horizontal = 16.dp, vertical = 12.dp),
                             style = MaterialTheme.typography.bodyMedium,
                             color = MaterialTheme.colorScheme.onSecondaryContainer,
-                        )
-                    }
-                }
-            } else if (message.imageUrls.isNotEmpty()) {
-                // 纯图片消息：显示小菜单按钮
-                Surface(
-                    onClick = { showMenu = true },
-                    color = MaterialTheme.colorScheme.surfaceContainerHigh,
-                    shape = CircleShape,
-                    modifier = Modifier.size(28.dp),
-                ) {
-                    Box(contentAlignment = Alignment.Center) {
-                        RuntimeIcon(
-                            RuntimeIconName.More,
-                            Modifier.size(15.dp),
-                            MaterialTheme.colorScheme.onSurfaceVariant,
                         )
                     }
                 }
@@ -366,10 +352,12 @@ private fun Modifier.clipBubbleShape(shape: Shape): Modifier = drawWithCache {
  * 的实际尺寸采样；稳定的 cacheKey 也让 Navigation3 重组页面时直接命中内存缓存。
  */
 @Composable
+@OptIn(androidx.compose.foundation.ExperimentalFoundationApi::class)
 internal fun ImageThumbnail(
     imageUrl: String,
     cacheKey: String,
     onClick: (() -> Unit)? = null,
+    onLongClick: (() -> Unit)? = null,
 ) {
     val context = LocalContext.current
     val thumbnailPx = with(LocalDensity.current) { 130.dp.roundToPx() }
@@ -400,8 +388,12 @@ internal fun ImageThumbnail(
                 MaterialTheme.colorScheme.outlineVariant.copy(alpha = 0.6f),
                 RoundedCornerShape(12.dp),
             )
-            // 与文字气泡一致的点击语义：弹出操作菜单
-            .then(if (onClick != null) Modifier.clickable(onClick = onClick) else Modifier),
+            // 点：全屏预览；长按：操作菜单（删除/复制等，原先靠旁边那个「三个点」按钮）
+            .then(
+                if (onClick != null || onLongClick != null) {
+                    Modifier.combinedClickable(onClick = { onClick?.invoke() }, onLongClick = onLongClick)
+                } else Modifier
+            ),
     )
 }
 
