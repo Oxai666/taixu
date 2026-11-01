@@ -19,6 +19,7 @@ import androidx.compose.foundation.text.KeyboardOptions
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.DisposableEffect
 import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
@@ -78,6 +79,18 @@ fun TermuxSettingsScreen(
         aptWrap = TermuxRuntime.aptWrapEnabled
     }
 
+    val lifecycleOwner = androidx.lifecycle.compose.LocalLifecycleOwner.current
+    DisposableEffect(lifecycleOwner) {
+        val observer = androidx.lifecycle.LifecycleEventObserver { _, event ->
+            if (event == androidx.lifecycle.Lifecycle.Event.ON_RESUME) {
+                integrationState = TermuxClient.state(ctx)
+                lastVerifiedOk = TermuxClient.lastVerifiedOkAtMs > 0L
+            }
+        }
+        lifecycleOwner.lifecycle.addObserver(observer)
+        onDispose { lifecycleOwner.lifecycle.removeObserver(observer) }
+    }
+
     val permLauncher = rememberLauncherForActivityResult(
         ActivityResultContracts.RequestMultiplePermissions(),
     ) { result ->
@@ -117,7 +130,6 @@ fun TermuxSettingsScreen(
                 onClick = ::openTermux,
             )
         }
-
         item {
             StatusRow(
                 title = "RUN_COMMAND 权限",
@@ -143,7 +155,6 @@ fun TermuxSettingsScreen(
                 },
             )
         }
-
         item {
             StatusRow(
                 title = "打开 Termux",
@@ -152,7 +163,6 @@ fun TermuxSettingsScreen(
                 onClick = ::openTermux,
             )
         }
-
         item {
             StatusRow(
                 title = "连通性测试",
@@ -188,7 +198,6 @@ fun TermuxSettingsScreen(
                 },
             )
         }
-
         item { SectionHeader(title = "超时") }
 
         item {
@@ -205,7 +214,6 @@ fun TermuxSettingsScreen(
                 },
             )
         }
-
         item {
             NumberRow(
                 title = "连通性测试超时",
@@ -220,7 +228,6 @@ fun TermuxSettingsScreen(
                 },
             )
         }
-
         item { SectionHeader(title = "默认值与限制") }
 
         item {
@@ -258,7 +265,6 @@ fun TermuxSettingsScreen(
                 }
             }
         }
-
         item {
             NumberRow(
                 title = "stdout 截断上限",
@@ -272,7 +278,6 @@ fun TermuxSettingsScreen(
                 },
             )
         }
-
         item {
             NumberRow(
                 title = "stderr 截断上限",
@@ -286,7 +291,6 @@ fun TermuxSettingsScreen(
                 },
             )
         }
-
         item {
             Row(
                 modifier = Modifier.fillMaxWidth().padding(bottom = 12.dp),
@@ -310,15 +314,13 @@ fun TermuxSettingsScreen(
                 )
             }
         }
-
         item { SectionHeader(title = "设置帮助") }
 
         item {
             Column(modifier = Modifier.fillMaxWidth().padding(bottom = 16.dp)) {
                 Text("如何启用 allow-external-apps", style = MaterialTheme.typography.bodyLarge)
                 Text(
-                    "在 Termux 里执行：\n" +
-                        "mkdir -p ~/.termux && echo 'allow-external-apps=true' >> ~/.termux/termux.properties\n\n" +
+                    "在 Termux 里执行：\nmkdir -p ~/.termux && echo 'allow-external-apps=true' >> ~/.termux/termux.properties\n\n" +
                         "然后从 Android 应用信息里强制停止 Termux 并重开，再回来点上面的「连通性测试」。\n" +
                         "这条不生效的表现很有迷惑性：发送端不报错，但结果永远等不回来，只表现为超时。",
                     style = MaterialTheme.typography.bodySmall,
@@ -350,11 +352,7 @@ private fun StatusRow(
         }
         Column(modifier = Modifier.weight(1f)) {
             Text(title, style = MaterialTheme.typography.bodyLarge, fontWeight = FontWeight.Medium)
-            Text(
-                desc,
-                style = MaterialTheme.typography.bodySmall,
-                color = MaterialTheme.colorScheme.onSurfaceVariant,
-            )
+            Text(desc, style = MaterialTheme.typography.bodySmall, color = MaterialTheme.colorScheme.onSurfaceVariant)
         }
     }
 }

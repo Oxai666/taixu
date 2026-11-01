@@ -33,6 +33,10 @@
          此为特殊权限，用户需在"设置→应用→太墟→修改系统设置"中手动授权。 -->
     <uses-permission android:name="android.permission.WRITE_SETTINGS"
         tools:ignore="ProtectedPermissions" />
+    <!-- Termux 的 RunCommandService 用这个自定义权限把关。没有本条声明，
+         我们对 com.termux.permission.RUN_COMMAND 的运行时申请在系统层就被直接拒绝，
+         连授权弹窗都不会出现（表现为「点了没反应」）。Termux 侧仍需 allow-external-apps=true。 -->
+    <uses-permission android:name="com.termux.permission.RUN_COMMAND" />
 
     <!-- Android 11+ 包可见性：允许解析 Shizuku App 与 QQ（授权弹窗、群卡片调起与 Binder 交互） -->
     <queries>
@@ -40,6 +44,9 @@
             <action android:name="android.intent.action.TTS_SERVICE" />
         </intent>
         <package android:name="moe.shizuku.privileged.api" />
+        <!-- Termux 外部通道：Android 11+ 不声明就查不到 com.termux 是否安装，
+             状态永远停在 NOT_INSTALLED，点授权也只会走「先装 Termux」分支。 -->
+        <package android:name="com.termux" />
         <package android:name="com.tencent.mobileqq" />
         <package android:name="com.tencent.tim" />
         <intent>
