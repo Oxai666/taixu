@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <!--
+      LeakCanary 2.14 只在 debug 变体引入，但它自带一个 LAUNCHER 入口
+      （LeakLauncherActivity），装完包里会在桌面多出一个「Leaks」图标，
+      看起来像「一个应用装了两份」。这里把它的桌面入口摘掉：
+      库本身仍然正常工作（泄漏检测照跑，结果通过通知查看），只是不再占桌面位置。
+      只在 debug 源集生效，release 包不受影响。
+    -->
+    <application tools:node="merge">
+        <activity
+            android:name="leakcanary.internal.activity.LeakLauncherActivity"
+            tools:node="remove" />
+    </application>
+
+</manifest>
