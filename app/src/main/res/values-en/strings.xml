@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <string name="taixu_app_name">TaiXu</string>
+    <string name="taixu_app_name">Gulong</string>
     <string name="taixu_update_available">New version available: v%1$s</string>
     <string name="taixu_update_versions">Current: v%1$s  ➔  Latest: v%2$s</string>
     <string name="taixu_update_downloading_package">Downloading update…</string>

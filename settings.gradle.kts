@@ -97,6 +97,8 @@ include(":core:datastore")
 include(":core:network")
 include(":core:security")
 include(":runtime")
+// 古龙 · Termux 外部调用通道（RUN_COMMAND 协议、配置默认值、文本工具）
+include(":gulong:termux")
 include(":project-template")
 include(":tools")
 include(":harness")

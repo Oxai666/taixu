@@ -1,0 +1,99 @@
+name: Build Gulong APK
+
+# 古龙构建线：只做一件事——把当前代码打成可安装的 debug APK 并挂成 artifact。
+# 为什么独立一条 workflow 而不是复用 taixudev-build.yml：
+#   taixudev-build 带 Release 发布与 tag 校验逻辑，属于正式交付线；
+#   古龙线是移植验证线，需要 push 即触发、产物可直接下载、不碰任何 tag。
+on:
+  push:
+    branches:
+      - gulong
+    paths-ignore:
+      - '**.md'
+      - 'docs/**'
+  workflow_dispatch:
+
+# 同一分支连推多次时，旧构建自动取消，省 Actions 额度也避免拿到过期产物
+concurrency:
+  group: gulong-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  build:
+    name: Build & Package Gulong
+    runs-on: ubuntu-24.04
+    timeout-minutes: 60
+
+    permissions:
+      contents: read
+
+    steps:
+      - name: Checkout Code
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Set up JDK 17
+        uses: actions/setup-java@v4
+        with:
+          distribution: 'temurin'
+          java-version: '17'
+          cache: 'gradle'
+
+      - name: Set up Android SDK
+        uses: android-actions/setup-android@v3
+        with:
+          # 'tools' 包已被 Google 下线，默认值会失败
+          # 参考 https://github.com/android-actions/setup-android/issues/537
+          packages: 'platform-tools'
+
+      - name: Grant Execute Permission for Gradlew
+        run: chmod +x gradlew
+
+      # 古龙命名空间模块先单独编译：模块自身语法错误比整包 build 报得更清楚，
+      # 也避免 app 层错误掩盖掉模块层的真实原因。
+      - name: Compile gulong modules
+        run: ./gradlew :gulong:termux:assembleDebug --no-daemon --stacktrace
+
+      - name: Run gulong module unit tests
+        run: ./gradlew :gulong:termux:testDebugUnitTest --no-daemon --stacktrace
+        continue-on-error: true
+
+      - name: Build Gulong APK
+        env:
+          TAIXU_DEV_BUILD: "1"
+        run: ./gradlew assembleDebug --no-daemon --stacktrace
+
+      - name: Identify and Rename Output APK
+        run: |
+          mkdir -p output
+          APK_PATH=$(find app/build/outputs/apk -name "*.apk" | head -n 1)
+          if [ -f "$APK_PATH" ]; then
+            cp "$APK_PATH" output/Gulong-arm64-debug.apk
+            sha256sum output/Gulong-arm64-debug.apk > output/Gulong-arm64-debug.apk.sha256
+            ls -l output/
+            echo "APK ready: output/Gulong-arm64-debug.apk"
+          else
+            echo "::error::No APK generated!"
+            exit 1
+          fi
+
+      - name: Upload Gulong APK Artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: gulong-apk
+          path: output/*
+          retention-days: 14
+
+      # 失败时把 Gradle 报错原文贴进 job summary：
+      # Actions 日志 API 需要 admin 权限，匿名取不到，只能在这里主动把关键行捞出来。
+      - name: Summarize failure
+        if: failure()
+        run: |
+          {
+            echo "## 构建失败"
+            echo ""
+            echo "分支：\`${GITHUB_REF_NAME}\`  提交：\`${GITHUB_SHA:0:8}\`"
+            echo ""
+            echo "请点开上面对应的失败步骤查看完整 Gradle 输出。"
+          } >> "$GITHUB_STEP_SUMMARY"

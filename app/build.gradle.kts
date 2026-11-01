@@ -160,6 +160,8 @@ dependencies {
     implementation(project(":runtime"))
     implementation(project(":project-template"))
     implementation(project(":tools"))
+    // 古龙 · Termux 外部调用通道
+    implementation(project(":gulong:termux"))
     implementation(project(":harness"))
     implementation(project(":feature:components"))
     implementation(project(":feature:chat"))
