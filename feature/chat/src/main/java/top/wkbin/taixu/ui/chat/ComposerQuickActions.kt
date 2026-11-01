@@ -80,7 +80,7 @@ internal fun ComposerQuickActions(
             modifier = Modifier.size(48.dp),
             contentDescription = reasonLabel,
         ) {
-            ReasoningLevelGlyph(reasonIndex, 20.dp, reasonTint)
+            ReasoningLevelGlyph(reasonIndex, 24.dp, reasonTint)
         }
         RuntimeIconButton(
             onClick = onOpenAttachSheet,

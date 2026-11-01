@@ -8,6 +8,7 @@ import androidx.compose.material3.toPath
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.remember
+import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.drawBehind
 import androidx.compose.ui.geometry.Offset
@@ -17,6 +18,8 @@ import androidx.compose.ui.graphics.drawscope.withTransform
 import androidx.compose.ui.unit.Dp
 import androidx.graphics.shapes.Morph
 import androidx.graphics.shapes.RoundedPolygon
+import top.wkbin.taixu.ui.components.RuntimeIcon
+import top.wkbin.taixu.ui.components.RuntimeIconName
 
 /**
  * 档位专属图形：与思考强度面板里那颗会变形的 Hero 同源，取的是**该档位的最终形态**（不播放变形动画）。
@@ -36,6 +39,7 @@ internal fun ReasoningLevelGlyph(
     val idx = index.coerceIn(0, 5)
     val shape = remember(idx) { levelShapeAt(idx) }
     Box(
+        contentAlignment = Alignment.Center,
         modifier = modifier
             .size(glyphSize)
             .drawBehind {
@@ -50,7 +54,13 @@ internal fun ReasoningLevelGlyph(
                     drawPath(path, color)
                 }
             },
-    )
+    ) {
+        RuntimeIcon(
+            name = if (idx == 0) RuntimeIconName.Brain else RuntimeIconName.Sparkles,
+            modifier = Modifier.size(glyphSize * 0.5f),
+            tint = MaterialTheme.colorScheme.surface,
+        )
+    }
 }
 
 /** 与 ChatSheets 里 reasoningLevelShape 保持一致的六档形状表（那边是 private，这里单列一份）。 */
