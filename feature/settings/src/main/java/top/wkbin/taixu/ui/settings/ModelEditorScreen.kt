@@ -391,8 +391,7 @@ internal fun ModelEditorContent(
     }
 
     var customHeaders by rememberSaveable(modelId) { mutableStateOf(existing?.customHeaders.orEmpty()) }
-    var balanceApiPath by rememberSaveable(modelId) { mutableStateOf(existing?.balanceApiPath.orEmpty()) }
-    var balanceResultPath by rememberSaveable(modelId) { mutableStateOf(existing?.balanceResultPath.orEmpty()) }
+    var balanceApiPath by rememberSaveable(modelId) { mutableStateOf(existing?.balanceApiPath.orEmpty()) }; var balanceResultPath by rememberSaveable(modelId) { mutableStateOf(existing?.balanceResultPath.orEmpty()) }
 
     // 折叠区域控制
     var reasoningSectionExpanded by rememberSaveable { mutableStateOf(false) }
@@ -1216,11 +1215,8 @@ internal fun ModelEditorContent(
                                 colors = fieldColors,
                                 textStyle = MaterialTheme.typography.bodySmall.copy(fontFamily = FontFamily.Monospace),
                             )
-                            ModelBalanceFields(
-                                apiPath = balanceApiPath, onApiPathChange = { balanceApiPath = it },
-                                resultPath = balanceResultPath, onResultPathChange = { balanceResultPath = it },
-                                shape = compactFieldShape, colors = fieldColors,
-                            )
+                            ModelBalanceFields(balanceApiPath, { balanceApiPath = it }, balanceResultPath,
+                                { balanceResultPath = it }, compactFieldShape, fieldColors)
                         }
                     }
                 }
@@ -1285,8 +1281,7 @@ internal fun ModelEditorContent(
                         responseApiEnabled,
                         promptCachingEnabled,
                         promptCacheTtl1h,
-                        balanceApiPath,
-                        balanceResultPath,
+                        balanceApiPath, balanceResultPath,
                     )
                 },
                 modifier = Modifier.fillMaxWidth().heightIn(min = 56.dp),
