@@ -37,6 +37,7 @@ sealed interface AppDestination : NavKey
 @Serializable data object AppManagementDestination : AppDestination
 @Serializable data object EnvironmentVariableSettingsDestination : AppDestination
 @Serializable data object SshSettingsDestination : AppDestination
+@Serializable data object TermuxSettingsDestination : AppDestination
 @Serializable data object FtpSettingsDestination : AppDestination
 @Serializable data object ModelProfilesDestination : AppDestination
 @Serializable data object LocalLlmDestination : AppDestination

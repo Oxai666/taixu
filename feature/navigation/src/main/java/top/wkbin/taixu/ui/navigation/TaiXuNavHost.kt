@@ -68,6 +68,7 @@ import top.wkbin.taixu.ui.settings.PhoneAgentSettingsScreen
 import top.wkbin.taixu.ui.settings.QuickPhrasesScreen
 import top.wkbin.taixu.ui.settings.SponsorScreen
 import top.wkbin.taixu.ui.settings.SshSettingsScreen
+import top.wkbin.taixu.ui.settings.TermuxSettingsScreen
 import top.wkbin.taixu.ui.settings.StorageMountSettingsScreen
 import top.wkbin.taixu.ui.settings.StorageUsageScreen
 import top.wkbin.taixu.ui.settings.SystemDevSettingsScreen
@@ -429,6 +430,7 @@ fun TaiXuNavHost(
                         onOpenAppManagement = { activeStack.push(LinuxEnvSettingsDestination, AppManagementDestination) },
                         onOpenEnvironmentVariables = { activeStack.push(LinuxEnvSettingsDestination, EnvironmentVariableSettingsDestination) },
                         onOpenSshSettings = { activeStack.push(LinuxEnvSettingsDestination, SshSettingsDestination) },
+                        onOpenTermuxSettings = { activeStack.push(LinuxEnvSettingsDestination, TermuxSettingsDestination) },
                         onOpenFtpSettings = { activeStack.push(LinuxEnvSettingsDestination, FtpSettingsDestination) },
                         viewModel = settingsViewModel,
                     )
@@ -577,6 +579,11 @@ fun TaiXuNavHost(
             entry<SshSettingsDestination> {
                 GuardedEntry(SshSettingsDestination) {
                     SshSettingsScreen(onBack = ::popBack)
+                }
+            }
+            entry<TermuxSettingsDestination> {
+                GuardedEntry(TermuxSettingsDestination) {
+                    TermuxSettingsScreen(onBack = ::popBack)
                 }
             }
             entry<FtpSettingsDestination> {

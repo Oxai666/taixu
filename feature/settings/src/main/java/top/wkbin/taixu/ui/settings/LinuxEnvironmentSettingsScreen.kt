@@ -53,6 +53,7 @@ fun LinuxEnvironmentSettingsScreen(
     onOpenEnvironmentVariables: () -> Unit,
     onOpenSshSettings: () -> Unit,
     onOpenFtpSettings: () -> Unit,
+    onOpenTermuxSettings: () -> Unit,
     viewModel: SettingsViewModel? = previewOrNull { koinViewModel() },
 ) {
     val executionMode by viewModel?.executionMode?.collectAsStateWithLifecycle() ?: previewStateOf(top.wkbin.taixu.core.model.ExecutionMode.PROOT)
@@ -163,6 +164,14 @@ fun LinuxEnvironmentSettingsScreen(
                         title = "FTP 远程文件访问",
                         subtitle = "挂载 Linux 根目录 (/) · FileZilla / 资源管理器直连",
                         onClick = onOpenFtpSettings,
+                    )
+                }
+                PreferenceSurface(first = false, last = false) {
+                    SettingsRow(
+                        icon = RuntimeIconName.Terminal,
+                        title = "Termux 外部通道",
+                        subtitle = "调用手机上的 Termux 执行命令 · 超时与输出上限 · 连通性测试",
+                        onClick = onOpenTermuxSettings,
                     )
                 }
                 PreferenceSurface(first = false, last = false) {

@@ -177,7 +177,7 @@
     },
     {
       "id": "feature.settings", "path": "feature/settings",
-      "requires": ["core.database", "core.datastore", "core.network", "runtime", "tools", "harness", "feature.theme", "plugin.ui"]
+      "requires": ["core.database", "core.datastore", "core.network", "runtime", "tools", "harness", "feature.theme", "plugin.ui", "gulong.termux"]
     },
     {
       "id": "feature.developer", "path": "feature/developer",

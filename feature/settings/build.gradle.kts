@@ -16,6 +16,8 @@ dependencies {
     implementation(project(":core:database"))
     implementation(project(":core:network"))
     implementation(project(":runtime"))
+    // 古龙 · Termux 通道（设置页读写 TermuxRuntime / TermuxClient）
+    implementation(project(":gulong:termux"))
     implementation(project(":tools"))
     implementation(project(":harness"))
     implementation(libs.androidx.core.ktx)

@@ -12,6 +12,6 @@ import top.wkbin.taixu.ui.components.RuntimePreview
 @Composable
 private fun LinuxEnvironmentSettingsScreenPreview() {
     RuntimePreview {
-        LinuxEnvironmentSettingsScreen(onBack = { }, onOpenDistroManagement = { }, onOpenStorageMounts = { }, onOpenStorageUsage = { }, onOpenAppManagement = { }, onOpenEnvironmentVariables = { }, onOpenSshSettings = { }, onOpenFtpSettings = { })
+        LinuxEnvironmentSettingsScreen(onBack = { }, onOpenDistroManagement = { }, onOpenStorageMounts = { }, onOpenStorageUsage = { }, onOpenAppManagement = { }, onOpenEnvironmentVariables = { }, onOpenSshSettings = { }, onOpenFtpSettings = { }, onOpenTermuxSettings = { })
     }
 }
