@@ -1,6 +1,7 @@
 package top.wkbin.taixu.harness
 
 import kotlinx.serialization.json.Json
+import kotlinx.serialization.json.jsonObject
 
 /**
  * 古龙 · 外部 Termux 工具（`termux`）的 schema 定义。

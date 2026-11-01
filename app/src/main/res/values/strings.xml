@@ -26,4 +26,5 @@
     <string name="taixu_agent_mcp_notification_channel">MCP 被控端</string>
     <string name="taixu_agent_mcp_running_hint">外部 AI 客户端可随时连接</string>
     <string name="taixu_gui_a11y_description">古龙 GUI 手势服务：用于点击/滑动/长按等全局手势。已授权 Shizuku 或 Root 时会自动写入开启，无需手动进系统无障碍页；未授权时也可在系统设置中手动开启作为降级通路。</string>
+    <string name="chat_action_termux">Termux 命令</string>
 </resources>

@@ -84,6 +84,7 @@ private fun toolStepTitle(call: ToolCall): String = when (call.tool) {
         HarnessTool.COMPRESS -> R.string.chat_action_compress
         HarnessTool.ASK_USER -> R.string.chat_action_question
         HarnessTool.RENDER_SURFACE -> R.string.chat_action_surface
+        HarnessTool.TERMUX -> R.string.chat_action_termux
         HarnessTool.MCP -> error("Handled above")
     })
 }

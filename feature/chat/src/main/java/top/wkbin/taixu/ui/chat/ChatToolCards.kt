@@ -420,6 +420,7 @@ internal fun toolIcon(tool: HarnessTool): RuntimeIconName = when (tool) {
     HarnessTool.COMPRESS -> RuntimeIconName.Compress
     HarnessTool.ASK_USER -> RuntimeIconName.Chat
     HarnessTool.RENDER_SURFACE -> RuntimeIconName.Palette
+    HarnessTool.TERMUX -> RuntimeIconName.Terminal
 }
 
 internal fun toolArgsSummary(call: ToolCall): String {

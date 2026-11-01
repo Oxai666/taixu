@@ -22,6 +22,7 @@ import top.wkbin.taixu.harness.WorkspaceToolBackend
 import top.wkbin.taixu.harness.WorkspaceMutationSnapshots
 import top.wkbin.taixu.harness.core.ToolCheckpoints
 import top.wkbin.taixu.harness.directory.CapabilityToolGateway
+import top.wkbin.taixu.harness.TermuxToolBackend
 
 internal val toolBackendModule = module {
     single<top.wkbin.taixu.runtime.environment.ExecutionEnvironmentFactory>(org.koin.core.qualifier.named("local-execution")) {
