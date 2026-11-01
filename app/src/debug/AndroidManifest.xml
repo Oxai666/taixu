@@ -3,15 +3,20 @@
     xmlns:tools="http://schemas.android.com/tools">
 
     <!--
-      LeakCanary 2.14 只在 debug 变体引入，但它自带一个 LAUNCHER 入口
-      （LeakLauncherActivity），装完包里会在桌面多出一个「Leaks」图标，
-      看起来像「一个应用装了两份」。这里把它的桌面入口摘掉：
-      库本身仍然正常工作（泄漏检测照跑，结果通过通知查看），只是不再占桌面位置。
-      只在 debug 源集生效，release 包不受影响。
+      LeakCanary 2.14 只在 debug 变体引入，桌面会多出一个「Leaks」图标 —— 那不是第二个安装包，
+      是 leakcanary-android-core 注入的启动入口。
+
+      关键点：那个入口是 <activity-alias>，不是 <activity>。
+      上一版我按 <activity> 写 tools:node="remove"，节点名对不上，merger 找不到东西可删，
+      于是静默不生效（不报错、图标照旧），这是这轮白跑的原因。
+
+      摘掉 alias 后：LeakCanary 本身照常工作（泄漏检测、结果通知都不变），
+      只是桌面不再有入口。仅 debug 变体生效，release 包不含 LeakCanary。
     -->
     <application tools:node="merge">
-        <activity
+        <activity-alias
             android:name="leakcanary.internal.activity.LeakLauncherActivity"
+            android:targetActivity="leakcanary.internal.activity.LeakActivity"
             tools:node="remove" />
     </application>
 
