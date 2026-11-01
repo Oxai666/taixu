@@ -321,7 +321,6 @@ private fun FloatingChatPanel(
     var inputText by remember { mutableStateOf("") }
     val listState = rememberLazyListState()
 
-    // 不再 filter 掉 ToolResult：结果与思考都要留在窗里
     val displayMessages = remember(messages) { messages.takeLast(40) }
 
     LaunchedEffect(displayMessages.size, running) {
