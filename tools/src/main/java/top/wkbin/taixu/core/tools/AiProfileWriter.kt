@@ -58,6 +58,8 @@ class AiProfileWriter(
         val promptCachingEnabled: Boolean = true,
         /** 是否使用 1 小时缓存 TTL。 */
         val promptCacheTtl1h: Boolean = false,
+        val balanceApiPath: String = "",
+        val balanceResultPath: String = "",
     )
 
     suspend fun upsertProfile(request: UpsertRequest) {
@@ -95,6 +97,8 @@ class AiProfileWriter(
                 responseApiEnabled = request.responseApiEnabled,
                 promptCachingEnabled = request.promptCachingEnabled,
                 promptCacheTtl1h = request.promptCacheTtl1h,
+                balanceApiPath = request.balanceApiPath,
+                balanceResultPath = request.balanceResultPath,
                 apiKeyCount = submittedKeys.ifEmpty { existingKeys }.size,
                 requestsPerMinutePerKey = request.requestsPerMinutePerKey.coerceAtLeast(0),
             ),
