@@ -79,7 +79,7 @@
         "core.security", "core.datastore", "runtime", "project-template", "tools", "harness",
         "feature.components", "feature.chat", "feature.workspace", "feature.workflow",
         "feature.navigation", "feature.custom_iteration", "feature.onboarding",
-        "feature.theme", "feature.git", "feature.bot"
+        "feature.theme", "feature.git", "feature.bot", "gulong.termux"
       ]
     },
     { "id": "baselineprofile", "path": "baselineprofile", "requires": [] },
@@ -217,6 +217,12 @@
       "path": "feature/a2uipoc",
       "_doc": "A2UI 渲染器：官方 androidx.a2ui 1.0.0-alpha01 仅允许在本模块使用，对外暴露 A2uiPocSurfaceCard / A2uiPocScreen",
       "requires": ["harness", "feature.theme", "feature.components"]
+    },
+    {
+      "id": "gulong.termux",
+      "path": "gulong/termux",
+      "_doc": "古龙 · Termux 外部调用通道：只依赖 androidx/kotlinx，不依赖任何兄弟模块，保持协议层自洽",
+      "requires": []
     }
   ]
 }
