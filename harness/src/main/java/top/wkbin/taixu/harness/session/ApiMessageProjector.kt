@@ -300,5 +300,8 @@ fun stripLegacyAttachmentPrompt(text: String?): String? {
     )) {
         out = out.replace(noise, "")
     }
-    return out.trim()
+    val cleaned = out.trim()
+    // 剥完只剩标点/省略号时一并清掉：原文常是「请分析附带的图片：…」，
+    // 删掉引导语后会剩一个孤零零的「...」，渲染出来就是一条只有三个点的空气泡。
+    return if (cleaned.none { it.isLetterOrDigit() }) "" else cleaned
 }
