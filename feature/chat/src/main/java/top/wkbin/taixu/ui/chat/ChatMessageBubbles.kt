@@ -113,8 +113,8 @@ internal fun UserBubble(
     onCreateBranch: () -> Unit,
     onRewind: (RewindScope) -> Unit = {},
 ) {
-    val context = LocalContext.current
-    var showMenu by remember { mutableStateOf(false) }
+    val context = LocalContext.current; var showMenu by remember { mutableStateOf(false) }
+    var previewUrl by remember { mutableStateOf<String?>(null) }; previewUrl?.let { url -> ImagePreviewOverlay(url) { previewUrl = null } }
     // 删除消息为破坏性操作，先经确认对话框
     var showDeleteConfirm by rememberSaveable { mutableStateOf(false) }
     // 撤回到此轮：先选择撤回范围（代码/对话/两者）
@@ -144,7 +144,7 @@ internal fun UserBubble(
                         ImageThumbnail(
                             imageUrl = imageUrl,
                             cacheKey = "chat-image-${message.id}-$index",
-                            onClick = { showMenu = true },
+                            onClick = { previewUrl = imageUrl },
                         )
                     }
                 }

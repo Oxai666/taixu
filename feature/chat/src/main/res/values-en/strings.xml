@@ -40,6 +40,7 @@
     <string name="chat_run_mode_plan_description">Read-only planning; state-changing tools are blocked</string>
     <string name="chat_attachment_files_prompt">Analyze the following attached files:</string>
     <string name="chat_attachment_images_prompt">Analyze the attached images:</string>
+    <string name="chat_attachment_images_inline">\n\n[Images are inlined in this message — view them directly, no file to read]\n</string>
     <string name="chat_attachment_mount_header">\n\n[Attachments copied and mounted in the Linux sandbox]\n</string>
     <string name="chat_attachment_image">Image</string>
     <string name="chat_attachment_file">File</string>

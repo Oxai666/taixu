@@ -22,15 +22,21 @@ internal fun buildComposerMessage(
         } else if (imageUrls.isNotEmpty()) {
             append(context.getString(R.string.chat_attachment_images_prompt))
         }
-        if (attachments.isNotEmpty()) {
+        // 图片走 image_url 内联，沙箱里根本没有文件——再说「挂载到沙箱、用 base 读」
+        // 就是给出一个必然失败的指令（模型会去 read 一个不存在的路径）。
+        val imageCount = attachments.count { it.isImage }
+        if (imageCount > 0) {
+            append(context.getString(R.string.chat_attachment_images_inline, imageCount))
+        }
+        if (nonImageFiles.isNotEmpty()) {
             append(context.getString(R.string.chat_attachment_mount_header))
-            attachments.forEachIndexed { i, att ->
+            nonImageFiles.forEachIndexed { i, att ->
                 val guestPath = att.guestFilePath ?: "/attachments/${att.name}"
-                val kind = context.getString(if (att.isImage) R.string.chat_attachment_image else R.string.chat_attachment_file)
+                val kind = context.getString(R.string.chat_attachment_file)
                 append(context.getString(R.string.chat_attachment_line, i + 1, kind, att.name, AttachmentHelper.formatFileSize(att.sizeBytes), guestPath))
-            att.extractedTextGuestPath?.let {
-                append(context.getString(R.string.chat_attachment_extracted, it))
-            }
+                att.extractedTextGuestPath?.let {
+                    append(context.getString(R.string.chat_attachment_extracted, it))
+                }
             }
             append(context.getString(R.string.chat_attachment_access_hint))
         }

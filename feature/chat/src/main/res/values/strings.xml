@@ -47,6 +47,7 @@
     <string name="chat_run_mode_plan_description">只读规划，改状态的工具一律拦截</string>
     <string name="chat_attachment_files_prompt">请分析并处理以下附带的文件：</string>
     <string name="chat_attachment_images_prompt">请分析附带的图片：</string>
+    <string name="chat_attachment_images_inline">\n\n[图片已内联在本次消息中，可直接查看，无需读取任何文件]\n</string>
     <string name="chat_attachment_mount_header">\n\n[附件：已复制并挂载到 Linux 沙箱]\n</string>
     <string name="chat_attachment_image">图片</string>
     <string name="chat_attachment_file">文件</string>
