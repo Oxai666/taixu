@@ -100,7 +100,7 @@ class ApprovalPolicyEngine(
                     ApprovalDecision(true, "high", "写入目标不在当前工作区内，可能影响工作区之外的文件。", summary)
                 }
             }
-            HarnessTool.BASE -> {
+            HarnessTool.BASE, HarnessTool.TERMUX -> {
                 val command = args["command"]?.jsonPrimitive?.content.orEmpty()
                 if (isRoutineCommand(command)) ApprovalDecision(false)
                 else ApprovalDecision(true, if (isDestructiveCommand(command)) "critical" else "high", reasonForCommand(command), summary)
