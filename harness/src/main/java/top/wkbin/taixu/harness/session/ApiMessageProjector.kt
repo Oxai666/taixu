@@ -134,7 +134,11 @@ object ApiMessageProjector {
                                         ),
                                         reasoning_content = null,
                                     )
-                                else -> HarnessApiMapper.toApiMessage(message)
+                                else -> HarnessApiMapper.toApiMessage(message).let { m ->
+                                    // 历史消息里可能留着旧版本拼的附件说明（「已挂载到 Linux 沙箱…用 base 读取」），
+                                    // 图片现在走 image_url 内联、沙箱无文件，这些话会把模型推去 read 一个不存在的路径。
+                                    if (message is UserMessage) m.copy(content = stripLegacyAttachmentPrompt(m.content)) else m
+                                }
                             }
                             val withSuffix = withRecallSuffix(mapped, message)
                             add(applyImagePolicy(withSuffix, message))
@@ -259,4 +263,40 @@ object ApiMessageProjector {
 
         fun dropped(message: UserMessage): Int = dropped[message.id] ?: 0
     }
+}
+
+/**
+ * 剥掉历史消息里由旧版本拼进去的附件说明。
+ *
+ * 为什么必须在发送侧做而不是改数据库：这些消息是既成事实，用户不重开会话就会一直带着；
+ * 而它们对模型的唯一作用是「去读一个不存在的文件」，然后得到「图片我这边没拿到」。
+ * UI 仍显示原文（用户看得见自己发过什么），只把发给模型的那份洗干净。
+ */
+internal fun stripLegacyAttachmentPrompt(text: String?): String? {
+    if (text.isNullOrBlank()) return text
+    var out = text
+    // 中文旧版：从标题标记删到访问提示结尾
+    val zhStart = out.indexOf("[附件：已复制并挂载到 Linux 沙箱]")
+    if (zhStart >= 0) {
+        val zhEnd = "不要使用 Android content:// URI 或宿主机路径。"
+        val zhEndIdx = out.indexOf(zhEnd)
+        out = if (zhEndIdx > zhStart) out.removeRange(zhStart, zhEndIdx + zhEnd.length) else out.substring(0, zhStart)
+    }
+    // 英文旧版
+    val enStart = out.indexOf("[Attachments copied and mounted in the Linux sandbox]")
+    if (enStart >= 0) {
+        val enEnd = "Do not use Android content:// URIs or host paths."
+        val enEndIdx = out.indexOf(enEnd)
+        out = if (enEndIdx > enStart) out.removeRange(enStart, enEndIdx + enEnd.length) else out.substring(0, enStart)
+    }
+    // 纯图片时代的引导语与内联说明：对模型都是噪音
+    for (noise in listOf(
+        "请分析附带的图片：",
+        "Analyze the attached images:",
+        "[图片已内联在本次消息中，可直接查看，无需读取任何文件]",
+        "[Images are inlined in this message",
+    )) {
+        out = out.replace(noise, "")
+    }
+    return out.trim()
 }

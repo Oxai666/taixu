@@ -137,10 +137,7 @@ object AttachmentHelper {
                     BitmapFactory.decodeFile(targetFile.absolutePath, boundsOptions)
 
                     var inSampleSize = 1
-                    // 1024 而非 1280：base64 会膨胀 1/3，1280/80 的单图常到 300KB+，
-                    // 三张就把请求体顶过中继默认的 1MB 上限（nginx client_max_body_size），
-                    // 表现是「App 里有图、模型说没收到」——请求被截断，服务端解析不到 image_url。
-                    val maxDimension = 1024
+                    val maxDimension = 1280
                     if (boundsOptions.outHeight > maxDimension || boundsOptions.outWidth > maxDimension) {
                         val halfHeight = boundsOptions.outHeight / 2
                         val halfWidth = boundsOptions.outWidth / 2
@@ -158,7 +155,7 @@ object AttachmentHelper {
                         try {
                             // BitmapFactory 不读 EXIF：带方向元数据的相机照片须先归一，否则模型看到横竖颠倒的图
                             val oriented = applyExifOrientation(bitmap, targetFile.absolutePath)
-                            oriented.compress(Bitmap.CompressFormat.JPEG, 75, baos)
+                            oriented.compress(Bitmap.CompressFormat.JPEG, 80, baos)
                         } finally {
                             bitmap.recycle()
                         }
