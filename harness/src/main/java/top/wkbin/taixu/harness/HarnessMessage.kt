@@ -30,6 +30,7 @@ enum class HarnessTool {
     @SerialName("compress") COMPRESS,
     @SerialName("ask_user") ASK_USER,
     @SerialName("render_surface") RENDER_SURFACE,
+    @SerialName("termux") TERMUX,
 }
 
 /**

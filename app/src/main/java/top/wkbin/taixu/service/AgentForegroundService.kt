@@ -79,7 +79,7 @@ class AgentForegroundService : Service() {
         // Starting can precede the run-state emission (including RemoteInput). Allow admission to settle.
         if (!collecting) {
             runCatching { startForeground(AgentNotifications.SUMMARY_ID,
-                notifications.running(null, "太墟任务", "正在准备执行…", System.currentTimeMillis())) }
+                notifications.running(null, "古龙任务", "正在准备执行…", System.currentTimeMillis())) }
                 .onFailure { Log.w(TAG, "启动 Agent 前台通知失败", it) }
             collecting = true
             scope.launch {
@@ -150,7 +150,7 @@ class AgentForegroundService : Service() {
         val running = started.keys.count { states[it] == SessionRunState.RUNNING }
         val waiting = started.keys.count { states[it] == SessionRunState.WAITING_APPROVAL }
         publish(null, AgentNotifications.SUMMARY_ID, notifications.running(null,
-            "太墟 · $running 个执行中 / $waiting 个等待批准", lines.take(6).joinToString("\n\n"),
+            "古龙 · $running 个执行中 / $waiting 个等待批准", lines.take(6).joinToString("\n\n"),
             started.values.minOrNull() ?: System.currentTimeMillis(), running == 0))
     }
 

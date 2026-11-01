@@ -79,6 +79,8 @@ class ToolExecutor(
     workspaceToolBackend: WorkspaceToolBackend? = null,
     private val governanceGuard: top.wkbin.taixu.harness.bot.GroupGovernanceGuard? = null,
     private val environments: top.wkbin.taixu.harness.environment.SessionExecutionEnvironments? = null,
+    /** 古龙 · 外部 Termux 通道；为 null 时 termux 工具返回「未装配」失败而非崩溃。 */
+    private val termuxToolBackend: TermuxToolBackend? = null,
 ) {
     private val mutationSnapshots = WorkspaceMutationSnapshots(checkpointStore, eventBus)
     private val workspaceTools = workspaceToolBackend ?: WorkspaceToolBackend(
@@ -98,6 +100,7 @@ class ToolExecutor(
         promptAssetToolBackend = promptAssetToolBackend,
         capabilityToolGateway = capabilityToolGateway,
         searchWebToolBackend = searchWebToolBackend,
+        termuxToolBackend = termuxToolBackend,
         searchRedactor = { session, workspace -> top.wkbin.taixu.harness.environment.executionOutputRedactor(
             secretRedactor, environments, linuxEnvironmentManager, settingsDataStore, session, workspace) },
     )

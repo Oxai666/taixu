@@ -24,6 +24,8 @@ dependencies {
     implementation(project(":core:network"))
     implementation(project(":runtime"))
     implementation(project(":tools"))
+    // 古龙 · 外部 Termux 通道（RUN_COMMAND 协议层，零业务耦合）
+    implementation(project(":gulong:termux"))
     implementation(libs.koin.core)
     implementation(libs.okhttp)
     implementation(libs.bundles.ktor.server)

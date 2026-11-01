@@ -37,6 +37,7 @@ internal class ToolRouting(
     private val hostToolBackend: HostCapabilityToolBackend,
     private val downloadToolBackend: DownloadToolBackend,
     private val searchWebToolBackend: SearchWebToolBackend,
+    private val termuxToolBackend: TermuxToolBackend? = null,
     private val harnessServiceToolBackend: HarnessServiceToolBackend,
     private val contextMemoryToolBackend: ContextMemoryToolBackend,
     private val promptAssetToolBackend: PromptAssetToolBackend,
@@ -90,6 +91,15 @@ internal class ToolRouting(
             },
             HarnessTool.SEARCH_WEB to { ctx ->
                 searchWebToolBackend.execute(SearchWebToolRequest(ctx.args, ctx.sessionId, ctx.workspace, ctx.progressReporter, ctx.metadata))
+            },
+            // 古龙：外部 Termux 通道。跑的是用户手机上已装的 Termux，不是内置 PRoot 沙箱。
+            HarnessTool.TERMUX to { ctx ->
+                val backend = termuxToolBackend
+                if (backend == null) {
+                    false to "Termux 通道未装配（TermuxToolBackend 未注入），无法调用外部 Termux 应用。"
+                } else {
+                    backend.execute(TermuxToolRequest(ctx.args, ctx.sessionId, ctx.progressReporter, ctx.metadata))
+                }
             },
             // 内建服务转发（记忆/计划/草稿、子智能体、构建脚本、渲染面）统一委托 HarnessServiceToolBackend。
             HarnessTool.MEMORY to service,

@@ -138,7 +138,7 @@
         "harness.core", "plugin.api", "plugin.packages",
         "core.common", "core.model", "core.browser", "runtime.browser",
         "core.database", "core.datastore", "core.network", "core.security",
-        "runtime", "tools"
+        "runtime", "tools", "gulong.termux"
       ]
     },
     {

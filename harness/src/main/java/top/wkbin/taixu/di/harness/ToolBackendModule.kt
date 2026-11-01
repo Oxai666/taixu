@@ -220,6 +220,8 @@ internal val toolBackendModule = module {
             toolCheckpoints = get(),
             workspaceToolBackend = get(), governanceGuard = get(),
             environments = get(),
+            // 古龙 · 外部 Termux 通道：注入 Application Context（不持有 Activity，避免泄漏）
+            termuxToolBackend = TermuxToolBackend(get<android.content.Context>()),
         )
     }
 

@@ -203,7 +203,7 @@ class WorkflowForegroundService : Service() {
         )
         return NotificationCompat.Builder(this, CHANNEL_ID)
             .setSmallIcon(R.drawable.taixu_notification)
-            .setContentTitle("太墟 · ${state.definition.name}")
+            .setContentTitle("古龙 · ${state.definition.name}")
             .setContentText(if (nodeTitle.isNotBlank()) "$nodeTitle · $detail" else detail)
             .setContentIntent(openRunIntent(state.executionId))
             .setOngoing(true)
@@ -229,7 +229,7 @@ class WorkflowForegroundService : Service() {
         }
         return NotificationCompat.Builder(this, RESULT_CHANNEL_ID)
             .setSmallIcon(R.drawable.taixu_notification)
-            .setContentTitle("太墟 · $title")
+            .setContentTitle("古龙 · $title")
             .setContentText(text)
             .setStyle(NotificationCompat.BigTextStyle().bigText(text))
             .setContentIntent(openRunIntent(state.executionId))
