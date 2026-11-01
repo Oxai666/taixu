@@ -191,6 +191,7 @@ internal class ProviderModelResolver(
                 "low" -> ReasoningEffort.LOW
                 "medium" -> ReasoningEffort.MEDIUM
                 "high" -> ReasoningEffort.HIGH
+                "xhigh" -> ReasoningEffort.XHIGH
                 "extreme", "max" -> ReasoningEffort.MAX
                 else -> null
             },

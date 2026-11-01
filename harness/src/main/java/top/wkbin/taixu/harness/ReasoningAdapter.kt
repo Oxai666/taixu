@@ -12,7 +12,7 @@ import kotlinx.serialization.json.put
 enum class ReasoningMode { AUTO, DISABLED, ENABLED }
 
 /** 推理强度：null = 服务端默认。 */
-enum class ReasoningEffort { LOW, MEDIUM, HIGH, MAX }
+enum class ReasoningEffort { LOW, MEDIUM, HIGH, XHIGH, MAX }
 
 /** 当前协议适配器对「推理开关 / 强度」的编码能力。 */
 data class ReasoningCapabilities(
@@ -45,6 +45,7 @@ object ReasoningAdapter {
         val modelName = model.model.lowercase()
         return when {
             isGemini(host, provider, modelName) -> geminiFields(model)
+            isDeepSeek(host, provider, modelName) -> deepSeekFields(model)
             isZhipu(host, provider, modelName) -> zhipuFields(model)
             isDoubao(host, provider, modelName) -> thinkingTypeFields(model)
             isOpenRouter(host, provider) -> openRouterFields(model)
@@ -126,6 +127,9 @@ object ReasoningAdapter {
     private fun isGemini(host: String, provider: String, modelName: String = "") =
         host.contains("generativelanguage.googleapis.com") || provider.contains("gemini") || modelName.contains("gemini")
 
+    private fun isDeepSeek(host: String, provider: String, modelName: String = "") =
+        host.contains("deepseek.com") || provider.contains("deepseek") || provider.contains("深度求索") || modelName.contains("deepseek")
+
     private fun isZhipu(host: String, provider: String, modelName: String = "") =
         host.contains("bigmodel.cn") || provider.contains("智谱") || provider.contains("glm") || modelName.contains("glm")
 
@@ -170,6 +174,32 @@ object ReasoningAdapter {
             )
         })
 
+    /**
+     * DeepSeek 官方（api-docs.deepseek.com）的 reasoning_effort **只有四档**：
+     * none / low / high / max，没有 medium，也没有 xhigh。
+     * 直接把我们的六档原样发过去会被服务端忽略或 400，所以在这里显式收敛：
+     *   关闭 -> none；低 -> low；中/高 -> high（无 medium，向上取）；超高/极限 -> max
+     * 另按官方约定同时给 thinking.type：关思考必须显式 disabled，光靠 effort=none 语义有歧义。
+     */
+    private fun deepSeekFields(model: ModelConfig): Map<String, JsonElement> {
+        if (model.reasoningMode == ReasoningMode.DISABLED) {
+            return mapOf(
+                "reasoning_effort" to JsonPrimitive("none"),
+                "thinking" to buildJsonObject { put("type", "disabled") },
+            )
+        }
+        val effort = when (model.reasoningEffort) {
+            ReasoningEffort.LOW -> "low"
+            ReasoningEffort.MEDIUM, ReasoningEffort.HIGH -> "high"
+            ReasoningEffort.XHIGH, ReasoningEffort.MAX -> "max"
+            null -> "high"
+        }
+        return mapOf(
+            "reasoning_effort" to JsonPrimitive(effort),
+            "thinking" to buildJsonObject { put("type", "enabled") },
+        )
+    }
+
     private fun openAiOfficialFields(model: ModelConfig): Map<String, JsonElement> =
         if (model.reasoningMode == ReasoningMode.DISABLED) {
             mapOf("reasoning_effort" to JsonPrimitive("none"))
@@ -182,13 +212,14 @@ object ReasoningAdapter {
     private fun ReasoningEffort.openAiName(): String = when (this) {
         ReasoningEffort.LOW -> "low"
         ReasoningEffort.MEDIUM -> "medium"
-        ReasoningEffort.HIGH, ReasoningEffort.MAX -> "high"
+        ReasoningEffort.HIGH, ReasoningEffort.XHIGH, ReasoningEffort.MAX -> "high"
     }
 
     private fun ReasoningEffort?.budgetTokens(): Int = when (this) {
         ReasoningEffort.LOW -> 1024
         ReasoningEffort.MEDIUM -> 2048
         ReasoningEffort.HIGH -> 8192
+        ReasoningEffort.XHIGH -> 16384
         ReasoningEffort.MAX -> 24576
         null -> 2048
     }
@@ -197,6 +228,7 @@ object ReasoningAdapter {
         ReasoningEffort.LOW -> 1024
         ReasoningEffort.MEDIUM -> 2048
         ReasoningEffort.HIGH -> 4096
+        ReasoningEffort.XHIGH -> 6000
         ReasoningEffort.MAX -> 8192
     }
 
@@ -205,6 +237,7 @@ object ReasoningAdapter {
         model.reasoningEffort == ReasoningEffort.LOW -> 1024
         model.reasoningEffort == ReasoningEffort.MEDIUM -> 2048
         model.reasoningEffort == ReasoningEffort.HIGH -> 8192
+        model.reasoningEffort == ReasoningEffort.XHIGH -> 16384
         model.reasoningEffort == ReasoningEffort.MAX -> 24576
         else -> 2048
     }
