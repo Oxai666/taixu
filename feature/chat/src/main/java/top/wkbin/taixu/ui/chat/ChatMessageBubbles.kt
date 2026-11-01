@@ -152,7 +152,7 @@ internal fun UserBubble(
 
             // 🌟 2. 用户文字气泡（clipBubbleShape 只裁绘制：四角异径的 Surface 会在图层轮廓里
             // 生成 Path，超长消息下半部分触摸判定会因 float 精度失效）
-            val visibleText = top.wkbin.taixu.harness.session.stripLegacyAttachmentPrompt(message.text).orEmpty(); if (visibleText.isNotBlank()) {
+            UserMessageAttachments(message.text); val visibleText = top.wkbin.taixu.harness.session.stripLegacyAttachmentPrompt(message.text).orEmpty(); if (visibleText.isNotBlank()) {
                 Box(
                     modifier = Modifier
                         .widthIn(max = 560.dp)
