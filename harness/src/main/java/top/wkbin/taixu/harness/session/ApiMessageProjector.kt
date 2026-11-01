@@ -274,7 +274,7 @@ object ApiMessageProjector {
  */
 fun stripLegacyAttachmentPrompt(text: String?): String? {
     if (text.isNullOrBlank()) return text
-    var out = text
+    var out: String = text
     // 中文旧版：从标题标记删到访问提示结尾
     val zhStart = out.indexOf("[附件：已复制并挂载到 Linux 沙箱]")
     if (zhStart >= 0) {
