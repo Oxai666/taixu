@@ -1529,10 +1529,8 @@ class SettingsViewModel(
         visionEnabled: Boolean = true,
         imageGenerationEnabled: Boolean = false,
         responseApiEnabled: Boolean = false,
-        promptCachingEnabled: Boolean = true,
-        promptCacheTtl1h: Boolean = false,
-        balanceApiPath: String = "",
-        balanceResultPath: String = "",
+        promptCachingEnabled: Boolean = true, promptCacheTtl1h: Boolean = false,
+        balanceApiPath: String = "", balanceResultPath: String = "",
     ): Boolean {
         val cleanUrl = ProviderEndpointPolicy.normalizeUrl(baseUrl)
         if (!ProviderEndpointPolicy.isSafeBaseUrl(cleanUrl)) {
@@ -1564,10 +1562,8 @@ class SettingsViewModel(
                     visionEnabled = visionEnabled,
                     imageGenerationEnabled = imageGenerationEnabled,
                     responseApiEnabled = responseApiEnabled,
-                    promptCachingEnabled = promptCachingEnabled,
-                    promptCacheTtl1h = promptCacheTtl1h,
-                    balanceApiPath = balanceApiPath,
-                    balanceResultPath = balanceResultPath,
+                    promptCachingEnabled = promptCachingEnabled, promptCacheTtl1h = promptCacheTtl1h,
+                    balanceApiPath = balanceApiPath, balanceResultPath = balanceResultPath,
                 ),
             )
         }
@@ -1596,8 +1592,7 @@ class SettingsViewModel(
         visionEnabled: Boolean = true,
         imageGenerationEnabled: Boolean = false,
         responseApiEnabled: Boolean = false,
-        promptCachingEnabled: Boolean = true,
-        promptCacheTtl1h: Boolean = false,
+        promptCachingEnabled: Boolean = true, promptCacheTtl1h: Boolean = false,
     ): Boolean {
         // 与 discoverModels 同源的端点策略：不安全的 Base URL（非 http(s)、内嵌凭据、
         // 无法解析）拒绝落库，否则请求期才在 OkHttp 解析处崩溃。
@@ -1635,8 +1630,7 @@ class SettingsViewModel(
                     visionEnabled = visionEnabled,
                     imageGenerationEnabled = imageGenerationEnabled,
                     responseApiEnabled = responseApiEnabled,
-                    promptCachingEnabled = promptCachingEnabled,
-                    promptCacheTtl1h = promptCacheTtl1h,
+                    promptCachingEnabled = promptCachingEnabled, promptCacheTtl1h = promptCacheTtl1h,
                 ),
             )
         }
