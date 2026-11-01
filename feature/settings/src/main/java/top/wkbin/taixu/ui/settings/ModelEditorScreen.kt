@@ -178,7 +178,7 @@ fun ModelEditorScreen(
             testResult = testResult,
             discover = { provider, url, key -> viewModel?.discoverModels(provider, url, key) },
             test = { url, model, key, respApi, providerId -> viewModel?.testConnection(url, model, key, respApi, providerId) },
-            save = { name, provider, modelsList, url, key, rpmLimit, temperature, maxTokens, topP, reasoningMode, reasoningEffort, toolCallMode, contextTokens, compactionKeepRecent, compactionReserve, customHeaders, pureChatMode, visionEnabled, imageGenerationEnabled, responseApiEnabled, promptCachingEnabled, promptCacheTtl1h ->
+            save = { name, provider, modelsList, url, key, rpmLimit, temperature, maxTokens, topP, reasoningMode, reasoningEffort, toolCallMode, contextTokens, compactionKeepRecent, compactionReserve, customHeaders, pureChatMode, visionEnabled, imageGenerationEnabled, responseApiEnabled, promptCachingEnabled, promptCacheTtl1h, balanceApiPath, balanceResultPath ->
                 val saved = viewModel?.saveModels(
                     id = modelId,
                     models = modelsList,
@@ -203,6 +203,8 @@ fun ModelEditorScreen(
                     responseApiEnabled = responseApiEnabled,
                     promptCachingEnabled = promptCachingEnabled,
                     promptCacheTtl1h = promptCacheTtl1h,
+                    balanceApiPath = balanceApiPath,
+                    balanceResultPath = balanceResultPath,
                 )
                 if (saved == true) onSaved()
             },
@@ -389,6 +391,8 @@ internal fun ModelEditorContent(
     }
 
     var customHeaders by rememberSaveable(modelId) { mutableStateOf(existing?.customHeaders.orEmpty()) }
+    var balanceApiPath by rememberSaveable(modelId) { mutableStateOf(existing?.balanceApiPath.orEmpty()) }
+    var balanceResultPath by rememberSaveable(modelId) { mutableStateOf(existing?.balanceResultPath.orEmpty()) }
 
     // 折叠区域控制
     var reasoningSectionExpanded by rememberSaveable { mutableStateOf(false) }
@@ -915,7 +919,6 @@ internal fun ModelEditorContent(
                         ) {
                             HorizontalDivider(color = MaterialTheme.colorScheme.outlineVariant.copy(alpha = 0.4f))
 
-                            // Temperature 滑块
                             Column(verticalArrangement = Arrangement.spacedBy(4.dp)) {
                                 Row(
                                     modifier = Modifier.fillMaxWidth(),
@@ -946,7 +949,6 @@ internal fun ModelEditorContent(
                                 }
                             }
 
-                            // Max Tokens 与 Context Tokens 双列并排
                             Row(
                                 modifier = Modifier.fillMaxWidth(),
                                 horizontalArrangement = Arrangement.spacedBy(16.dp),
@@ -991,7 +993,6 @@ internal fun ModelEditorContent(
                                 )
                             }
 
-                            // Top P 滑块
                             Column(verticalArrangement = Arrangement.spacedBy(4.dp)) {
                                 Row(
                                     modifier = Modifier.fillMaxWidth(),
@@ -1017,7 +1018,6 @@ internal fun ModelEditorContent(
                                 )
                             }
 
-                            // 推理思考模式
                             ExposedDropdownMenuBox(
                                 expanded = reasoningModeMenu,
                                 onExpandedChange = { reasoningModeMenu = !reasoningModeMenu },
@@ -1096,7 +1096,6 @@ internal fun ModelEditorContent(
                         ) {
                             HorizontalDivider(color = MaterialTheme.colorScheme.outlineVariant.copy(alpha = 0.4f))
 
-                            // 单 Key 每分钟上限
                             RuntimeFilledTextField(
                                 value = rpmLimitText,
                                 onValueChange = { rpmLimitText = it },
@@ -1149,7 +1148,6 @@ internal fun ModelEditorContent(
                                 color = MaterialTheme.colorScheme.onSurfaceVariant,
                             )
 
-                            // 特性开关列表
                             EditorToggleRow(
                                 title = "支持函数调用 (Tool Call)",
                                 subtitle = "支持沙箱命令与工具调用闭环",
@@ -1206,7 +1204,6 @@ internal fun ModelEditorContent(
                                 onCheckedChange = { pureChatMode = it },
                             )
 
-                            // 自定义请求头
                             RuntimeFilledTextField(
                                 value = customHeaders,
                                 onValueChange = { customHeaders = it },
@@ -1218,6 +1215,11 @@ internal fun ModelEditorContent(
                                 shape = compactFieldShape,
                                 colors = fieldColors,
                                 textStyle = MaterialTheme.typography.bodySmall.copy(fontFamily = FontFamily.Monospace),
+                            )
+                            ModelBalanceFields(
+                                apiPath = balanceApiPath, onApiPathChange = { balanceApiPath = it },
+                                resultPath = balanceResultPath, onResultPathChange = { balanceResultPath = it },
+                                shape = compactFieldShape, colors = fieldColors,
                             )
                         }
                     }
@@ -1283,6 +1285,8 @@ internal fun ModelEditorContent(
                         responseApiEnabled,
                         promptCachingEnabled,
                         promptCacheTtl1h,
+                        balanceApiPath,
+                        balanceResultPath,
                     )
                 },
                 modifier = Modifier.fillMaxWidth().heightIn(min = 56.dp),

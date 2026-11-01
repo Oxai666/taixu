@@ -32,25 +32,53 @@ object ProviderBalanceClient {
 
     private val json = Json { ignoreUnknownKeys = true; isLenient = true }
 
-    /** 探测并返回形如 `¥12.34` / `$5.00` 的余额串；拿不到返回 null。 */
-    suspend fun fetch(baseUrl: String, apiKey: String, currency: String = "¥"): String? =
-        withContext(Dispatchers.IO) {
-            if (baseUrl.isBlank() || apiKey.isBlank()) return@withContext null
-            val root = baseUrl.trimEnd('/')
-            // baseUrl 可能已经带 /v1，探测时两种拼法都试
-            val candidates = buildList {
-                add("$root/user/balance")
-                if (!root.endsWith("/v1")) add("$root/v1/user/balance")
-                add("$root/v1/credits")
-                if (!root.endsWith("/v1")) add("$root/credits")
-            }.distinct()
-
-            for (url in candidates) {
-                val text = getJson(url, apiKey) ?: continue
-                parseAmount(text)?.let { return@withContext currency + format(it) }
-            }
-            null
+    /**
+     * 查询余额并返回形如 `¥12.34` 的串；拿不到返回 null。
+     *
+     * [apiPath] 非空时**只**打这一个路径（用户在模型档案里显式配了就以他的为准，
+     * 不再乱试其它端点）；[resultPath] 非空时按它取值，否则退回内置字段链。
+     */
+    suspend fun fetch(
+        baseUrl: String,
+        apiKey: String,
+        currency: String = "¥",
+        apiPath: String = "",
+        resultPath: String = "",
+    ): String? = withContext(Dispatchers.IO) {
+        if (baseUrl.isBlank() || apiKey.isBlank()) return@withContext null
+        val root = baseUrl.trimEnd('/')
+        resultPath.trim().takeIf { it.isNotEmpty() }?.let { path ->
+            customUrls(root, apiPath).firstNotNullOfOrNull { url ->
+                getJson(url, apiKey)?.let { firstNumber(json.parseToJsonElement(it).jsonObject, path) }
+            }?.let { return@withContext currency + format(it) }
         }
+        if (apiPath.isNotBlank()) {
+            return@withContext customUrls(root, apiPath).firstNotNullOfOrNull { url ->
+                getJson(url, apiKey)?.let { parseAmount(it) }
+            }?.let { currency + format(it) }
+        }
+        // 未配置自定义路径：按已知形状依次探测
+        val candidates = buildList {
+            add("$root/user/balance")
+            if (!root.endsWith("/v1")) add("$root/v1/user/balance")
+            add("$root/v1/credits")
+            if (!root.endsWith("/v1")) add("$root/credits")
+        }.distinct()
+        for (url in candidates) {
+            val text = getJson(url, apiKey) ?: continue
+            parseAmount(text)?.let { return@withContext currency + format(it) }
+        }
+        null
+    }
+
+    /** 自定义路径的候选 URL：绝对地址直接用，相对地址拼 baseUrl（带/不带 /v1 各试一次）。 */
+    private fun customUrls(root: String, apiPath: String): List<String> {
+        val path = apiPath.trim()
+        if (path.startsWith("http")) return listOf(path)
+        val normalized = if (path.startsWith("/")) path else "/$path"
+        return if (root.endsWith("/v1")) listOf("$root$normalized")
+        else listOf("$root$normalized", "$root/v1$normalized")
+    }
 
     private fun getJson(url: String, apiKey: String): String? = try {
         val request = Request.Builder()

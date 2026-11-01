@@ -57,7 +57,9 @@ internal fun ModelDialog(
         val p = activeProfile ?: return@LaunchedEffect
         val key = providerRepo.readModelApiKeys(p.secretRef).firstOrNull()
             ?: providerRepo.readApiKey().orEmpty()
-        balanceText = top.wkbin.taixu.harness.ProviderBalanceClient.fetch(p.baseUrl, key)
+        balanceText = top.wkbin.taixu.harness.ProviderBalanceClient.fetch(
+            p.baseUrl, key, apiPath = p.balanceApiPath, resultPath = p.balanceResultPath,
+        )
     }
     val filtered = remember(models, query, selectedProfileId, selectedModelVariant) {
         models.filter { query.isBlank() || listOfNotNull(it.name, it.provider, it.model, selectedModelVariant.takeIf { _ -> it.id == selectedProfileId }).any { value -> value.contains(query.trim(), true) } }

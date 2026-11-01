@@ -66,6 +66,10 @@ data class AiModelEntity(
     val compactionKeepRecentTokens: Int? = null,
     /** 压缩预算线中为 LLM 响应预留的 token；null = 使用内置默认。 */
     val compactionReserveTokens: Int? = null,
+    /** 余额查询相对路径（如 /user/balance）；空 = 走内置探测链。 */
+    val balanceApiPath: String = "",
+    /** 余额在响应 JSON 中的取值路径（如 balance_infos[0].total_balance）；空 = 走内置探测。 */
+    val balanceResultPath: String = "",
 )
 
 @Dao

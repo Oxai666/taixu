@@ -1531,6 +1531,8 @@ class SettingsViewModel(
         responseApiEnabled: Boolean = false,
         promptCachingEnabled: Boolean = true,
         promptCacheTtl1h: Boolean = false,
+        balanceApiPath: String = "",
+        balanceResultPath: String = "",
     ): Boolean {
         val cleanUrl = ProviderEndpointPolicy.normalizeUrl(baseUrl)
         if (!ProviderEndpointPolicy.isSafeBaseUrl(cleanUrl)) {
@@ -1564,6 +1566,8 @@ class SettingsViewModel(
                     responseApiEnabled = responseApiEnabled,
                     promptCachingEnabled = promptCachingEnabled,
                     promptCacheTtl1h = promptCacheTtl1h,
+                    balanceApiPath = balanceApiPath,
+                    balanceResultPath = balanceResultPath,
                 ),
             )
         }
