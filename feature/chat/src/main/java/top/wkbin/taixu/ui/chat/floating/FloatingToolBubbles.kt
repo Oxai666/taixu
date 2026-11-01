@@ -21,6 +21,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import top.wkbin.taixu.harness.AssistantText
 import top.wkbin.taixu.harness.ToolResult
 import top.wkbin.taixu.ui.chat.MarkdownText
 import top.wkbin.taixu.ui.components.RuntimeIcon
@@ -137,4 +138,28 @@ internal fun FloatingAssistantBody(text: String) {
             Modifier.padding(horizontal = 8.dp, vertical = 5.dp),
         )
     }
+}
+
+/**
+ * 每条助手回复底部的用量行：上下文 / 缓存 / 输出 / 耗时。
+ *
+ * 数字全部来自 [AssistantText] 上由 provider 回传的 usage 字段，
+ * 不是估算值；字段缺失（老数据或 provider 不回传）就不显示该段，不填空值糊弄。
+ */
+@Composable
+internal fun FloatingUsageLine(msg: AssistantText) {
+    val bits = buildList {
+        msg.promptTokens?.let { add("上下文 $it") }
+        msg.cachedTokens?.takeIf { it > 0 }?.let { add("缓存 $it") }
+        msg.completionTokens?.let { add("输出 $it") }
+        msg.totalMs?.let { add(String.format(java.util.Locale.US, "%.1fs", it / 1000.0)) }
+    }
+    if (bits.isEmpty()) return
+    Text(
+        text = bits.joinToString(" · "),
+        style = MaterialTheme.typography.labelSmall.copy(fontSize = 9.sp),
+        color = MaterialTheme.colorScheme.onSurfaceVariant.copy(alpha = 0.7f),
+        maxLines = 1,
+        overflow = TextOverflow.Ellipsis,
+    )
 }

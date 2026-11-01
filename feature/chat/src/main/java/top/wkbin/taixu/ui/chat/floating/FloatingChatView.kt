@@ -521,6 +521,7 @@ private fun FloatingChatPanel(
                                         }
                                         msg.reasoning?.takeIf { it.isNotBlank() }?.let { FloatingReasoningBubble(it) }
                                         if (msg.text.isNotBlank()) FloatingAssistantBody(msg.text)
+                                        FloatingUsageLine(msg)
                                     }
                                 }
                                 is ToolCall -> {
