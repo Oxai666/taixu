@@ -1593,6 +1593,7 @@ class SettingsViewModel(
         imageGenerationEnabled: Boolean = false,
         responseApiEnabled: Boolean = false,
         promptCachingEnabled: Boolean = true, promptCacheTtl1h: Boolean = false,
+        balanceApiPath: String = "", balanceResultPath: String = "",
     ): Boolean {
         // 与 discoverModels 同源的端点策略：不安全的 Base URL（非 http(s)、内嵌凭据、
         // 无法解析）拒绝落库，否则请求期才在 OkHttp 解析处崩溃。
@@ -1631,6 +1632,7 @@ class SettingsViewModel(
                     imageGenerationEnabled = imageGenerationEnabled,
                     responseApiEnabled = responseApiEnabled,
                     promptCachingEnabled = promptCachingEnabled, promptCacheTtl1h = promptCacheTtl1h,
+                    balanceApiPath = balanceApiPath, balanceResultPath = balanceResultPath,
                 ),
             )
         }

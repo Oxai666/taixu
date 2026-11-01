@@ -248,7 +248,7 @@ internal fun ModelEditorContent(
     testResult: String?,
     discover: (String, String, String) -> Unit,
     test: (String, String, String, Boolean, String?) -> Unit,
-    save: (String, String, List<String>, String, String, Int, Float?, Int?, Float?, String?, String?, String?, Int?, Int?, Int?, String, Boolean, Boolean, Boolean, Boolean, Boolean, Boolean) -> Unit,
+    save: (String, String, List<String>, String, String, Int, Float?, Int?, Float?, String?, String?, String?, Int?, Int?, Int?, String, Boolean, Boolean, Boolean, Boolean, Boolean, Boolean, String, String) -> Unit,
     onFillFromJson: (String) -> AiModelProfileExport?,
     showImportDialog: Boolean,
     onDismissImportDialog: () -> Unit,
