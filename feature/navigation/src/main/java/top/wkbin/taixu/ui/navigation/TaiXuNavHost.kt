@@ -581,16 +581,8 @@ fun TaiXuNavHost(
                     SshSettingsScreen(onBack = ::popBack)
                 }
             }
-            entry<TermuxSettingsDestination> {
-                GuardedEntry(TermuxSettingsDestination) {
-                    TermuxSettingsScreen(onBack = ::popBack)
-                }
-            }
-            entry<FtpSettingsDestination> {
-                GuardedEntry(FtpSettingsDestination) {
-                    FtpSettingsScreen(onBack = ::popBack)
-                }
-            }
+            entry<TermuxSettingsDestination> { GuardedEntry(TermuxSettingsDestination) { TermuxSettingsScreen(onBack = ::popBack) } }
+            entry<FtpSettingsDestination> { GuardedEntry(FtpSettingsDestination) { FtpSettingsScreen(onBack = ::popBack) } }
             entry<ModelProfilesDestination> {
                 GuardedEntry(ModelProfilesDestination) {
                     ModelProfilesScreen(
