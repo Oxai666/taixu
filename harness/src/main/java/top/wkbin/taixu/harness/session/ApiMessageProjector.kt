@@ -291,7 +291,9 @@ fun stripLegacyAttachmentPrompt(text: String?): String? {
     }
     // 纯图片时代的引导语与内联说明：对模型都是噪音
     for (noise in listOf(
+        "请分析并处理以下附带的文件：",
         "请分析附带的图片：",
+        "Analyze the attached files:",
         "Analyze the attached images:",
         "[图片已内联在本次消息中，可直接查看，无需读取任何文件]",
         "[Images are inlined in this message",

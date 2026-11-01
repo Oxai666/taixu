@@ -52,7 +52,7 @@
     <string name="chat_attachment_image">图片</string>
     <string name="chat_attachment_file">文件</string>
     <string name="chat_attachment_line">%1$d. [%2$s] %3$s (%4$s) -> Linux 沙箱绝对路径: %5$s\n</string>
-    <string name="chat_attachment_access_hint">需要通过工具访问时，请使用 base 在上述绝对路径读取；不要使用 Android content:// URI 或宿主机路径。</string>
+    <string name="chat_attachment_access_hint">这些路径在 Linux 沙箱内，只能用 base 工具读取（例如 cat 上述路径）；不要用 read 工具，也不要使用 Android content:// URI 或宿主机路径。</string>
     <string name="chat_thinking">思考中…</string>
     <string name="chat_close">关闭</string>
     <string name="chat_enable">启用</string>

@@ -9,6 +9,7 @@ import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.foundation.layout.wrapContentWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.lazy.LazyRow
@@ -97,7 +98,8 @@ internal fun MessageAttachmentRow(
 ) {
     if (items.isEmpty()) return
     LazyRow(
-        modifier = modifier.fillMaxWidth().padding(bottom = 4.dp),
+        // 不撑满整行：气泡本身是靠右的，卡片也得跟着靠右，否则会孤零零飘在左上角
+        modifier = modifier.wrapContentWidth().padding(bottom = 4.dp),
         horizontalArrangement = Arrangement.spacedBy(8.dp),
     ) {
         items(items, key = { it.guestPath }) { item ->
