@@ -184,13 +184,13 @@ internal fun UserMessageAttachments(text: String) {
     val items = remember(text) { parseAttachmentEntries(text) }
     var preview by remember { mutableStateOf<Pair<String, String>?>(null) }
     if (items.isEmpty()) return
-    MessageAttachmentRow(items) { att ->
+    MessageAttachmentRow(items, onOpen = { att ->
         if (!att.isImage && isPreviewable(att)) {
             sandboxAttachmentFile(context, att.guestPath)?.let { f ->
                 runCatching { preview = att.name to f.readText().take(200_000) }
             }
         }
-    }
+    })
     preview?.let { (name, content) ->
         TextAttachmentPreviewDialog(name, content) { preview = null }
     }
