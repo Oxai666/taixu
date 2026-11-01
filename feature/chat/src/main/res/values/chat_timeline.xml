@@ -52,6 +52,7 @@
     <string name="chat_action_compress">整理上下文</string>
     <string name="chat_action_question">确认需求</string>
     <string name="chat_action_surface">展示交互界面</string>
+    <string name="chat_action_termux">Termux 命令</string>
     <string name="chat_tool_details_title">工具详情</string>
     <string name="chat_tool_details_command">命令</string>
     <string name="chat_tool_details_arguments">参数</string>

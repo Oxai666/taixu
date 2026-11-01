@@ -26,5 +26,4 @@
     <string name="taixu_agent_mcp_notification_channel">MCP Agent Server</string>
     <string name="taixu_agent_mcp_running_hint">External AI clients can connect at any time</string>
     <string name="taixu_gui_a11y_description">Gulong GUI gesture service for taps/swipes/long-press. With Shizuku/Root it is auto-enabled; otherwise you can turn it on manually in Accessibility settings as a fallback.</string>
-    <string name="chat_action_termux">Termux command</string>
 </resources>

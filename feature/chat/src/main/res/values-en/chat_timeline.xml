@@ -52,6 +52,7 @@ Extracted text: %s (readable via the read tool)</string>
     <string name="chat_action_compress">Compact context</string>
     <string name="chat_action_question">Clarify requirements</string>
     <string name="chat_action_surface">Display interactive surface</string>
+    <string name="chat_action_termux">Termux command</string>
     <string name="chat_tool_details_title">Tool details</string>
     <string name="chat_tool_details_command">Command</string>
     <string name="chat_tool_details_arguments">Arguments</string>
