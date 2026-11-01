@@ -7,7 +7,7 @@ data class ChatIdentityStyle(val name: String = DEFAULT_NAME, val imageName: Str
         return copy(name = clean.substring(0, end), imageName = imageName?.takeIf(ChatBackgroundStyle::isValidImageName))
     }
     companion object {
-        const val DEFAULT_NAME = "太墟"
+        const val DEFAULT_NAME = "古龙"
         const val MAX_NAME_LENGTH = 40
         const val IMAGE_DIRECTORY = "chat-identity"
     }

@@ -1,7 +1,7 @@
 package top.wkbin.taixu.core.model
 
 /**
- * 太墟支持的已安装 Linux 发行版实例数据模型。
+ * 古龙支持的已安装 Linux 发行版实例数据模型。
  */
 data class InstalledDistro(
     val id: String,

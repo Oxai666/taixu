@@ -61,7 +61,7 @@ class GroupChatRenderTest {
                 TaiXuTheme(darkTheme = dark, dynamicColor = false) {
                     Surface(color = MaterialTheme.colorScheme.surface) {
                         Column(Modifier.fillMaxSize()) {
-                            GroupChatTopBar(GroupChatViewMode.CHAT, "太墟项目协作", "2 位成员 · 阿策主持", false,
+                            GroupChatTopBar(GroupChatViewMode.CHAT, "古龙项目协作", "2 位成员 · 阿策主持", false,
                                 GroupWorkSummary(0, 0, 0), false, {}, {}, {}, {})
                             Column(Modifier.weight(1f).fillMaxWidth().verticalScroll(rememberScrollState()).padding(16.dp),
                                 verticalArrangement = Arrangement.spacedBy(16.dp)) {

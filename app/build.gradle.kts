@@ -26,7 +26,7 @@ extensions.configure<ApplicationExtension> {
     ndkVersion = "30.0.15729638"
 
     defaultConfig {
-        // 古龙独立包名：与太墟（top.wkbin.taixu）互不覆盖，可以并存安装。
+        // 古龙独立包名：与古龙（top.wkbin.taixu）互不覆盖，可以并存安装。
         // namespace 保持 top.wkbin.taixu 不动——那是 Java 包路径，与安装标识无关。
         applicationId = if (taiXuDevBuild) "top.wkbin.gulong.dev" else "top.wkbin.gulong"
         minSdk = 29

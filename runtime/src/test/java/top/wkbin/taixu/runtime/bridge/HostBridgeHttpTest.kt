@@ -9,7 +9,7 @@ class HostBridgeHttpTest {
 
     @Test fun preservesLegacyRequestsAndReadsMultibyteBodyByBytes() {
         assertEquals("GET", parse("GET /api/health HTTP/1.1\r\nHost: localhost\r\n\r\n")!!.method)
-        val body = "{\"command\":\"echo 太墟\"}"
+        val body = "{\"command\":\"echo 古龙\"}"
         val request = parse("POST /api/shell HTTP/1.1\r\nContent-Length: ${body.toByteArray().size}\r\n\r\n$body")!!
         assertEquals(body, request.body)
     }

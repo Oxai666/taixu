@@ -147,7 +147,7 @@ class SkillPackageParser {
             ?: fallbackId
 
         val description = frontmatter["description"]
-            ?: "太墟声明式智能体技能包"
+            ?: "古龙声明式智能体技能包"
 
         val version = frontmatter["version"] ?: "1.0.0"
         val author = frontmatter["author"] ?: "Community"

@@ -74,7 +74,7 @@ import java.util.Date
 import java.util.Locale
 
 /**
- * 太墟 · 文件浏览器 (File Explorer)
+ * 古龙 · 文件浏览器 (File Explorer)
  * 实时树形遍历与文件 CRUD
  */
 @OptIn(ExperimentalMaterial3Api::class)

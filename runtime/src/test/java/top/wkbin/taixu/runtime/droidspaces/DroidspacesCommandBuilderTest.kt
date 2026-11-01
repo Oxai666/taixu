@@ -148,7 +148,7 @@ class DroidspacesCommandBuilderTest {
         assertTrue("诊断只能写到 stderr", failure.contains(">&2"))
         assertFalse("诊断不得写到 stdout", failure.contains(">&1"))
         assertTrue("退出码保持 125", failure.endsWith("exit 125"))
-        assertFalse("不得再声称太墟从不修改容器", failure.contains("不自行创建或修改"))
+        assertFalse("不得再声称古龙从不修改容器", failure.contains("不自行创建或修改"))
         assertTrue("应说明 start 会把 -B 写回容器配置", failure.contains("写回容器配置"))
     }
 

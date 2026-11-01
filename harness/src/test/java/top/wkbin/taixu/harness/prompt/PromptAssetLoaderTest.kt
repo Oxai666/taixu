@@ -60,7 +60,7 @@ class PromptAssetLoaderTest {
     @Test
     fun allKnownAssetVariablesCanBeRendered() {
         val variables = mapOf(
-            "CHAR_NAME" to "太墟智枢",
+            "CHAR_NAME" to "古龙智枢",
             "EXECUTION_LOCATION" to "Android 私有 Linux 沙箱",
             "EXECUTION_ARCH" to "aarch64",
             "EXECUTION_LAYER" to "PRoot",

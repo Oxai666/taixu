@@ -36,7 +36,7 @@ internal fun EmptyChatGuidance(
         when (hour) {
             in 5..11 -> "早上好，今天想开辟什么工程？"
             in 12..17 -> "下午好，准备好开始 AI 结对了吗？"
-            else -> "晚上好，灵感闪烁时，太墟常伴。"
+            else -> "晚上好，灵感闪烁时，古龙常伴。"
         }
     }
 

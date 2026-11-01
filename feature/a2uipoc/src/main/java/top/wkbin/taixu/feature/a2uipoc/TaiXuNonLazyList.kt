@@ -133,7 +133,7 @@ internal object TaiXuNonLazyList : A2uiBasicCatalogV1.List {
         modifier: Modifier = Modifier,
     ) {
         // 与官方 ListItemStateWrapper 等价：按子组件状态 加载中/失败/成功 三态渲染。
-        // 加载态用太墟骨架屏（官方 MaterialA2uiDefaults 是 internal，无法直接复用）。
+        // 加载态用古龙骨架屏（官方 MaterialA2uiDefaults 是 internal，无法直接复用）。
         when (val state = observeA2uiComponentState(childRef)) {
             is A2uiComponentState.Success ->
                 A2uiComponent(component = state.component, modifier = modifier)

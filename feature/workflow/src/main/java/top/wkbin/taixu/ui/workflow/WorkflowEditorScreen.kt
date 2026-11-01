@@ -664,7 +664,7 @@ private fun RunConsoleModal(
 
     val consoleOutput = remember(activeRunState) {
         buildString {
-            appendLine("=== 太墟工作流「${activeRunState.definition.name}」控制台输出 ===")
+            appendLine("=== 古龙工作流「${activeRunState.definition.name}」控制台输出 ===")
             appendLine("全局状态: ${runStatusLabel(activeRunState.status)}  |  执行耗时: ${durationMs}ms")
             activeRunState.error?.let {
                 appendLine("❌ 异常信息: $it")

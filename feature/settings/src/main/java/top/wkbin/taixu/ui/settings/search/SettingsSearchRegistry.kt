@@ -3,8 +3,8 @@ package top.wkbin.taixu.ui.settings.search
 import top.wkbin.taixu.ui.components.RuntimeIconName
 
 /**
- * 太墟全局功能与细粒度设置选项索引仓库
- * 全面深层收录太墟全系统的每一个子功能、具体配置项、开关与参数，支持多维加权检索与一键直达
+ * 古龙全局功能与细粒度设置选项索引仓库
+ * 全面深层收录古龙全系统的每一个子功能、具体配置项、开关与参数，支持多维加权检索与一键直达
  */
 object SettingsSearchRegistry {
 
@@ -504,8 +504,8 @@ object SettingsSearchRegistry {
         ),
         SettingsSearchItem(
             id = "linux_web_chat",
-            title = "太墟智枢 Web 协作台",
-            subtitle = "局域网内使用电脑浏览器直接访问太墟 Agent 与工作区 (PIN 验证)",
+            title = "古龙智枢 Web 协作台",
+            subtitle = "局域网内使用电脑浏览器直接访问古龙 Agent 与工作区 (PIN 验证)",
             category = SettingsSearchCategory.LINUX_ENV,
             target = SettingsSearchTarget.WEB_CHAT,
             icon = RuntimeIconName.Globe,
@@ -557,7 +557,7 @@ object SettingsSearchRegistry {
         SettingsSearchItem(
             id = "appearance_font_scale",
             title = "应用字号与页面缩放",
-            subtitle = "调节太墟全界面文本字号大小与排版比例 (0.8x ~ 1.3x)",
+            subtitle = "调节古龙全界面文本字号大小与排版比例 (0.8x ~ 1.3x)",
             category = SettingsSearchCategory.APPEARANCE,
             target = SettingsSearchTarget.FONT_SCALE,
             icon = RuntimeIconName.FontSize,
@@ -772,16 +772,16 @@ object SettingsSearchRegistry {
             breadcrumb = "工坊与离线构建 > 自动化工作流",
         ),
 
-        // ==================== 6. 太墟核心功能直达 ====================
+        // ==================== 6. 古龙核心功能直达 ====================
         SettingsSearchItem(
             id = "nav_home",
-            title = "太墟主画卷 (开辟画布)",
-            subtitle = "太墟主控仪表盘、沙箱快捷启动与状态概览",
+            title = "古龙主画卷 (开辟画布)",
+            subtitle = "古龙主控仪表盘、沙箱快捷启动与状态概览",
             category = SettingsSearchCategory.CORE_FEATURE,
             target = SettingsSearchTarget.NAV_HOME,
             icon = RuntimeIconName.NavDashboard,
-            keywords = listOf("home", "dashboard", "主页", "画布", "太墟", "zhuye"),
-            breadcrumb = "太墟核心直达 > 主画卷",
+            keywords = listOf("home", "dashboard", "主页", "画布", "古龙", "zhuye"),
+            breadcrumb = "古龙核心直达 > 主画卷",
         ),
         SettingsSearchItem(
             id = "nav_agent_chat",
@@ -791,7 +791,7 @@ object SettingsSearchRegistry {
             target = SettingsSearchTarget.NAV_AGENT_CHAT,
             icon = RuntimeIconName.NavMessage,
             keywords = listOf("chat", "agent", "ai", "智枢", "对话", "结对", "duihua"),
-            breadcrumb = "太墟核心直达 > 智枢 AI 会话",
+            breadcrumb = "古龙核心直达 > 智枢 AI 会话",
         ),
         SettingsSearchItem(
             id = "nav_workspace",
@@ -801,7 +801,7 @@ object SettingsSearchRegistry {
             target = SettingsSearchTarget.NAV_WORKSPACE,
             icon = RuntimeIconName.NavRepository,
             keywords = listOf("workspace", "files", "project", "工作区", "文件", "代码", "gongzuoqu"),
-            breadcrumb = "太墟核心直达 > 工坊工作区",
+            breadcrumb = "古龙核心直达 > 工坊工作区",
         ),
         SettingsSearchItem(
             id = "nav_terminal",
@@ -812,7 +812,7 @@ object SettingsSearchRegistry {
             icon = RuntimeIconName.Terminal,
             keywords = listOf("terminal", "pty", "bash", "shell", "终端", "命令行", "zhongduan"),
             badge = "直达",
-            breadcrumb = "太墟核心直达 > 原生 PTY 终端",
+            breadcrumb = "古龙核心直达 > 原生 PTY 终端",
         ),
         SettingsSearchItem(
             id = "nav_browser",
@@ -822,19 +822,19 @@ object SettingsSearchRegistry {
             target = SettingsSearchTarget.NAV_BROWSER,
             icon = RuntimeIconName.Globe,
             keywords = listOf("browser", "cdp", "webview", "浏览器", "网页", "liulanqi"),
-            breadcrumb = "太墟核心直达 > 内置浏览器",
+            breadcrumb = "古龙核心直达 > 内置浏览器",
         ),
 
         // ==================== 7. 关于与官方社区 ====================
         SettingsSearchItem(
             id = "about_community",
-            title = "关于太墟与官方社区",
+            title = "关于古龙与官方社区",
             subtitle = "检查版本更新、查看开源协议、GitHub 仓库与官方 QQ 交流群",
             category = SettingsSearchCategory.ABOUT,
             target = SettingsSearchTarget.ABOUT_COMMUNITY,
             icon = RuntimeIconName.Community,
             keywords = listOf("about", "version", "github", "qq", "community", "关于", "版本", "更新", "开源", "交流群", "guanyu"),
-            breadcrumb = "关于与官方社区 > 关于太墟",
+            breadcrumb = "关于与官方社区 > 关于古龙",
         ),
         SettingsSearchItem(
             id = "about_changelog",
@@ -849,7 +849,7 @@ object SettingsSearchRegistry {
         SettingsSearchItem(
             id = "about_github",
             title = "GitHub 开源仓库与源码",
-            subtitle = "太墟开源项目地址、提交 Issue 反馈与代码贡献",
+            subtitle = "古龙开源项目地址、提交 Issue 反馈与代码贡献",
             category = SettingsSearchCategory.ABOUT,
             target = SettingsSearchTarget.ABOUT_COMMUNITY,
             icon = RuntimeIconName.Github,
@@ -858,8 +858,8 @@ object SettingsSearchRegistry {
         ),
         SettingsSearchItem(
             id = "about_sponsor",
-            title = "赞助太墟开发",
-            subtitle = "支持太墟开源项目持续迭代与移动端 Linux 沙箱生态演进",
+            title = "赞助古龙开发",
+            subtitle = "支持古龙开源项目持续迭代与移动端 Linux 沙箱生态演进",
             category = SettingsSearchCategory.ABOUT,
             target = SettingsSearchTarget.ABOUT_SPONSOR,
             icon = RuntimeIconName.Sponsor,

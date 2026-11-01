@@ -1,7 +1,7 @@
 {
   "schemaVersion": 1,
   "id": "builtin.taixu-local-plugin",
-  "name": "太墟本地进程插件",
+  "name": "古龙本地进程插件",
   "version": "1.0.0",
   "description": "预置 v2 插件清单、Shell 示例、离线打包脚本与开发说明",
   "projectType": "TAIXU_PLUGIN",

@@ -50,7 +50,7 @@ fun WorkflowNodeType.metadata(): NodeTypeMeta = when (this) {
     )
     WorkflowNodeType.TAIXU_BUILD -> NodeTypeMeta(
         type = this,
-        label = "太墟离线构建",
+        label = "古龙离线构建",
         icon = RuntimeIconName.Package,
         summary = "调用沙箱内离线构建引擎编译打包 Android/C++/Rust",
         guide = "调用沙箱内置的 taixu-build 编译引擎。支持 android、cmake、cargo 等类型，可直接产出 APK 安装包或可执行二进制文件。",

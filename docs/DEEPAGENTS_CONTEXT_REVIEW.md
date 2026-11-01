@@ -64,19 +64,19 @@
 
 ## 结论
 
-太墟已经具备“输出外置 → 老结果缩减 → 历史摘要 → 溢出恢复”的分层链路，以及技能按需加载、独立子任务与原文检索。历史分页与大参数治理已落地，本轮补充背景预算分配、保护原因诊断、最终请求体积门禁与引用失效反馈。媒体恢复目前明确限定为文本回读，产物保留仍受既有清理上限约束；无需为借鉴 deepagents 引入 Python/LangGraph 依赖或重写 Agent 循环。
+古龙已经具备“输出外置 → 老结果缩减 → 历史摘要 → 溢出恢复”的分层链路，以及技能按需加载、独立子任务与原文检索。历史分页与大参数治理已落地，本轮补充背景预算分配、保护原因诊断、最终请求体积门禁与引用失效反馈。媒体恢复目前明确限定为文本回读，产物保留仍受既有清理上限约束；无需为借鉴 deepagents 引入 Python/LangGraph 依赖或重写 Agent 循环。
 
 ## 上游依据
 
 - [summarization.py](https://github.com/langchain-ai/deepagents/blob/main/libs/deepagents/deepagents/middleware/summarization.py)：`_truncate_args` 在摘要前缩减保留窗口之外的 `write_file` / `edit_file` 参数；修改后重新计数。`_count_tokens` 将 system 和 tools 纳入计数（计数器支持 tools 时）。自动与主动压缩复用摘要引擎，历史和内联媒体可外置。
 - [_message_eviction.py](https://github.com/langchain-ai/deepagents/blob/main/libs/deepagents/deepagents/middleware/_message_eviction.py)：大结果替换为预览与可回读路径，保留消息身份字段；该辅助函数写入失败时返回空值，要求调用方保留原消息。
-- [Subagents](https://docs.langchain.com/oss/python/deepagents/subagents) 与 [Skills](https://docs.langchain.com/oss/python/deepagents/skills)：上下文隔离与按需加载的参考。它们在太墟中属于已有方向，不列为待新增能力。
+- [Subagents](https://docs.langchain.com/oss/python/deepagents/subagents) 与 [Skills](https://docs.langchain.com/oss/python/deepagents/skills)：上下文隔离与按需加载的参考。它们在古龙中属于已有方向，不列为待新增能力。
 
 以上说明具体参考点，不推断上游所有错误路径均无损。上游文档注释中的触发顺序描述也不能替代实际配置：当前有模型 profile 时，参数缩减与摘要默认触发比例同为 0.85，但参数缩减先执行。
 
 ## 已有能力与边界
 
-| 能力 | 太墟源码依据 | 判断 |
+| 能力 | 古龙源码依据 | 判断 |
 | --- | --- | --- |
 | 工具输出落盘与分页回读 | [ToolExecutor.kt](../harness/src/main/java/top/wkbin/taixu/harness/ToolExecutor.kt)、[ToolOutputSpillStore.kt](../harness/src/main/java/top/wkbin/taixu/harness/ToolOutputSpillStore.kt) | 已有；正文附相对路径，存储受时间、文件数和容量约束，写入可能失败 |
 | 摘要前缩减历史工具结果 | [ContextWindowPolicy.kt](../harness/src/main/java/top/wkbin/taixu/harness/ContextWindowPolicy.kt) 的 `truncateStaleToolResults` | 已有；保护当前用户轮与最近结果，缩减正文并附消息 ID |
@@ -125,7 +125,7 @@
 
 ### P2：逐步统一预算决策与来源诊断
 
-这是架构改进建议，不是“太墟没有预算系统”。当前预算已覆盖 system、摘要、召回和工具预留，但不同阶段分别缩减，最终请求诊断缺少原因链。
+这是架构改进建议，不是“古龙没有预算系统”。当前预算已覆盖 system、摘要、召回和工具预留，但不同阶段分别缩减，最终请求诊断缺少原因链。
 
 建议先提取纯函数决策结果：输入来源、估算占用、保护原因、处理动作、回读引用及处理前后估算。继续使用现有 assembler/store 边界，先让诊断解释“为何缩减这条消息”，再考虑按价值分配不同上下文贡献的预算。分支投影已有来源信息，宜复用。
 

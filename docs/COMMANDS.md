@@ -1,4 +1,4 @@
-# 🛠️ 太墟 (TaiXu) — 常用开发与自动化命令速查 (Runbook & Commands)
+# 🛠️ 古龙 (TaiXu) — 常用开发与自动化命令速查 (Runbook & Commands)
 
 ---
 
@@ -70,10 +70,10 @@ $env:JAVA_HOME="C:\Program Files\Android\Android Studio\jbr"; .\gradlew.bat :har
 # 1. 安装 Debug APK 到已连接的真机或模拟器
 adb install -r app/build/outputs/apk/debug/taixu-v0.5.0-debug.apk
 
-# 2. 启动太墟主入口 Activity
+# 2. 启动古龙主入口 Activity
 adb shell am start -n top.wkbin.taixu/.MainActivity
 
-# 3. 实时过滤太墟运行时与智能体核心日志
+# 3. 实时过滤古龙运行时与智能体核心日志
 adb logcat -s TaiXu:V HarnessLoop:V ProotProcess:V
 ```
 

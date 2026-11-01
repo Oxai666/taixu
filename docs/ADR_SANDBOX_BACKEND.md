@@ -1,4 +1,4 @@
-# 🧱 太墟 (TaiXu) — 沙箱执行后端选型 (chroot / namespace vs PRoot)
+# 🧱 古龙 (TaiXu) — 沙箱执行后端选型 (chroot / namespace vs PRoot)
 
 > **范围**：评估是否用 `chroot`（或 `unshare` + `pivot_root`）替换/补充现有 PRoot 沙箱执行后端。
 > **状态**：**已决策 — 不实施**。PRoot 保持为唯一沙箱后端；高性能后端列为长期可选项，默认不排期。
@@ -9,7 +9,7 @@
 
 ## 1. 🎯 背景与问题
 
-PRoot 通过 `ptrace` 逐个拦截并改写 syscall，在 syscall 密集负载上开销约 2–10 倍。太墟恰好把最重的此类负载放在沙箱内：
+PRoot 通过 `ptrace` 逐个拦截并改写 syscall，在 syscall 密集负载上开销约 2–10 倍。古龙恰好把最重的此类负载放在沙箱内：
 
 - Gradle / AGP 的 Android 构建（见 [`ANDROID_OFFLINE_PLUGIN.md`](ANDROID_OFFLINE_PLUGIN.md)）
 - `dpkg` / `apt` 解包（见 [`KNOWN_ISSUES.md`](KNOWN_ISSUES.md) §6 硬链接防御）
@@ -29,7 +29,7 @@ chroot 的门槛不是"有特权"，而是具体需要 `CAP_SYS_CHROOT`；要挂
 | `SHIZUKU` | shell uid 2000 | ❌ | **ADB 级别不含 `CAP_SYS_CHROOT` / `CAP_SYS_ADMIN`** |
 | `ROOT` | uid 0 | ✅ | 仅此一档可行 |
 
-**关键结论**：Shizuku 是太墟特权能力的主力场景（`PrivilegeManager` 的 `applyPrivilegeOptimizations`、幽灵进程解除、`appops` 自授权都在这一档），但它**完全吃不到** chroot 的收益。受益面仅限已 Root 设备。
+**关键结论**：Shizuku 是古龙特权能力的主力场景（`PrivilegeManager` 的 `applyPrivilegeOptimizations`、幽灵进程解除、`appops` 自授权都在这一档），但它**完全吃不到** chroot 的收益。受益面仅限已 Root 设备。
 
 ### 2.1 现状：ROOT 模式不参与沙箱执行
 
@@ -50,7 +50,7 @@ feature/chat/ChatViewModel.kt                ── UI 状态
 
 ## 3. ✅ 决策
 
-1. **PRoot 保持唯一沙箱后端**，不引入 chroot 作为替换或默认路径。无 Root 可用是太墟的核心产品定位，任何以 root 为前提的路径都不能进入主链路。
+1. **PRoot 保持唯一沙箱后端**，不引入 chroot 作为替换或默认路径。无 Root 可用是古龙的核心产品定位，任何以 root 为前提的路径都不能进入主链路。
 2. **裸 `chroot` 永久否决**。在 Android 上它必须搭配全局 mount namespace 的 bind mount（见 §4.3），残留风险不可接受。
 3. 若未来确有性能刚需，**唯一可接受形态**是 ROOT 模式下的 `unshare --mount --pid --fork` + `pivot_root` 可选后端，默认关闭、失败自动降级（见 §6）。
 4. 优先榨取 PRoot 侧余量（见 §7），而不是新开后端。
@@ -195,7 +195,7 @@ Termux 版 PRoot 默认启用 seccomp 加速（只陷入需要翻译的 syscall�
 `PrivilegeManager.checkRootPrivilege()` 现在只看 `su -c id` 是否返回 `uid=0`。但由 §4 可知**"root 可用" ≠ "namespace/chroot 可用"**：
 
 - 用户可能使用未注入 permissive domain 补丁的裸 root；
-- 可能在 KernelSU / APatch 中把太墟放进了排除（umount）列表；
+- 可能在 KernelSU / APatch 中把古龙放进了排除（umount）列表；
 - 内核可能裁剪了相关 namespace 支持。
 
 若将来实施 §6，探测必须实际试跑最小动作（如 `su -c "unshare -m true"`）而非推断。**即使不实施，当前 `Authorized` 文案中"已释放原生 Linux 与内核硬件加速能力"的表述也超出了实际能力范围，建议校正。**
@@ -241,7 +241,7 @@ Termux 版 PRoot 默认启用 seccomp 加速（只陷入需要翻译的 syscall�
 创建/进入 namespace 的操作（`unshare(CLONE_NEWNS)`、`mount`、`pivot_root`、`setns`）
 都需要 `CAP_SYS_ADMIN`，即宿主 uid 0。**容器内的 root 是被授予的，不是容器自生的。**
 因此必然存在一个持有宿主特权的发起者；本 PR 的 `su -c droidspaces …` 就是把它设成了
-太墟自身。
+古龙自身。
 
 ### A.2 上游本来有「非特权客户端 + 特权 daemon」设计，但 App 用不了
 
@@ -278,7 +278,7 @@ Termux 版 PRoot 默认启用 seccomp 加速（只陷入需要翻译的 syscall�
 `containerBackendEnabled` 默认关，用于**避免改变现有 ROOT 用户的行为**（ADR-S001），
 并让功能以实验形态逐步验证。
 
-必须明示的局限：太墟内部具备 GUI 自动化能力，**任何位于应用内的开关都可能被自动化翻转**，
+必须明示的局限：古龙内部具备 GUI 自动化能力，**任何位于应用内的开关都可能被自动化翻转**，
 所以它**不构成针对「应用内智能体越权」的安全边界**。若后续需要真正的安全边界，
 应把它放在应用进程之外（例如由系统/模块侧的策略决定是否授予该能力），
 而不是依赖一个可被 UI 操作翻转的偏好项。

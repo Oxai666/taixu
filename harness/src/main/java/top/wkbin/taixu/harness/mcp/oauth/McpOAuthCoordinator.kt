@@ -300,6 +300,6 @@ class McpOAuthCoordinator(
     companion object {
         const val TRANSACTION_TTL_MS = 10 * 60 * 1000L
         const val REFRESH_SKEW_MS = 30_000L
-        const val CLIENT_NAME = "太墟 (TaiXu)"
+        const val CLIENT_NAME = "古龙 (TaiXu)"
     }
 }

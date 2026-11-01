@@ -13,8 +13,8 @@ class WebPluginMessagesTest {
         assertTrue(runCatching { WebPluginMessages.decode("""{"id":"write","action":"host.service-write","target":"service","text":"api/auth\n{}","method":"POST"}""") }.isFailure)
     }
     @Test fun acceptsOnlyTheTypedClipboardTextEnvelope() {
-        val call = WebPluginMessages.decode("""{"id":"copy","action":"host.clipboard-write","target":"clipboard","text":"太墟\n{[example]}"}""")
-        assertEquals("太墟\n{[example]}", call.text)
+        val call = WebPluginMessages.decode("""{"id":"copy","action":"host.clipboard-write","target":"clipboard","text":"古龙\n{[example]}"}""")
+        assertEquals("古龙\n{[example]}", call.text)
         assertEquals("clipboard", call.capability.target)
     }
 

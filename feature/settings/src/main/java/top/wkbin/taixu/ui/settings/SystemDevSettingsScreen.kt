@@ -182,7 +182,7 @@ fun SystemDevSettingsScreen(
 
         item {
             Text(
-                text = "太墟自定义迭代与共建",
+                text = "古龙自定义迭代与共建",
                 style = MaterialTheme.typography.titleSmall,
                 color = MaterialTheme.colorScheme.primary,
                 modifier = Modifier.padding(start = 16.dp, bottom = 12.dp),
@@ -191,7 +191,7 @@ fun SystemDevSettingsScreen(
                 SettingsRow(
                     icon = RuntimeIconName.Code,
                     title = "自定义迭代（TaiXuDev）",
-                    subtitle = "在手机沙盒中调用 AI 开发太墟自身并云端构建 APK",
+                    subtitle = "在手机沙盒中调用 AI 开发古龙自身并云端构建 APK",
                     onClick = onOpenCustomIteration,
                 )
             }
@@ -279,7 +279,7 @@ private fun BatteryOptimizationDialog(
                     }
                 }
                 Text(
-                    "太墟在 Agent 执行期间会启动前台服务并持有 CPU 进程锁，但系统电池优化仍可能在息屏后" +
+                    "古龙在 Agent 执行期间会启动前台服务并持有 CPU 进程锁，但系统电池优化仍可能在息屏后" +
                         "冻结进程，表现为 Agent 推理或命令执行中途停住。建议开启以下两项：",
                     style = MaterialTheme.typography.bodySmall,
                     color = MaterialTheme.colorScheme.onSurfaceVariant,

@@ -293,7 +293,7 @@ class FtpServiceManager(
             manager.createNotificationChannel(
                 NotificationChannel(
                     NOTIFICATION_CHANNEL_ID,
-                    "太墟 Linux FTP 文件服务",
+                    "古龙 Linux FTP 文件服务",
                     NotificationManager.IMPORTANCE_LOW,
                 ).apply {
                     description = "用于展示 Linux 沙箱 FTP 远程文件访问运行状态的常驻通知"

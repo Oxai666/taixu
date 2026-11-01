@@ -13,7 +13,7 @@ import org.robolectric.internal.bytecode.Sandbox
  * supported on Linux (aarch64)`，此时 JUnit 的 `@Before` 还没执行，因此守卫必须放在
  * runner 层。
  *
- * 太墟的主要开发场景是手机上的 Linux 沙盒（aarch64），本地跑单测时这组用例必然全红，
+ * 古龙的主要开发场景是手机上的 Linux 沙盒（aarch64），本地跑单测时这组用例必然全红，
  * 会掩盖真实回归。这里改为跳过，x86-64 CI 上照常执行。
  */
 object RobolectricNativeRuntime {

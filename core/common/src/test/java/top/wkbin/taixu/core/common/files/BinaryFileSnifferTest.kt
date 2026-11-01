@@ -11,7 +11,7 @@ class BinaryFileSnifferTest {
         assertFalse(BinaryFileSniffer.looksBinary("plain ascii".toByteArray()))
         assertFalse(BinaryFileSniffer.looksBinary("# 标题\n\n- 列表项 `code`\n".toByteArray()))
         assertFalse(BinaryFileSniffer.looksBinary("""{"model":"gpt","temperature":0.7}""".toByteArray()))
-        assertFalse(BinaryFileSniffer.looksBinary("中文说明：太墟运行时\n第二行\t带制表符\r\n".toByteArray()))
+        assertFalse(BinaryFileSniffer.looksBinary("中文说明：古龙运行时\n第二行\t带制表符\r\n".toByteArray()))
         assertFalse(BinaryFileSniffer.looksBinary(ByteArray(0)))
     }
 

@@ -84,7 +84,7 @@ import top.wkbin.taixu.core.tools.LocalPluginImportState
 import top.wkbin.taixu.feature.components.R as ComponentsR
 import top.wkbin.taixu.feature.settings.R
 /**
- * 太墟 · 插件与 AI 工具中心 (Tool & Plugin Center)
+ * 古龙 · 插件与 AI 工具中心 (Tool & Plugin Center)
  */
 @OptIn(androidx.compose.material3.ExperimentalMaterial3Api::class)
 @Composable

@@ -88,7 +88,7 @@ fun SkillSecurityAuditDialog(
                         fontWeight = FontWeight.Bold,
                     )
                     Text(
-                        text = "PalmClaw / 太墟端侧安全边界审计",
+                        text = "PalmClaw / 古龙端侧安全边界审计",
                         style = MaterialTheme.typography.bodySmall,
                         color = MaterialTheme.colorScheme.onSurfaceVariant,
                     )

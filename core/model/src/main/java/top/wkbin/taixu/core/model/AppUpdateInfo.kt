@@ -3,7 +3,7 @@ package top.wkbin.taixu.core.model
 import kotlinx.serialization.Serializable
 
 /**
- * 太墟 · 版本更新信息模型 (GitHub Releases API)
+ * 古龙 · 版本更新信息模型 (GitHub Releases API)
  */
 @Serializable
 data class AppUpdateInfo(

@@ -14,7 +14,7 @@ object A2uiSurfaceContract {
     const val TOOL_NAME = "render_surface"
 
     /**
-     * 太墟目录 id。createSurface 必须使用它。目录包含官方 Basic Catalog，并增加 Table。
+     * 古龙目录 id。createSurface 必须使用它。目录包含官方 Basic Catalog，并增加 Table。
      * [LEGACY_CATALOG_ID] 是官方 basic catalog；渲染器会把它改写成 [CATALOG_ID]，旧载荷仍能显示。
      */
     const val CATALOG_ID = "https://taixu.app/a2ui/catalog/v1"
@@ -26,7 +26,7 @@ object A2uiSurfaceContract {
             "表单/看板）时用本工具提交，然后一两句话总结，不要在正文重复数据。" +
             "messages 是 A2UI 消息数组的 JSON 字符串：首条 createSurface（新界面用全新 surfaceId），" +
             "其后 updateComponents（扁平 components，容器用 children/child 引用子组件 id，恰一个 root），" +
-            "deleteSurface 移除界面。version 固定 v0.9；catalogId 固定为太墟目录；禁止对 messages 二次转义；" +
+            "deleteSurface 移除界面。version 固定 v0.9；catalogId 固定为古龙目录；禁止对 messages 二次转义；" +
             "文本写明文常量不用表达式，不得杜撰组件类型。" +
             "对比和排行用 Table：columns 是表头字符串数组（最多 6 列），rows 是 {cells: 字符串数组}（最多 12 行），cells 与 columns 等长。" +
             "其余用 Basic Catalog：Text/Row/Column/List/Card/Tabs/Modal/Divider/Button/" +

@@ -177,11 +177,11 @@ fun LinuxEnvironmentSettingsScreen(
                 PreferenceSurface(first = false, last = false) {
                     SettingsRow(
                         icon = RuntimeIconName.Globe,
-                        title = "太墟智枢 Web 协作台",
+                        title = "古龙智枢 Web 协作台",
                         subtitle = if (webChatStatus.isRunning) {
                             "运行中 · ${webChatStatus.accessUrl} (PIN: ${webChatStatus.pinCode})"
                         } else {
-                            "在同一 Wi-Fi 下使用电脑浏览器访问太墟 Agent 与工作区"
+                            "在同一 Wi-Fi 下使用电脑浏览器访问古龙 Agent 与工作区"
                         },
                         value = if (webChatStatus.isRunning) "已开启" else "未开启",
                         onClick = { showWebChatDialog = true },

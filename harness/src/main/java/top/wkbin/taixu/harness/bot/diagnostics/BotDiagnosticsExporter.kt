@@ -72,7 +72,7 @@ class BotDiagnosticsExporter(
         }
 
         val report = buildString {
-            appendLine("# 太墟群聊诊断导出")
+            appendLine("# 古龙群聊诊断导出")
             appendLine()
             appendLine("- 导出时间：${stamp(System.currentTimeMillis())}")
             appendLine("- 设备：${Build.MANUFACTURER} ${Build.MODEL} · Android ${Build.VERSION.RELEASE} (SDK ${Build.VERSION.SDK_INT})")

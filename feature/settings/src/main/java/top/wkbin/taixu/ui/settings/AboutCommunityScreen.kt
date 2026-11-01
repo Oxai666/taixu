@@ -91,7 +91,7 @@ fun AboutCommunityScreen(
                         }
                     },
                     text = {
-                        Text("当前太墟版本 v${state.info.currentVersion} 已是最新稳定版，无需更新。")
+                        Text("当前古龙版本 v${state.info.currentVersion} 已是最新稳定版，无需更新。")
                     },
                     confirmButton = {
                         TextButton(onClick = { viewModel?.clearUpdateState() }) {
@@ -163,34 +163,13 @@ fun AboutCommunityScreen(
             )
             SettingsGroup {
                 SettingsRow(
-                    icon = RuntimeIconName.Update,
-                    title = "检查新版本",
-                    subtitle = "基于 GitHub Releases 自动检测与在线升级",
-                    value = if (updateCheckState is UpdateCheckState.Checking) "检查中…" else "v$currentVersion",
-                    onClick = {
-                        // 检查进行中禁止重复触发
-                        if (updateCheckState !is UpdateCheckState.Checking) {
-                            viewModel?.checkForUpdates(currentVersion)
-                        }
-                    },
-                )
-                HorizontalDivider(color = MaterialTheme.colorScheme.outlineVariant.copy(alpha = 0.5f))
-                SettingsRow(
                     icon = RuntimeIconName.Document,
-                    title = "版本更新日志",
-                    subtitle = "查看当前版本 (v$currentVersion) 的更新说明与功能亮点",
+                    title = "版本说明",
+                    subtitle = "查看当前版本 (v$currentVersion) 的功能说明与亮点",
                     onClick = {
                         viewModel?.loadCurrentReleaseNotes(currentVersion)
                         showReleaseNotesDialog = true
                     },
-                )
-                HorizontalDivider(color = MaterialTheme.colorScheme.outlineVariant.copy(alpha = 0.5f))
-                ToggleRow(
-                    icon = RuntimeIconName.Update,
-                    title = "启动时自动检查更新",
-                    subtitle = "应用启动时在后台静默检测新版本",
-                    checked = autoCheckUpdates,
-                    change = { arg0 -> viewModel?.setAutoCheckUpdates(arg0) },
                 )
                 HorizontalDivider(color = MaterialTheme.colorScheme.outlineVariant.copy(alpha = 0.5f))
                 SettingsRow(
@@ -235,13 +214,13 @@ fun AboutCommunityScreen(
                 SettingsRow(
                     icon = RuntimeIconName.Sponsor,
                     title = "赞助支持",
-                    subtitle = "赞助太墟 · 助力开源持续开发",
+                    subtitle = "赞助古龙 · 助力开源持续开发",
                     onClick = onOpenSponsor,
                 )
                 HorizontalDivider(color = MaterialTheme.colorScheme.outlineVariant.copy(alpha = 0.5f))
                 SettingsRow(
                     icon = RuntimeIconName.Info,
-                    title = "关于太墟 · TaiXu",
+                    title = "关于古龙 · TaiXu",
                     subtitle = "Android 原生 Linux PRoot 沙箱与 AI 结对中枢",
                     onClick = { showAboutDialog = true },
                 )
@@ -262,7 +241,7 @@ private fun AboutAppDialog(
         title = {
             Row(verticalAlignment = Alignment.CenterVertically, horizontalArrangement = Arrangement.spacedBy(10.dp)) {
                 RuntimeIcon(name = RuntimeIconName.Package, modifier = Modifier.size(24.dp), tint = MaterialTheme.colorScheme.primary)
-                Text("太墟 · TaiXu", fontWeight = FontWeight.Bold)
+                Text("古龙 · TaiXu", fontWeight = FontWeight.Bold)
             }
         },
         text = {
@@ -398,7 +377,7 @@ private fun joinQqGroup(context: Context, groupId: String = "964382207") {
     }.onFailure {
         // 剪贴板兜底
         val clipboard = context.getSystemService(Context.CLIPBOARD_SERVICE) as? ClipboardManager
-        val clip = ClipData.newPlainText("太墟官方交流群", groupId)
+        val clip = ClipData.newPlainText("古龙官方交流群", groupId)
         clipboard?.setPrimaryClip(clip)
         Toast.makeText(context, "已复制 QQ 群号：$groupId，可打开 QQ 搜索加入", Toast.LENGTH_LONG).show()
     }
@@ -431,7 +410,7 @@ private fun VersionReleaseNotesDialog(
         title = {
             Row(verticalAlignment = Alignment.CenterVertically, horizontalArrangement = Arrangement.spacedBy(10.dp)) {
                 RuntimeIcon(RuntimeIconName.Document, Modifier.size(24.dp), tint = MaterialTheme.colorScheme.primary)
-                Text("太墟 v$version 更新说明", fontWeight = FontWeight.Bold)
+                Text("古龙 v$version 更新说明", fontWeight = FontWeight.Bold)
             }
         },
         text = {

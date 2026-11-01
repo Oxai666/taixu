@@ -26,7 +26,7 @@ class GroupChatTopBarTest {
             TaiXuTheme {
                 GroupChatTopBar(
                     viewMode = GroupChatViewMode.CHAT,
-                    groupName = "太墟项目群",
+                    groupName = "古龙项目群",
                     statusText = "2 位成员",
                     busy = false,
                     workSummary = GroupWorkSummary(0, 0, 0),
@@ -51,7 +51,7 @@ class GroupChatTopBarTest {
             TaiXuTheme {
                 GroupChatTopBar(
                     viewMode = GroupChatViewMode.STUDIO,
-                    groupName = "太墟项目群",
+                    groupName = "古龙项目群",
                     statusText = "2 位成员",
                     busy = false,
                     workSummary = GroupWorkSummary(0, 0, 0),

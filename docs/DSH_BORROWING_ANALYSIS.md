@@ -7,8 +7,8 @@
 
 ## 总体判断
 
-DSH 与太墟 harness 形态高度同构（消息树 / 审批链 / 压缩 / 子代理 / 工作流 / 定时全能对上），
-它的价值不在"搬功能"，而在**边界语义的工程化细节**——恰好补太墟几处已知让步与静默风险。
+DSH 与古龙 harness 形态高度同构（消息树 / 审批链 / 压缩 / 子代理 / 工作流 / 定时全能对上），
+它的价值不在"搬功能"，而在**边界语义的工程化细节**——恰好补古龙几处已知让步与静默风险。
 另有一类**明确不借鉴**：Cordis 运行时插件树 / HMR / profile-bundle 分发是桌面服务端形态，
 与 Android 编译期装配冲突；值得拿走的只是 seam 三角色（Definition / Provider / Consumer）的分类学，
 用于整理 `HarnessPlugin` 六类贡献的文档命名。
@@ -17,27 +17,27 @@ DSH 与太墟 harness 形态高度同构（消息树 / 审批链 / 压缩 / 子�
 
 ### P0（补硬伤）—— 本批次已落地
 
-| # | 借鉴点 | DSH 机制 | 太墟落点 |
+| # | 借鉴点 | DSH 机制 | 古龙落点 |
 |---|---|---|---|
 | 1 | 会话条目 payload 格式版本 + 解码 fail-closed | Session 是 append-only 事件日志；未知事件默认 required（读到不认识的事件拒绝重建）；格式 N→N+1 相邻迁移链 + 后继 generation 排他发布 | `harness_entries.payloadVersion` 列（v81 回填 1）；`SessionPayloadMigrations` 相邻链；`SessionCorruptionLedger` 腐坏台账；见让步 C7 |
 | 2 | 审批审计对持久化 + unavailable fail-closed | `approval/asked`/`decided` 审计对写会话日志；缺应答者/异常/非法值归一为 unavailable = 拒绝 | 核查结论：asked/用户决定/过期/执行已由 `agent_approval_requests` 持久化且 TTL 过期 fail-closed ✓；真正的缺口是**会话授权（grants）豁免执行与授权写入无痕** → 新表 `agent_approval_audits`（grant_written / grant_exempted / deferred 三类）+ `ApprovalAuditRecorder`；缺审批仓库 → 失败结果不放行（回归测试钉死）；见让步 C8 |
 
 ### P1（已有机制对齐增强）
 
-3. **技能目录 digest 替换注入**——**核查后不做（2026-10-24）**：太墟技能目录在 system prompt 内，
+3. **技能目录 digest 替换注入**——**核查后不做（2026-10-24）**：古龙技能目录在 system prompt 内，
    但已有 prefix cache 字节稳定契约（逐轮不变、技能按全会话累计，见 ApiContextAssembler 头注）；
-   DSH 方案解决的是"目录放会话历史 + 技能集变化只追加替换消息"，太墟当前架构下技能集变化是
+   DSH 方案解决的是"目录放会话历史 + 技能集变化只追加替换消息"，古龙当前架构下技能集变化是
    低频事件且一次重建可接受，迁移要动契约核心。若未来技能规模上到百级再评估。
 4. **压缩三事件括住 + 溢出重试的 generation 检查**——**核查后无需改动（2026-10-24）**：
-   - 三事件括住（start 锁/summary/end）对太墟架构不适用：DSH 需要括号是因为它用
+   - 三事件括住（start 锁/summary/end）对古龙架构不适用：DSH 需要括号是因为它用
      surface replace 两阶段替换（存在"替换一半"中间态，崩溃遗留锁需可检测）；
-     太墟压缩是 **append-only 单 entry 事务落库**（CompactionManager.compact：锁外摘要、
+     古龙压缩是 **append-only 单 entry 事务落库**（CompactionManager.compact：锁外摘要、
      锁内重读-对账-原子追加），崩溃语义天然是"没有压缩"（下次组装重新触发），
      不存在半完成态。强加括号反而引入需要清理的遗留锁状态。
    - generation 检查已等价存在：`recoverFromContextOverflow` 的 `folded <= 0 → null`
      （状态未前进不返回）+ 调用方 `overflowRecovered` 单次标志（HarnessProviderRunner:287/345，
      每轮至多一次紧急压缩，无效重试不烧钱）+ `ProviderOutputRecovery` 同样 `!= null` 才采纳。
-     DSH 的"surface replacement generation 前进才重试"在太墟对应"折叠数 > 0 才重试"。
+     DSH 的"surface replacement generation 前进才重试"在古龙对应"折叠数 > 0 才重试"。
 4a. ~~**轮改动交付物卡片**~~ —— **已落地（2026-10-24，见下）**。
 5. **spill 定位符 + retrievalHint**——**主体已存在（opencode 批次），2026-10-24 补齐**：
    两处 spill 消费方（ToolExecutor 截断文案 / SubagentSummaryPagination）均已有
@@ -47,7 +47,7 @@ DSH 与太墟 harness 形态高度同构（消息树 / 审批链 / 压缩 / 子�
 6. **定时投递 flush 确认**——**核查后无需改动（2026-10-24）**：`BotScheduleRunner` 的
    stage→claim→finish 三段 + `recoverInterruptedDeliveries` 启动恢复 + 未知结果标
    UNKNOWN 不自动重试，已覆盖 DSH "flush 确认后写回执 / 错过只补最新" 语义，且在
-   防重复投递上更保守（DSH 显式让步"可能重复投递"，太墟选择"可能丢拍标 UNKNOWN
+   防重复投递上更保守（DSH 显式让步"可能重复投递"，古龙选择"可能丢拍标 UNKNOWN
    人工核对"——移动端宁可丢拍不重复打扰，与既有 memory 记录的让步一致）。
 7. **"沙箱拦住了 vs 沙箱坏了"双分类器**——**已落地（2026-10-24，P2 批次提前）**：
    `harness/ExecutionEnvironmentClassifier.kt` 两类正交分类——A 类执行器异常
@@ -59,12 +59,12 @@ DSH 与太墟 harness 形态高度同构（消息树 / 审批链 / 压缩 / 子�
    `runLoopInternal` 内的单协程局部计数器（HarnessLoop:1198），advance/canContinue/
    beginNextSegment 无并发窗口；续跑提示先 enqueue 落盘再消费，进程被杀可恢复；
    审批恢复经 sessionJobs join 串行。DSH 的三重防护（预留 Round 号 / pre-step 双重
-   校验 / flush 检查点）面向跨 agent 调度器与 inbox 认领的并发，太墟单会话顺序流
+   校验 / flush 检查点）面向跨 agent 调度器与 inbox 认领的并发，古龙单会话顺序流
    不存在该竞态面。
 
 ### P1 已落地：轮文件改动卡片（2026-10-24）
 
-DSH 的 deliverables 用轮始/末工作树快照 diff 自动得出"本轮改动文件"；太墟 `CheckpointStore`
+DSH 的 deliverables 用轮始/末工作树快照 diff 自动得出"本轮改动文件"；古龙 `CheckpointStore`
 本就为 rewind 捕获每轮写工具触碰文件的「轮初内容 + 最后写入后凭据」，直接复用为数据源
 （比 git diff 更精确覆盖无 git 的工作区）。
 
@@ -99,7 +99,7 @@ DSH 的 deliverables 用轮始/末工作树快照 diff 自动得出"本轮改动
   **让步 C10**：进程被杀后批次不自动恢复（Lane 持久可续跑，调度身份恢复让步）；
   后台 Lane 审批沿用 deferred 语义（INCOMPLETE 汇总报告）。
 - **Agent Teams 任务板**——**评估后不做（2026-10-25）**：DSH 自身也标 experimental。
-  其任务板针对的三个问题在太墟各有已落地的对应物：并发写冲突 → 子代理 write_paths
+  其任务板针对的三个问题在古龙各有已落地的对应物：并发写冲突 → 子代理 write_paths
   写租约波次（buildWriteCleanWaves）；任务状态机 → AgentTaskStateMachine + 后台审批
   通知；多 Bot 协作 → 群提案治理 + 接力派单树。缺实证需求（尚无"多 Bot 需要跨会话
   看彼此任务依赖"的真实用例），硬造任务板 = 为对标而对标。触发条件：出现跨会话
@@ -109,7 +109,7 @@ DSH 的 deliverables 用轮始/末工作树快照 diff 自动得出"本轮改动
 - ~~"沙箱拦住了 vs 沙箱坏了"双分类器~~ —— **已提前落地（P1-7 顺延，2026-10-24，见上）**。
 - **消息级反馈事件**——**API 层已落地（2026-10-24，Web 先行）**：
   `agent_message_feedback` 表（DB v82，messageId 唯一 + REPLACE upsert = last-write-wins；
-  DSH 的 ifVersion 乐观并发面向多客户端同写，太墟单设备单写者不做版本字段）+
+  DSH 的 ifVersion 乐观并发面向多客户端同写，古龙单设备单写者不做版本字段）+
   `MessageFeedbackService`（写入门面：目标校验"活动分支上的非空 assistant 消息"、
   rating 枚举、备注 trim）。Web 桥暴露 `/conversations/{id}/feedback` GET/POST
   （WebChatAgentGateway 接口 +2 方法）；HarnessLoop 会话删除链清理反馈。

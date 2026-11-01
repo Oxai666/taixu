@@ -3,7 +3,7 @@ package top.wkbin.taixu.iteration.engine
 import java.io.File
 
 /**
- * CustomIterationBootstrap — 太墟自定义迭代环境自举引擎。
+ * CustomIterationBootstrap — 古龙自定义迭代环境自举引擎。
  *
  * 职责：
  * 1. 只 `mkdir` 空的隔离工作区 `~/custom_taixu`，供随后 `git clone` 使用；
@@ -76,7 +76,7 @@ object CustomIterationBootstrap {
      */
     fun bootstrapPrompt(guestWorkspace: String, forkRepo: String? = null): String {
         val forkLabel = promptForkLabel(forkRepo)
-        return """我准备在太墟（TaiXu）的手机 Linux 虚拟沙盒中进行 TaiXu 自定义迭代。
+        return """我准备在古龙（TaiXu）的手机 Linux 虚拟沙盒中进行 TaiXu 自定义迭代。
 
 请按以下步骤引导我：
 1. 检查本地开发环境：

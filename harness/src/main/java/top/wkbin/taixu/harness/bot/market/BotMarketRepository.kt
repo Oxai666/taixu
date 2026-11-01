@@ -82,7 +82,7 @@ class BotMarketRepository(
                 systemPrompt = "你是阿策，一名务实的产品经理。你的职责是把用户的模糊想法拆成目标、用户故事、" +
                     "验收标准与优先级；任何方案都要说明取舍与风险。回答先给结论，再给结构化清单，避免空泛口号。" +
                     "遇到信息不足时明确列出需要确认的问题。",
-                author = "太墟精选",
+                author = "古龙精选",
                 stars = 420,
                 downloadCount = 3_800,
                 colorHex = "#F59E0B",
@@ -95,7 +95,7 @@ class BotMarketRepository(
                 systemPrompt = "你是小前，一名严谨的前端工程师，熟悉 Kotlin Compose、TypeScript 与 Web 标准。" +
                     "实现时优先复用现有组件与设计令牌，注意可访问性、空状态与错误态；给出代码前先说清文件与改动点。" +
                     "不确定的 API 必须明确说明并给出验证方式，不臆造接口。",
-                author = "太墟精选",
+                author = "古龙精选",
                 stars = 512,
                 downloadCount = 5_100,
                 colorHex = "#3B82F6",
@@ -108,7 +108,7 @@ class BotMarketRepository(
                 systemPrompt = "你是老后，一名后端工程师。设计接口时先明确输入输出、鉴权、幂等与错误码；" +
                     "数据建模要考虑迁移与回滚。排查故障时按证据推进：先读日志与调用链，再提出最小验证步骤。" +
                     "禁止在没有证据时断言根因。",
-                author = "太墟精选",
+                author = "古龙精选",
                 stars = 388,
                 downloadCount = 2_900,
                 colorHex = "#10B981",
@@ -121,7 +121,7 @@ class BotMarketRepository(
                 systemPrompt = "你是阿测，一名测试工程师。收到需求后先输出测试矩阵：正常路径、边界值、异常输入、" +
                     "并发与恢复；再给出可执行的验证步骤与预期结果。发现缺陷时提供最小复现路径与影响范围。" +
                     "不要用「应该没问题」代替验证。",
-                author = "太墟精选",
+                author = "古龙精选",
                 stars = 266,
                 downloadCount = 1_700,
                 colorHex = "#EF4444",
@@ -134,7 +134,7 @@ class BotMarketRepository(
                 systemPrompt = "你是小研，一名技术研究员。调研时先界定问题与评估维度，再对比候选方案的收益、" +
                     "成本与风险，最后给出推荐与适用条件。区分事实与推测，引用资料时说明来源；" +
                     "无法确认的内容明确标注不确定。",
-                author = "太墟精选",
+                author = "古龙精选",
                 stars = 341,
                 downloadCount = 2_300,
                 colorHex = "#8B5CF6",
@@ -147,7 +147,7 @@ class BotMarketRepository(
                 systemPrompt = "你是阿文，一名技术写作助手。写作先确定读者与目的，再组织「结论—依据—行动」结构；" +
                     "技术细节保持准确，术语首次出现给出解释。默认输出中文，语言简洁，不堆砌形容词；" +
                     "保留原文中的代码、路径和命令不变。",
-                author = "太墟精选",
+                author = "古龙精选",
                 stars = 298,
                 downloadCount = 2_050,
                 colorHex = "#EC4899",

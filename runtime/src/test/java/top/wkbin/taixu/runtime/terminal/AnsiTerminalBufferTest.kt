@@ -124,10 +124,10 @@ class AnsiTerminalBufferTest {
         val buffer = AnsiTerminalBuffer(columns = 20, maxRows = 10)
         // 模拟 readline/bash：先清行，再输入中文字符
         buffer.append("abcdefgh")
-        val screen = buffer.append("\u001B[1G\u001B[K你好太墟")
+        val screen = buffer.append("\u001B[1G\u001B[K你好古龙")
 
         val line = screen.first()
-        assertEquals("你好太墟", line.cells.joinToString("") { it.character })
+        assertEquals("你好古龙", line.cells.joinToString("") { it.character })
         assertEquals(8, buffer.cursor().column)
         assertEquals("你", line.cells[0].character)
         assertEquals("", line.cells[1].character)

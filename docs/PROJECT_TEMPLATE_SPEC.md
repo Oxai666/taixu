@@ -1,6 +1,6 @@
-# 太墟可移植项目模板规范（v1）
+# 古龙可移植项目模板规范（v1）
 
-太墟模板是一个可导入、导出和分享的 ZIP 包。用户可在“工坊 → 更多 → 模板管理”中导入 ZIP，也可导出任意内置模板作为制作样例。
+古龙模板是一个可导入、导出和分享的 ZIP 包。用户可在“工坊 → 更多 → 模板管理”中导入 ZIP，也可导出任意内置模板作为制作样例。
 
 ## 1. 目录结构
 
@@ -37,7 +37,7 @@ my-template/
 
 - `id` 只能包含小写字母、数字以及 `.`、`_`、`-` 分隔符。
 - `builtin.` 是系统内置模板保留前缀，用户模板不能使用。
-- `projectType` 支持 `ANDROID`、`FLUTTER`、`GENERAL`、`TAIXU_PLUGIN`（太墟本地插件开发）。
+- `projectType` 支持 `ANDROID`、`FLUTTER`、`GENERAL`、`TAIXU_PLUGIN`（古龙本地插件开发）。
 - `category` 是模板选择页的第二级分组，`sortOrder` 越小越靠前。
 - JSON 采用严格解析；未知字段会被拒绝，避免拼写错误被静默忽略。
 
@@ -127,7 +127,7 @@ my-template/
 
 应用内置模板会从 `project-template/src/main/assets/templates/<项目类型>/<模板目录>/template.json` 自动发现；新增标准目录不需要修改 Kotlin 注册表。
 
-## 10. 太墟本地插件开发
+## 10. 古龙本地插件开发
 
 内置模板 `builtin.taixu-local-plugin` 位于 `templates/taixu-plugin/process/`，在创建项目首步作为独立类型展示。用户填写工具 ID、点分插件身份、插件名称与初始版本，不需要 Android 包名或 Gradle。创建和归档导入均持久化 `TAIXU_PLUGIN` 项目类型。
 

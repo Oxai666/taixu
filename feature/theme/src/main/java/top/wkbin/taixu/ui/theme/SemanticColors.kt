@@ -11,7 +11,7 @@ import androidx.compose.ui.graphics.toArgb
 import com.materialkolor.blend.Blend
 
 /**
- * 太墟 · M3 语义色扩展。
+ * 古龙 · M3 语义色扩展。
  *
  * Material You 的 [ColorScheme] 只定义 primary / secondary / tertiary
  * 三组彩色角色，无法表达「成功 / 警告 / 信息 / 工具 / 分支」这类领域语义。全App 曾直接写死

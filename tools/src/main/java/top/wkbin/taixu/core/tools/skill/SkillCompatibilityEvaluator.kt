@@ -6,7 +6,7 @@ import top.wkbin.taixu.core.model.skill.SkillPackage
 import top.wkbin.taixu.core.tools.ToolRegistry
 
 /**
- * 技能兼容性与依赖评估器（静态评估技能在当前移动端 PRoot 沙箱与太墟环境下的适配度）。
+ * 技能兼容性与依赖评估器（静态评估技能在当前移动端 PRoot 沙箱与古龙环境下的适配度）。
  */
 class SkillCompatibilityEvaluator(
     private val toolRegistry: ToolRegistry? = null,
@@ -26,7 +26,7 @@ class SkillCompatibilityEvaluator(
             val hasOverlap = declaredRuntimes.any { it.lowercase() in supportedInTaiXu }
             if (!hasOverlap) {
                 unsupportedRuntimes.addAll(declaredRuntimes)
-                notes.add("该技能声明的目标运行环境 (${declaredRuntimes.joinToString()}) 与太墟 Android PRoot (arm64-v8a) 不匹配")
+                notes.add("该技能声明的目标运行环境 (${declaredRuntimes.joinToString()}) 与古龙 Android PRoot (arm64-v8a) 不匹配")
             }
         }
 
@@ -54,7 +54,7 @@ class SkillCompatibilityEvaluator(
         }
 
         if (level == CompatibilityLevel.COMPATIBLE) {
-            notes.add("与当前太墟沙箱 (Debian arm64-v8a) 完全兼容，所有前置依赖均已就绪。")
+            notes.add("与当前古龙沙箱 (Debian arm64-v8a) 完全兼容，所有前置依赖均已就绪。")
         }
 
         return SkillCompatibilityResult(
@@ -66,7 +66,7 @@ class SkillCompatibilityEvaluator(
     }
 
     companion object {
-        /** 太墟 Debian 沙箱预置或基础 Linux 核心命令列表。 */
+        /** 古龙 Debian 沙箱预置或基础 Linux 核心命令列表。 */
         private val BUILTIN_SANDBOX_COMMANDS = setOf(
             "sh", "bash", "cat", "echo", "grep", "find", "sed", "awk",
             "ls", "cp", "mv", "rm", "mkdir", "chmod", "ps", "tar", "gzip",

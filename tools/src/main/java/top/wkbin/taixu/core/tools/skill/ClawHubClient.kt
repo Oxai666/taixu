@@ -252,7 +252,7 @@ class ClawHubClient(
                         trigger_command: /git
                         ---
                         # Git 工作流专精总纲
-                        本技能为太墟智能体提供在沙箱中进行严格代码版本控制的能力。
+                        本技能为古龙智能体提供在沙箱中进行严格代码版本控制的能力。
                     """.trimIndent(),
                     agentMd = """
                         1. 任何代码修改提交前，必先调用 `git status -s` 与 `git diff` 确认变更影响范围；
@@ -347,7 +347,7 @@ class ClawHubClient(
                     agentMd = """
                         1. 识别 Android PRoot 无 Root 用户态限制；
                         2. dpkg 安装异常时，指导检查 `/var/lib/dpkg/updates` 与 setuid 降低；
-                        3. 后台服务必须通过太墟进程托管器守护，避免孤儿进程回收。
+                        3. 后台服务必须通过古龙进程托管器守护，避免孤儿进程回收。
                     """.trimIndent(),
                     soulMd = """
                         冷静、沉着、排障思路严密，如同老道经验丰富的 Linux 系统工程师。

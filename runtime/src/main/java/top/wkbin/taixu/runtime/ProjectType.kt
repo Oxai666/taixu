@@ -9,6 +9,6 @@ enum class ProjectType {
             FLUTTER -> "Flutter"
             REVERSE -> "APK 逆向"
             GENERAL -> "通用"
-            TAIXU_PLUGIN -> "太墟本地插件"
+            TAIXU_PLUGIN -> "古龙本地插件"
         }
 }

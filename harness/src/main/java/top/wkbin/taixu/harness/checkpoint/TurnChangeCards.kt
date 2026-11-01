@@ -21,7 +21,7 @@ import top.wkbin.taixu.harness.session.SessionTreeStore
 object TurnChangeCards {
 
     /**
-     * 从轮快照计算改动分类。删除类不存在：太墟的 checkpoint 只覆盖写工具，
+     * 从轮快照计算改动分类。删除类不存在：古龙的 checkpoint 只覆盖写工具，
      * shell 删除不经 capture（卡片如实只反映写工具可见的改动）。
      * 轮初与最后写入内容完全一致的路径视为无变化，不进任何类。
      */

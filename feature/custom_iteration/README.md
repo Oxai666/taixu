@@ -1,6 +1,6 @@
-# 太墟（TaiXu）自定义迭代与 TaiXuDev 构建模块 (`feature:custom_iteration`)
+# 古龙（TaiXu）自定义迭代与 TaiXuDev 构建模块 (`feature:custom_iteration`)
 
-本模块为 **太墟 · TaiXu** 量身打造的标准、无降级自迭代系统。让用户在手机上使用太墟的自主 AI Agent 进行太墟自身的二次开发、测试、云端 CI 构建，并向开源社区贡献代码。
+本模块为 **古龙 · TaiXu** 量身打造的标准、无降级自迭代系统。让用户在手机上使用古龙的自主 AI Agent 进行古龙自身的二次开发、测试、云端 CI 构建，并向开源社区贡献代码。
 
 ---
 
@@ -8,7 +8,7 @@
 
 ```
 feature/custom_iteration/
-├── build.gradle.kts                        # Gradle 多模块依赖配置（对齐太墟规范）
+├── build.gradle.kts                        # Gradle 多模块依赖配置（对齐古龙规范）
 ├── README.md                               # 完整模块架构与接入文档
 └── src/
     ├── main/
@@ -47,7 +47,7 @@ feature/custom_iteration/
    * 自举只 `mkdir` 这个空目录。克隆前不写入 `.github` 或 `.agents`，否则
      `git clone <fork> ~/custom_taixu` 会因目录非空失败。
 2. **专属 Agent Skill 约束 (`SKILL.md`)**：
-   * 指导 AI Agent 严格遵守太墟的多模块 Kotlin DSL 规范、Material3 Compose 规范、协程设计及凭证安全规则。
+   * 指导 AI Agent 严格遵守古龙的多模块 Kotlin DSL 规范、Material3 Compose 规范、协程设计及凭证安全规则。
    * Skill 随模块 assets 打包。自举时只落盘到两个真实扫描根，无需用户手工复制：
      `<attachmentsDir>/skills/`（guest `/attachments/skills`）、
      `<workspaceDir>/skills/`（guest `/workspace/skills`）。
@@ -65,7 +65,7 @@ feature/custom_iteration/
      避免写死官方仓库导致 `workflow_dispatch` 403；URL 无法解析为 `owner/name` 时直接失败关闭。
 4. **双包共存（Dual-Flavor）**：
    * 编译产物包名自动重命名为 `top.wkbin.taixu.dev`，应用名显示为 `TaiXuDev`；
-   * 测试版与手机中的正式版太墟共存运行、互不覆盖。
+   * 测试版与手机中的正式版古龙共存运行、互不覆盖。
 5. **预置 Agent 引导 Prompt**：
    * 自举时生成 6 步引导 Prompt（含设备码认证、免本地 SDK 策略、双包校验），交给 Chat 会话执行。
    * 云端构建目标与 Coordinator 一致：在 `~/custom_taixu` 执行 `git remote get-url origin`，
@@ -81,7 +81,7 @@ feature/custom_iteration/
 
 ---
 
-## 三、快速接入指南（集成到太墟主工程）
+## 三、快速接入指南（集成到古龙主工程）
 
 ### 1. 注册 Gradle 子模块
 在 `settings.gradle.kts` 中添加：

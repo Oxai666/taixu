@@ -193,7 +193,7 @@ class PluginHostGatewayTest {
     }
 
     @Test fun loopbackTransportReadsUtf8BytesAndNeverReturnsCredentials() {
-        val gateway = PluginHostGateway({ "{\"package\":\"太墟\"}" })
+        val gateway = PluginHostGateway({ "{\"package\":\"古龙\"}" })
         val unicode = request.copy(scope = scope.copy(pluginId = "示例.web"))
         val token = gateway.issue(unicode) { true }
         val server = ServerSocket(0, 1, InetAddress.getLoopbackAddress())
@@ -214,7 +214,7 @@ class PluginHostGatewayTest {
                 client.getOutputStream().write(head.toByteArray(Charsets.US_ASCII) + bytes)
                 val result = client.getInputStream().readBytes().toString(Charsets.UTF_8)
                 assertTrue(result.startsWith("HTTP/1.1 200"))
-                assertTrue(result.endsWith("{\"package\":\"太墟\"}"))
+                assertTrue(result.endsWith("{\"package\":\"古龙\"}"))
                 assertFalse(result.contains(token))
             }
             handled.get(3, TimeUnit.SECONDS)

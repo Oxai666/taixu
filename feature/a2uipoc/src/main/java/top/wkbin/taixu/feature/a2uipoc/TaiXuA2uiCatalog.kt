@@ -32,8 +32,8 @@ import top.wkbin.taixu.harness.A2uiSurfaceBus
 import top.wkbin.taixu.harness.A2uiSurfaceContract
 
 /**
- * 太墟目录 = 官方 Basic Catalog 的全部组件，再加 [TaiXuTableComponent]。
- * catalogId 用太墟自己的 URI；模型若仍写官方 basic catalog id，渲染前改写成这个 id。
+ * 古龙目录 = 官方 Basic Catalog 的全部组件，再加 [TaiXuTableComponent]。
+ * catalogId 用古龙自己的 URI；模型若仍写官方 basic catalog id，渲染前改写成这个 id。
  */
 internal object TaiXuA2uiCatalog {
 

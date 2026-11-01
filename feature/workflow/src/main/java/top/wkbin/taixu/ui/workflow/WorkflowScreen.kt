@@ -108,9 +108,9 @@ fun WorkflowScreen(
         containerColor = MaterialTheme.colorScheme.surface,
         snackbarHost = { SnackbarHost(snackbar) },
         topBar = {
-            if (catalogVisible) RuntimeTopBar(title = "太墟工作流", onBack = onBack, scrollBehavior = scrollBehavior)
+            if (catalogVisible) RuntimeTopBar(title = "古龙工作流", onBack = onBack, scrollBehavior = scrollBehavior)
             else RuntimeTopBar(
-                title = activeState?.definition?.name ?: editorState?.definition?.name ?: "太墟工作流",
+                title = activeState?.definition?.name ?: editorState?.definition?.name ?: "古龙工作流",
                 statusText = projectName.takeIf(String::isNotBlank)?.let { "工作区 · $it" },
                 onBack = {
                     when {

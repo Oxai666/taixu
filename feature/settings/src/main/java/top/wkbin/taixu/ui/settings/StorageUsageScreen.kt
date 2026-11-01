@@ -415,7 +415,7 @@ private fun StorageDashboardCard(
     ) {
         Column {
             Text(
-                "太墟已管理空间",
+                "古龙已管理空间",
                 style = MaterialTheme.typography.labelMedium,
                 color = MaterialTheme.colorScheme.onSurfaceVariant,
             )

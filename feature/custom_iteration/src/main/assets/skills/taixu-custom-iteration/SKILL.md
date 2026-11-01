@@ -1,24 +1,24 @@
 ---
 name: taixu-custom-iteration
-description: 太墟（TaiXu）自定义迭代与 TaiXuDev 构建规范，引导 Agent 安全开发、提交 PR 及构建双包共存 APK。
+description: 古龙（TaiXu）自定义迭代与 TaiXuDev 构建规范，引导 Agent 安全开发、提交 PR 及构建双包共存 APK。
 ---
 
-# 太墟（TaiXu）自定义迭代专属开发规范
+# 古龙（TaiXu）自定义迭代专属开发规范
 
-本 Skill 用于引导 AI Agent 在太墟无 Root Linux 沙盒中协助用户进行太墟应用自身的迭代开发、测试、云端 CI 构建与开源社区 PR 交付。
+本 Skill 用于引导 AI Agent 在古龙无 Root Linux 沙盒中协助用户进行古龙应用自身的迭代开发、测试、云端 CI 构建与开源社区 PR 交付。
 
 ---
 
 ## 1. 核心安全与隔离准则
 
-1. **工作区隔离**：所有针对太墟源码的修改必须且仅在隔离工作区 `~/custom_taixu` 中进行，严禁直接在运行宿主目录或系统级配置中修改。
+1. **工作区隔离**：所有针对古龙源码的修改必须且仅在隔离工作区 `~/custom_taixu` 中进行，严禁直接在运行宿主目录或系统级配置中修改。
 2. **凭据安全**：
    - 引导用户使用 `gh auth login`（设备码流程）或 SSH Key 认证；
    - 严禁将 GitHub Token、私钥或任何敏感凭证打印在终端输出、会话消息或提交记录中。
 3. **双包共存（Dual-Flavor）规范**：
    - 自定义迭代构建的 APK 命名必须为 `TaiXuDev`；
    - 包名必须重命名为 `top.wkbin.taixu.dev`；
-   - 默认存储与配置目录与正式版隔离，确保测试版与手机中正在运行的太墟正式版完全共存、互不影响。
+   - 默认存储与配置目录与正式版隔离，确保测试版与手机中正在运行的古龙正式版完全共存、互不影响。
 
 ---
 
@@ -59,7 +59,7 @@ description: 太墟（TaiXu）自定义迭代与 TaiXuDev 构建规范，引导 
 
 ## 4. 开源 PR 提交规范
 
-经过本地真机安装验证满意后，协助用户生成标准 PR 模板并提交到太墟官方仓库：
+经过本地真机安装验证满意后，协助用户生成标准 PR 模板并提交到古龙官方仓库：
 - **目标仓库**：`taixu-lab/taixu:main`
 - **源分支**：`user-fork:feature/xxx`
 - **PR 模板包含**：概述（Summary）、改动点（Changes）、测试结果（Testing）、截图/录屏（Screenshots）、潜在风险（Risks）。

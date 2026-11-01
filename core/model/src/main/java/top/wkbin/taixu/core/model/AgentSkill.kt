@@ -23,7 +23,7 @@ object BuiltinSkills {
         AgentSkill(
             id = "agent_context",
             name = "上下文与任务记忆规划",
-            description = "太墟核心系统能力：提供长期事实记忆 (memory)、任务执行规划 (plan) 与工作草稿便签 (scratchpad)",
+            description = "古龙核心系统能力：提供长期事实记忆 (memory)、任务执行规划 (plan) 与工作草稿便签 (scratchpad)",
             systemPrompt = """
                 【Agent 上下文与任务记忆规划核心指导】：
                 1. 长期记忆 (memory)：当用户表达偏好、架构规范或重要事实时，主动调用 memory(action="save", key=..., value=..., kind="preference"|"rule"|"fact") 持久化存储；
@@ -104,12 +104,12 @@ object BuiltinSkills {
         AgentSkill(
             id = "mobile_build_guard",
             name = "移动端构建环境守卫",
-            description = "Android/Flutter 构建前强制自检，优先使用太墟 ARM64 工具链，并在必要时显式切换 QEMU 兼容会话",
+            description = "Android/Flutter 构建前强制自检，优先使用古龙 ARM64 工具链，并在必要时显式切换 QEMU 兼容会话",
             systemPrompt = """
                 【移动端构建环境守卫】：
                 1. 在执行 Android 或 Flutter 构建前，先运行 `taixu-build doctor <项目路径>`；不得跳过自检后直接下载或执行未知主机架构的工具。
-                2. 自检通过后统一使用 `taixu-build android <项目路径> [Gradle任务]` 或 `taixu-build flutter <项目路径> [Flutter参数]`。优先使用太墟内置 JDK、Android SDK、Gradle、AAPT2、NDK 与 Flutter SDK。
-                3. 不要用 `apt`、`sdkmanager`、Gradle 自动下载或 Flutter 自动修复去覆盖太墟工具链；不要下载 x86/x86_64 AAPT2、JDK、NDK 或 Android 主机工具替代 ARM64 核心资源。
+                2. 自检通过后统一使用 `taixu-build android <项目路径> [Gradle任务]` 或 `taixu-build flutter <项目路径> [Flutter参数]`。优先使用古龙内置 JDK、Android SDK、Gradle、AAPT2、NDK 与 Flutter SDK。
+                3. 不要用 `apt`、`sdkmanager`、Gradle 自动下载或 Flutter 自动修复去覆盖古龙工具链；不要下载 x86/x86_64 AAPT2、JDK、NDK 或 Android 主机工具替代 ARM64 核心资源。
                 4. 第三方项目版本不匹配时，先读取 Gradle wrapper、AGP、Kotlin、compileSdk、NDK 与 Flutter/Dart 约束，再以当前工具链为基准做最小项目对齐。修改前向用户说明需要升级或降级的文件与版本。
                 5. 只有自检明确报告“x86_64 主机 ELF/Exec format error”且 QEMU 兼容环境已经就绪时，才使用 `taixu-build ... --qemu`；QEMU 只运行隔离 x86_64 用户态工具，最终 APK 仍必须只面向 ARM64。
                 6. 如果用户直接要求 `./gradlew` 或 `flutter build apk`，仍先执行 doctor；构建失败时保留原始日志，区分项目源码错误、依赖版本错误、网络错误与主机架构错误，禁止把所有失败都盲目转入 QEMU。
@@ -143,7 +143,7 @@ object BuiltinSkills {
         AgentSkill(
             id = "android_cli",
             name = "Android CLI 与官方技能",
-            description = "在太墟沙箱内使用 Google Android CLI（android 命令）与 33 个官方 Android Skills：工程创建、SDK 管理、设备 UI dump / 截图、APK 部署、文档检索与构建排错",
+            description = "在古龙沙箱内使用 Google Android CLI（android 命令）与 33 个官方 Android Skills：工程创建、SDK 管理、设备 UI dump / 截图、APK 部署、文档检索与构建排错",
             systemPrompt = """
                 【Android CLI 与官方技能指导】：
                 1. 能力来源自检（先做这一步）：运行 `command -v android`。
@@ -153,13 +153,13 @@ object BuiltinSkills {
                 3. 命令速查：
                    - `android create <template> --name=... --output=...`：从官方模板创建工程；
                    - `android sdk list/install/update/remove`：管理 SDK 组件（需联网或可达镜像）；
-                   - `android layout`（JSON UI 树）与 `android screen capture -o <png>`：检查已连接设备/模拟器的界面，设备侧依赖 adb，可用太墟内置无线 ADB；
+                   - `android layout`（JSON UI 树）与 `android screen capture -o <png>`：检查已连接设备/模拟器的界面，设备侧依赖 adb，可用古龙内置无线 ADB；
                    - `android install` / `android run`：部署与启动 APK；
                    - `android docs`：检索官方 Android 文档；
                    - `android skills list/add`：管理官方技能；离线时只会输出告警，属正常现象，技能已随插件本地下发。
                 4. 官方技能目录：33 个 Google 官方技能（SKILL.md + references）已落在 `/attachments/skills/android-skills/<技能名>/`，
                    并已进入技能目录（元数据常驻、正文按需 load_skill）。命中相关主题时先 load_skill 再动手，不要重复联网拉取技能包。
-                5. 构建仍走太墟工具链：构建 APK 一律先 `taixu-build doctor <工作区>`，再 `taixu-build android <工作区> assembleDebug`。
+                5. 构建仍走古龙工具链：构建 APK 一律先 `taixu-build doctor <工作区>`，再 `taixu-build android <工作区> assembleDebug`。
                    不要用 `android sdk` 或 Gradle 自动下载覆盖 ARM64 工具链，也不要引入 x86/x86_64 主机工具。
                 6. 语义化使用官方最佳实践：Compose 自适应布局、edge-to-edge、Navigation3、R8/keep 规则精简、
                    意图与权限安全、AGP 9 升级、测试基线等主题，优先参考对应官方技能而不是凭记忆作答。

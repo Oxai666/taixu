@@ -400,7 +400,7 @@ class HostActionNodeExecutor(
         val channelId = "taixu_workflow"
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
             manager.createNotificationChannel(
-                NotificationChannel(channelId, "太墟工作流", NotificationManager.IMPORTANCE_DEFAULT),
+                NotificationChannel(channelId, "古龙工作流", NotificationManager.IMPORTANCE_DEFAULT),
             )
         }
         val notification = Notification.Builder(appContext, channelId)

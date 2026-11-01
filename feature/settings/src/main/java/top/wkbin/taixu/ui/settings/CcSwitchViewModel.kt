@@ -635,7 +635,7 @@ EOF
                 val saveRes = ccSwitchClient.saveProvider(appId, profile, creds.first, creds.second, creds.third)
                 if (saveRes.isSuccess) {
                     _providers.value = _providers.value.filterNot { it.id == profile.id } + profile
-                    _successMessage.value = "已从太墟模型库同步：${model.name}"
+                    _successMessage.value = "已从古龙模型库同步：${model.name}"
                 } else {
                     _errorMessage.value = "同步到 CC-Switch 失败：${saveRes.exceptionOrNull()?.message}"
                 }
@@ -695,7 +695,7 @@ EOF
                         ShellCommand("command -v npm >/dev/null 2>&1 || [ -x /opt/taixu/bin/npm ] || [ -x /usr/local/bin/npm ]")
                     ).isSuccess
                     if (!hasNode) {
-                        log("[!] 沙箱内未检测到可用 npm，正在通过太墟依赖管理器自动解析...")
+                        log("[!] 沙箱内未检测到可用 npm，正在通过古龙依赖管理器自动解析...")
                         val depRes = dependencyManager.acquire(
                             RuntimeRequirement(RuntimeName.NODE),
                             "cc-switch",

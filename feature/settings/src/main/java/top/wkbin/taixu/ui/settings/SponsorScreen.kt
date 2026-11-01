@@ -121,12 +121,12 @@ fun SponsorScreen(
                             RuntimeIcon(RuntimeIconName.Sponsor, Modifier.size(22.dp), tint = MaterialTheme.colorScheme.onTertiaryContainer)
                         }
                         Text(
-                            "感谢你考虑赞助太墟",
+                            "感谢你考虑赞助古龙",
                             style = MaterialTheme.typography.titleMedium,
                         )
                     }
                     Text(
-                        "太墟（TaiXu）完全免费且开源，由作者在业余时间独立维护。你的每一份赞助都将用于购买 API Token 与持续的开发迭代，帮助我们把项目做得更好。",
+                        "古龙（TaiXu）完全免费且开源，由作者在业余时间独立维护。你的每一份赞助都将用于购买 API Token 与持续的开发迭代，帮助我们把项目做得更好。",
                         style = MaterialTheme.typography.bodySmall,
                         color = MaterialTheme.colorScheme.onSurfaceVariant,
                     )
@@ -340,7 +340,7 @@ private fun SponsorQrDialog(
 /** 唤起邮件客户端撰写 Token 赞助邮件（正文预填模板）；无邮件客户端时复制邮箱兜底 */
 private fun sendSponsorEmail(context: Context) {
     val body = buildString {
-        appendLine("你好，我想赞助太墟一个 Token，支持你继续开发：")
+        appendLine("你好，我想赞助古龙一个 Token，支持你继续开发：")
         appendLine()
         appendLine("API Base URL：")
         appendLine("API Key：")
@@ -349,7 +349,7 @@ private fun sendSponsorEmail(context: Context) {
         appendLine("感谢你的付出！")
     }
     val intent = Intent(Intent.ACTION_SENDTO, Uri.parse("mailto:$SPONSOR_EMAIL")).apply {
-        putExtra(Intent.EXTRA_SUBJECT, "太墟 Token 赞助")
+        putExtra(Intent.EXTRA_SUBJECT, "古龙 Token 赞助")
         putExtra(Intent.EXTRA_TEXT, body)
         addFlags(Intent.FLAG_ACTIVITY_NEW_TASK)
     }
@@ -357,7 +357,7 @@ private fun sendSponsorEmail(context: Context) {
         context.startActivity(intent)
     }.onFailure {
         val clipboard = context.getSystemService(Context.CLIPBOARD_SERVICE) as? ClipboardManager
-        clipboard?.setPrimaryClip(ClipData.newPlainText("太墟赞助邮箱", SPONSOR_EMAIL))
+        clipboard?.setPrimaryClip(ClipData.newPlainText("古龙赞助邮箱", SPONSOR_EMAIL))
         Toast.makeText(context, "已复制赞助邮箱：$SPONSOR_EMAIL，请打开邮箱写信", Toast.LENGTH_LONG).show()
     }
 }

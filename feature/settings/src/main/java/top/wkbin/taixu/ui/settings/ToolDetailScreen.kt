@@ -74,7 +74,7 @@ import top.wkbin.taixu.core.database.ToolEntity
 import top.wkbin.taixu.core.model.ToolManifest
 import top.wkbin.taixu.feature.components.R
 /**
- * 太墟 · 插件配置详情页 (Tool Detail & Configuration Screen)
+ * 古龙 · 插件配置详情页 (Tool Detail & Configuration Screen)
  *
  * 功能概览：
  * - 工具概览与状态
@@ -172,7 +172,7 @@ internal fun LocalToolDetailContent(
                                         color = MaterialTheme.colorScheme.error,
                                     )
                                     Text(
-                                        text = state.error ?: "可呼叫太墟 Agent 在 PRoot 沙箱内自主排查与自愈",
+                                        text = state.error ?: "可呼叫古龙 Agent 在 PRoot 沙箱内自主排查与自愈",
                                         style = MaterialTheme.typography.bodySmall,
                                         color = MaterialTheme.colorScheme.onSurfaceVariant,
                                         maxLines = 2,

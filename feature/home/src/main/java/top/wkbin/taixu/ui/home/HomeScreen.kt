@@ -115,7 +115,7 @@ private fun warningStatusColor(): Color =
     top.wkbin.taixu.ui.theme.semanticColors().warning
 
 /**
- * 太墟 · 运行仪表盘 (TaiXu Linux Runtime Dashboard)
+ * 古龙 · 运行仪表盘 (TaiXu Linux Runtime Dashboard)
  * 集成沙箱引擎状态、运行环境体检自愈中心、实时内存/存储监控与规格信息
  */
 @OptIn(androidx.compose.material3.ExperimentalMaterial3Api::class)

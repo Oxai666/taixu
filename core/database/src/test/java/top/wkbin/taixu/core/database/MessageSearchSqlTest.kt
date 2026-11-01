@@ -16,7 +16,7 @@ class MessageSearchSqlTest {
     @Test
     fun `hits user and assistant text across sessions and excludes tool payloads`() {
         connection().use { conn ->
-            insert(conn, "m1", "sessionA", "user", """{"type":"user","text":"太墟支持 PRoot 沙箱"}""", 10, sessionTitle = "会话甲")
+            insert(conn, "m1", "sessionA", "user", """{"type":"user","text":"古龙支持 PRoot 沙箱"}""", 10, sessionTitle = "会话甲")
             insert(conn, "m2", "sessionB", "assistant", """{"type":"assistant","text":"这里是关于 PRoot 的说明"}""", 20, sessionTitle = "会话乙")
             insert(conn, "m3", "sessionA", "tool_call", """{"type":"tool_call","args":{"cmd":"PRoot 出现在工具参数里"}}""", 30)
             val hits = search(conn, "PRoot")

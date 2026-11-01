@@ -109,7 +109,7 @@ class RoomBuildScriptRepository(
             BuildScriptEntity(
                 id = "builtin-android",
                 name = "标准 Android",
-                description = "太墟内置 Android 构建脚本，可复制后适配旧版或新版依赖。",
+                description = "古龙内置 Android 构建脚本，可复制后适配旧版或新版依赖。",
                 projectType = "ANDROID",
                 content = androidScript.ifBlank { DEFAULT_BUILTIN_ANDROID_SCRIPT },
                 isBuiltin = true,
@@ -119,7 +119,7 @@ class RoomBuildScriptRepository(
             BuildScriptEntity(
                 id = "builtin-flutter",
                 name = "标准 Flutter",
-                description = "太墟内置 Flutter APK 构建脚本，可复制后定制。",
+                description = "古龙内置 Flutter APK 构建脚本，可复制后定制。",
                 projectType = "FLUTTER",
                 content = flutterScript.ifBlank { DEFAULT_BUILTIN_FLUTTER_SCRIPT },
                 isBuiltin = true,
@@ -143,10 +143,10 @@ class RoomBuildScriptRepository(
 
     companion object {
         const val DEFAULT_BUILTIN_ANDROID_SCRIPT =
-            "#!/bin/sh\n# 太墟标准 Android 构建脚本入口\n# 默认调度 /opt/taixu/scripts/taixu-build.sh 执行完整环境加载、AAPT2 架构对齐与 Gradle 编译\nset -eu\n\nPROJECT_DIR=\"\${1:-.}\"\nTASK=\"\${2:-assembleDebug}\"\n\nexec /bin/sh /opt/taixu/scripts/taixu-build.sh android \"\$PROJECT_DIR\" \"\$TASK\"\n"
+            "#!/bin/sh\n# 古龙标准 Android 构建脚本入口\n# 默认调度 /opt/taixu/scripts/taixu-build.sh 执行完整环境加载、AAPT2 架构对齐与 Gradle 编译\nset -eu\n\nPROJECT_DIR=\"\${1:-.}\"\nTASK=\"\${2:-assembleDebug}\"\n\nexec /bin/sh /opt/taixu/scripts/taixu-build.sh android \"\$PROJECT_DIR\" \"\$TASK\"\n"
 
         const val DEFAULT_BUILTIN_FLUTTER_SCRIPT =
-            "#!/bin/sh\n# 太墟标准 Flutter 构建脚本入口\n# 默认调度 /opt/taixu/scripts/taixu-build.sh 执行完整跨端工具链校验与 Flutter APK 构建\nset -eu\n\nPROJECT_DIR=\"\${1:-.}\"\nTARGET=\"\${2:-apk --debug --target-platform android-arm64}\"\n\nexec /bin/sh /opt/taixu/scripts/taixu-build.sh flutter \"\$PROJECT_DIR\" \$TARGET\n"
+            "#!/bin/sh\n# 古龙标准 Flutter 构建脚本入口\n# 默认调度 /opt/taixu/scripts/taixu-build.sh 执行完整跨端工具链校验与 Flutter APK 构建\nset -eu\n\nPROJECT_DIR=\"\${1:-.}\"\nTARGET=\"\${2:-apk --debug --target-platform android-arm64}\"\n\nexec /bin/sh /opt/taixu/scripts/taixu-build.sh flutter \"\$PROJECT_DIR\" \$TARGET\n"
     }
 }
 

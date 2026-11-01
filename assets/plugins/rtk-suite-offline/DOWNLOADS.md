@@ -1,6 +1,6 @@
 # RTK 终端命令优化器 — 离线插件包
 
-本目录是 `rtk-suite-offline` 插件的源文件布局，用于打包为可直接导入太墟的本地 `.txplugin`。
+本目录是 `rtk-suite-offline` 插件的源文件布局，用于打包为可直接导入古龙的本地 `.txplugin`。
 
 ## 用途
 

@@ -254,8 +254,8 @@ class ToolExecutor(
             false to "工具执行异常：${throwable.message ?: throwable::class.simpleName}"
         }
         val (success, rawOutput) = outcome
-        val finalOutput = if (!success && !rawOutput.contains("【太墟") && !rawOutput.contains("【已强制拦截")) {
-            rawOutput + "\n\n【太墟 Harness 调试提示】：本次工具调用未成功。请仔细阅读上方错误信息，分析具体原因并在下一步中调整策略，严禁使用相同参数盲目重试。"
+        val finalOutput = if (!success && !rawOutput.contains("【古龙") && !rawOutput.contains("【已强制拦截")) {
+            rawOutput + "\n\n【古龙 Harness 调试提示】：本次工具调用未成功。请仔细阅读上方错误信息，分析具体原因并在下一步中调整策略，严禁使用相同参数盲目重试。"
         } else {
             rawOutput
         }

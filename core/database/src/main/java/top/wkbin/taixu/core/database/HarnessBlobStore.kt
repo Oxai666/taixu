@@ -4,7 +4,7 @@ import android.content.Context
 import java.io.File
 
 /**
- * 🌟 太墟大载荷离线沙箱持久化存储 (Harness Large Payload Storage)
+ * 🌟 古龙大载荷离线沙箱持久化存储 (Harness Large Payload Storage)
  *
  * 彻底解决 Android SQLite CursorWindow (1MB~2MB) 游标单行大小物理上限问题。
  * - 普通小载荷 (< 48KB): 原样内联存储在 SQLite `harness_entries.payloadJson` 中，零额外文件 IO 开销。

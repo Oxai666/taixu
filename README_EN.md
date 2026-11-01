@@ -2,7 +2,7 @@
   <img src="app/src/main/res/drawable/taixu_logo.webp" width="96" alt="TaiXu Logo" />
 </p>
 
-<h1 align="center">TaiXu · 太墟</h1>
+<h1 align="center">TaiXu · 古龙</h1>
 
 <p align="center"><strong>The Myriad Manifestations in the Great Void.</strong></p>
 
@@ -25,7 +25,7 @@
 
 ## 🌌 What is TaiXu?
 
-**TaiXu (太墟)** takes its name from GuiXu, the vast ravine described in *Liezi*. It brings a **runnable, observable, recoverable, and extensible** Linux and AI automation environment to Android within the app's permissions.
+**TaiXu (古龙)** takes its name from GuiXu, the vast ravine described in *Liezi*. It brings a **runnable, observable, recoverable, and extensible** Linux and AI automation environment to Android within the app's permissions.
 
 Agents, MCP tools, Linux processes, native PTY terminals, browsers, Git, and project workspaces work together to turn natural language goals into files, running processes, verified code, and Android / Flutter build artifacts. Visual workflows make repeatable tasks persistent, schedulable, and subject to approval.
 

@@ -16,7 +16,12 @@ import top.wkbin.taixu.ui.components.RuntimeIcon
 import top.wkbin.taixu.ui.components.RuntimeIconButton
 import top.wkbin.taixu.ui.components.RuntimeIconName
 
-/** Common actions occupy one toolbar; the "+" opens the attach sheet (grid + extensions + compact). */
+/**
+ * 输入区工具栏：模型徽标、审批模式、思考强度、附件「+」。
+ *
+ * 思考强度（Brain 图标）从顶栏挪到这里、紧挨「+」——它和「这条消息怎么发出去」是同一类决策，
+ * 顶栏那排全是会话级入口（分支/记忆/大纲），把推理强度混在里面反而要多走一层。
+ */
 @Composable
 internal fun ComposerQuickActions(
     activeModel: AiModelEntity?,
@@ -25,6 +30,7 @@ internal fun ComposerQuickActions(
     approvalMode: ApprovalMode,
     onOpenApprovalModes: () -> Unit,
 ) {
+    val openReasoning = LocalReasoningOpener.current
     Row(verticalAlignment = Alignment.CenterVertically) {
         RuntimeIconButton(
             onClick = onOpenModels,
@@ -53,6 +59,14 @@ internal fun ComposerQuickActions(
             contentDescription = modeLabel,
         ) {
             RuntimeIcon(RuntimeIconName.Shield, Modifier.size(22.dp), modeColor)
+        }
+        // 思考强度：紧挨「+」，与附件同一排
+        RuntimeIconButton(
+            onClick = openReasoning,
+            modifier = Modifier.size(48.dp),
+            contentDescription = "思考强度",
+        ) {
+            RuntimeIcon(RuntimeIconName.Brain, Modifier.size(22.dp), MaterialTheme.colorScheme.onSurfaceVariant)
         }
         RuntimeIconButton(
             onClick = onOpenAttachSheet,

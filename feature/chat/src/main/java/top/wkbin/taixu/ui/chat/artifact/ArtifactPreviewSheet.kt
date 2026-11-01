@@ -75,7 +75,7 @@ enum class ArtifactViewMode {
 }
 
 /**
- * 太墟产物交付与全功能预览浮层 (Artifact Preview Sheet)
+ * 古龙产物交付与全功能预览浮层 (Artifact Preview Sheet)
  *
  * 1. 支持 Markdown 富文本解析与渲染；
  * 2. 支持全语种代码语法高亮与行号显示；

@@ -21,11 +21,11 @@ class NativePtyLifecycleTest {
         assertFalse(f.session.isAlive)
     }
     @Test fun naturalExitPreservesSplitUtf8AndDoesNotSignalAReapedPid() = scenario { f ->
-        val bytes = "太墟".toByteArray()
+        val bytes = "古龙".toByteArray()
         f.backend.chunks += bytes.copyOfRange(0, 2)
         f.backend.chunks += bytes.copyOfRange(2, bytes.size)
         f.backend.alive = false
-        assertEquals("太墟", f.session.output.toList().joinToString("") { it.text })
+        assertEquals("古龙", f.session.output.toList().joinToString("") { it.text })
         assertFalse(f.session.isAlive)
         f.session.close()
         assertTrue(f.backend.signals.isEmpty())

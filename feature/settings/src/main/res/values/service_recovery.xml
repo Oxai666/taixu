@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <string name="service_panel_title">服务管理面板</string>
-    <string name="service_panel_auth">登录凭据和 API Key 由服务自身管理。首次使用请按面板提示创建管理员；已创建时使用原账号密码。太墟 Token 不用于此面板登录。</string>
+    <string name="service_panel_auth">登录凭据和 API Key 由服务自身管理。首次使用请按面板提示创建管理员；已创建时使用原账号密码。古龙 Token 不用于此面板登录。</string>
     <string name="service_panel_loopback">仅监听本机，不提供局域网访问。关闭管理页面不会停止服务。</string>
     <string name="service_recovery_title">自启动与持续运行</string>
     <string name="service_recovery_summary">Linux 环境就绪后启动 %1$s，异常停止后自动重试；手动停止会关闭此开关</string>

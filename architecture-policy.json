@@ -1,6 +1,6 @@
 {
   "_doc": [
-    "太墟架构治理策略（policy 即代码，借鉴 ZCode architecture-policy 思路）。",
+    "古龙架构治理策略（policy 即代码，借鉴 ZCode architecture-policy 思路）。",
     "本文件是根任务 architectureCheck 的唯一事实源：新增模块 / 调整依赖必须同步登记，",
     "否则依赖白名单检查会失败（防止未声明的模块依赖悄悄混入构建）。",
     "",
@@ -148,7 +148,7 @@
     },
     {
       "id": "showerclient", "path": "showerclient", "requires": [],
-      "_doc": "源自 Operit（LGPL-3.0）的虚拟屏客户端库，保持来源边界：不依赖任何太墟内部模块"
+      "_doc": "源自 Operit（LGPL-3.0）的虚拟屏客户端库，保持来源边界：不依赖任何古龙内部模块"
     },
     {
       "id": "termux-terminal-emulator", "path": "termux-terminal-emulator", "requires": [],

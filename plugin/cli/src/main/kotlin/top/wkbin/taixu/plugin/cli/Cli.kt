@@ -92,7 +92,7 @@ class Cli(private val out: PrintStream, private val err: PrintStream) {
     private fun usage() {
         out.println(
             """
-            太墟插件作者工具
+            古龙插件作者工具
             用法：
               taixu-plugin check <工程目录>
               taixu-plugin pack <工程目录> [--output <插件包>] [--write-manifest]

@@ -55,7 +55,7 @@ private const val MIN_TERMINAL_FONT_SIZE_SP = 10f
 private const val MAX_TERMINAL_FONT_SIZE_SP = 24f
 
 /**
- * 太墟 · 矩阵控制台 — Termux TerminalView + PRoot argv via TerminalSession JNI.
+ * 古龙 · 矩阵控制台 — Termux TerminalView + PRoot argv via TerminalSession JNI.
  * Input is owned by TerminalView (same as Android-PRoot-Engine TerminalBridge).
  */
 @Composable

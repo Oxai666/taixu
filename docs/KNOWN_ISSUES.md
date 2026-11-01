@@ -128,7 +128,7 @@ This file tracks known issues and environment notes for the TaiXu Android projec
   Windows 上目标存在即失败，`.new` 残留而 base 保持旧版本（诊断实证：active-version=1.9.0
   与 active-version.new=1.10.0 并存）。修复为 finishWrite 后自愈校验（指针内容 != 本次写入
   值时删除 .new 并直写 base；设备上 POSIX rename 成功不触发，不破坏原子性）。8 个用例全绿。
-- `:core:datastore`（8 个）：失败点在 DataStore 库内部（第三方原子 rename），不在太墟
+- `:core:datastore`（8 个）：失败点在 DataStore 库内部（第三方原子 rename），不在古龙
   代码范围——已加 `RequiresAtomicRenameOverwrite` 守卫 Rule（探测 rename 覆盖能力，
   Windows 上显式跳过而非失败），本机测试体验干净，CI（Linux）覆盖不受影响。
 

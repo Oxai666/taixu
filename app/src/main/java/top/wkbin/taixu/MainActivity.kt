@@ -171,17 +171,9 @@ class MainActivity : AppCompatActivity() {
                     } ?: "0.0.0"
                 }
 
-                LaunchedEffect(onboarding.completed) {
-                    if (onboarding.completed) {
-                        val autoCheck = settingsDataStore.autoCheckUpdates.first()
-                        if (autoCheck) {
-                            val res = appUpdateManager.checkUpdate(currentVersionName)
-                            res.onSuccess { info ->
-                                if (info.hasUpdate) updateInfo = info
-                            }
-                        }
-                    }
-                }
+                // 自更新已移除：本分支不再做任何「检查新版本 / 下载 / 安装」动作。
+                // appUpdateManager 与 updateInfo 的注入点保留，只为不打断既有 Koin 装配链，
+                // 下面所有 updateInfo 对话框因 updateInfo 恒为 null 而永不显示。
 
                 updateInfo?.let { info ->
                     RuntimeAlertDialog(

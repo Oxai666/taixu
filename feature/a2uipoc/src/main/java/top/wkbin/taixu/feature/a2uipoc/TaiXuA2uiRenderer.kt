@@ -31,9 +31,9 @@ import kotlinx.serialization.json.jsonPrimitive
 import top.wkbin.taixu.harness.A2uiSurfaceBus
 
 /**
- * 太墟 A2UI 渲染器包装：把 androidx.a2ui 官方渲染器收敛为单例入口。
+ * 古龙 A2UI 渲染器包装：把 androidx.a2ui 官方渲染器收敛为单例入口。
  *
- * - Catalog 在官方 Material3 Basic Catalog 上加太墟 Table，catalogId 与
+ * - Catalog 在官方 Material3 Basic Catalog 上加古龙 Table，catalogId 与
  *   harness 契约（A2uiSurfaceContract.CATALOG_ID）保持一致：智能体只能使用目录内
  *   声明的组件，与工具白名单同一套安全哲学；
  * - processor 单例持有全部活动 surface：聊天流滚动导致组合销毁重建时，
@@ -49,7 +49,7 @@ object TaiXuA2uiRenderer {
 
     /**
      * Basic Catalog 加 Table。image/video/audioPlayer 与 urlOpener/messageFormatter
-     * 由太墟实现（Coil、Media3、http/https 白名单、ICU plural）；其余走官方默认。
+     * 由古龙实现（Coil、Media3、http/https 白名单、ICU plural）；其余走官方默认。
      */
     private val catalog: A2uiCatalog = TaiXuA2uiCatalog.extend(
         materialA2uiBasicCatalogV1(

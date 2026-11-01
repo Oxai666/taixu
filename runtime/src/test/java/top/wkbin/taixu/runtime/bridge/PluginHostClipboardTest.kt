@@ -18,10 +18,10 @@ class PluginHostClipboardTest {
 
     @Test fun writesOnlyPlainTextWithSensitivePreviewFlag() {
         clipboard.setPrimaryClip(ClipData.newPlainText("old", "previous"))
-        PluginHostClipboard.write(context, "太墟\nhttps://example.invalid")
+        PluginHostClipboard.write(context, "古龙\nhttps://example.invalid")
         val clip = clipboard.primaryClip!!
         assertEquals(1, clip.itemCount)
-        assertEquals("太墟\nhttps://example.invalid", clip.getItemAt(0).text.toString())
+        assertEquals("古龙\nhttps://example.invalid", clip.getItemAt(0).text.toString())
         assertNull(clip.getItemAt(0).uri)
         assertNull(clip.getItemAt(0).intent)
         assertTrue(clip.description.extras!!.getBoolean("android.content.extra.IS_SENSITIVE"))

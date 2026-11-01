@@ -250,7 +250,7 @@ class PrivilegeManager(
             logger.e("检查 Root 权限发生异常", e)
             PrivilegeCheckResult.ServiceNotRunning(
                 ExecutionMode.ROOT,
-                "未在设备上检测到可用的 su 可执行程序。若已 Root，请检查是否在授权管理器中对太墟开启了授权。",
+                "未在设备上检测到可用的 su 可执行程序。若已 Root，请检查是否在授权管理器中对古龙开启了授权。",
             )
         }
     }
@@ -281,7 +281,7 @@ class PrivilegeManager(
                 if (Shizuku.shouldShowRequestPermissionRationale()) {
                     PrivilegeCheckResult.Unauthorized(
                         ExecutionMode.SHIZUKU,
-                        "请在 Shizuku 弹窗中允许太墟访问 ADB 特权服务。",
+                        "请在 Shizuku 弹窗中允许古龙访问 ADB 特权服务。",
                     )
                 } else {
                     val granted = requestShizukuPermission()
@@ -293,7 +293,7 @@ class PrivilegeManager(
                     } else {
                         PrivilegeCheckResult.Unauthorized(
                             ExecutionMode.SHIZUKU,
-                            "Shizuku 授权被拒绝或等待超时，请在 Shizuku App 中检查太墟的授权状态。",
+                            "Shizuku 授权被拒绝或等待超时，请在 Shizuku App 中检查古龙的授权状态。",
                         )
                     }
                 }
@@ -585,7 +585,7 @@ class PrivilegeManager(
             return ShellExecResult(false, -1, "", "Shizuku 服务未运行。请打开 Shizuku App 并确保服务已启动。")
         }
         if (Shizuku.checkSelfPermission() != PackageManager.PERMISSION_GRANTED) {
-            return ShellExecResult(false, -1, "", "Shizuku 未授权。请在 Shizuku App 中授予太墟访问权限。")
+            return ShellExecResult(false, -1, "", "Shizuku 未授权。请在 Shizuku App 中授予古龙访问权限。")
         }
 
         return try {

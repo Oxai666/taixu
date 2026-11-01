@@ -1,5 +1,5 @@
 <resources>
-    <string name="workspace_project_taixu_plugin">太墟本地插件开发</string>
+    <string name="workspace_project_taixu_plugin">古龙本地插件开发</string>
     <string name="workspace_plugin_debug_import">一键导入调试</string>
     <string name="workspace_plugin_debug_failed">调试插件打包失败</string>
     <string name="workspace_plugin_debug_dismiss">知道了</string>

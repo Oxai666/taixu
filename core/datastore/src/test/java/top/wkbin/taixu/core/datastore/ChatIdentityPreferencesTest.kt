@@ -33,7 +33,7 @@ class ChatIdentityPreferencesTest {
         } finally { scope.cancel() }
     }
     @Test fun nameNormalizationPreservesUnicodeAndDefaults() {
-        assertEquals("太墟", ChatIdentityStyle("  ").normalized().name)
+        assertEquals("古龙", ChatIdentityStyle("  ").normalized().name)
         val emoji = String(Character.toChars(0x1F430))
         assertEquals(emoji.repeat(40), ChatIdentityStyle(emoji.repeat(41)).normalized().name)
         assertEquals("a b", ChatIdentityStyle("a\nb").normalized().name)

@@ -289,7 +289,7 @@ fun AdbLogcatScreen(
                         onClick = { logcatPackage = "top.wkbin.taixu" },
                         contentPadding = PaddingValues(horizontal = 8.dp, vertical = 2.dp),
                     ) {
-                        Text("填入太墟", style = MaterialTheme.typography.labelSmall)
+                        Text("填入古龙", style = MaterialTheme.typography.labelSmall)
                     }
                     OutlinedButton(
                         onClick = { logcatPackage = "" },

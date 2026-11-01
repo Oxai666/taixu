@@ -134,10 +134,10 @@ class WebChatBridgeServer(
                     }
                 }
             }
-            logger.i("太墟智枢 Web 协作服务启动成功：http://$localIp:$port")
+            logger.i("古龙智枢 Web 协作服务启动成功：http://$localIp:$port")
             true
         } catch (exception: Exception) {
-            logger.e("太墟智枢 Web 协作服务启动失败", exception)
+            logger.e("古龙智枢 Web 协作服务启动失败", exception)
             false
         }
     }
@@ -156,7 +156,7 @@ class WebChatBridgeServer(
             httpServer?.stop(0)
             httpServer = null
             _status.value = _status.value.copy(isRunning = false, activeConnections = 0)
-        }.onFailure { logger.e("太墟智枢 Web 协作服务停止异常", it) }
+        }.onFailure { logger.e("古龙智枢 Web 协作服务停止异常", it) }
     }
 
     fun broadcastEvent(eventName: String, dataJson: String) {
@@ -193,7 +193,7 @@ class WebChatBridgeServer(
             } catch (cancellation: CancellationException) {
                 throw cancellation
             } catch (throwable: Throwable) {
-                logger.e("太墟智枢 Web 请求处理失败：${exchange.requestURI.path}", throwable)
+                logger.e("古龙智枢 Web 请求处理失败：${exchange.requestURI.path}", throwable)
                 if (!exchange.isResponseStarted) {
                     runCatching { sendJson(exchange, 500, errorJson(throwable.message ?: "请求处理失败")) }
                 }
@@ -241,7 +241,7 @@ class WebChatBridgeServer(
             }.getOrDefault(emptyList())
             sendJson(exchange, 200, buildJsonObject {
                 put("authenticated", true)
-                put("appName", "太墟智枢")
+                put("appName", "古龙智枢")
                 put("version", "1.0")
                 putJsonArray("models") {
                     configuredModels.forEach { model ->

@@ -1,6 +1,6 @@
 # Baseline Profile 启动优化指南
 
-> 太墟冷启动优化第二阶段：安装时预编译（AOT）热点方法，消除首次启动 JIT 现场编译开销。
+> 古龙冷启动优化第二阶段：安装时预编译（AOT）热点方法，消除首次启动 JIT 现场编译开销。
 
 ## 原理
 
@@ -45,7 +45,7 @@ adb -s emulator-5554 shell settings put secure user_setup_complete 1
 adb -s emulator-5554 shell settings put global device_provisioned 1
 ```
 
-x86_64 模拟器可以运行 arm64-only 应用（模拟器 37+ 自动二进制翻译），太墟仅 arm64-v8a 不受影响。
+x86_64 模拟器可以运行 arm64-only 应用（模拟器 37+ 自动二进制翻译），古龙仅 arm64-v8a 不受影响。
 
 ## 已知坑位
 

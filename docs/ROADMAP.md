@@ -1,4 +1,4 @@
-# 太墟（TaiXu）— 路线图
+# 古龙（TaiXu）— 路线图
 
 > 一句话：把 **Debian** 当 Runtime，把 **OpenClaw/Hermes/Codex** 当受管理的工具，把 **Android** 当产品层，再由一个内置 **Agent**（类 pi）用自然语言驱动一切。
 

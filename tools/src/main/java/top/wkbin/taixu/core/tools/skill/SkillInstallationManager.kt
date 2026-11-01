@@ -33,7 +33,7 @@ class SkillSecurityBlockedException(
 ) : SecurityException(message)
 
 /**
- * 技能安全审查与安装事务管理器（连接 ClawHub 市场、静态审计引擎与太墟持久化仓储）。
+ * 技能安全审查与安装事务管理器（连接 ClawHub 市场、静态审计引擎与古龙持久化仓储）。
  */
 class SkillInstallationManager(
     private val packageParser: SkillPackageParser,

@@ -42,7 +42,7 @@ internal fun RemotePluginsScreen(onBack: () -> Unit, model: RemotePluginsViewMod
             item {
                 RuntimeCard(Modifier.fillMaxWidth()) {
                     Column(verticalArrangement = Arrangement.spacedBy(8.dp)) {
-                        Text("太墟官方插件库", style = MaterialTheme.typography.titleLarge)
+                        Text("古龙官方插件库", style = MaterialTheme.typography.titleLarge)
                         Text("仓库渠道", style = MaterialTheme.typography.labelLarge)
                         FlowRow(horizontalArrangement = Arrangement.spacedBy(8.dp)) {
                             PluginLibraryChannel.entries.forEach { channel ->

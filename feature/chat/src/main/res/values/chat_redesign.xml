@@ -10,7 +10,7 @@
     <string name="chat_toolchain_entry">工具链</string>
     <string name="chat_welcome_subtitle">选择一个方向，或直接在下方描述需求。</string>
     <string name="chat_welcome_project">项目快捷操作</string>
-    <string name="chat_welcome_project_subtitle">描述目标或遇到的问题，太墟会结合当前项目协助你。</string>
+    <string name="chat_welcome_project_subtitle">描述目标或遇到的问题，古龙会结合当前项目协助你。</string>
     <string name="chat_welcome_suggestions">快捷开始</string>
     <string name="chat_start_build">做一个小工具</string>
     <string name="chat_start_build_detail">从需求到实现，一起搭好第一版。</string>

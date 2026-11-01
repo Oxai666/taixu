@@ -3,7 +3,7 @@ package top.wkbin.taixu.ui.theme
 import androidx.compose.ui.graphics.Color
 
 /**
- * 「太墟 · TaiXu」Material 3 Expressive 设计系统色板
+ * 「古龙 · TaiXu」Material 3 Expressive 设计系统色板
  * 融合 Google M3 Expressive 的生动高阶色调：
  * 曜石夜空（Obsidian Expressive Dark）与 温润素白（Alabaster Expressive Light）
  */

@@ -176,7 +176,7 @@ fun McpSettingsScreen(
                 item(key = "mcp_section_builtin") {
                     McpSectionHeader(
                         title = "系统核心 MCP",
-                        subtitle = "太墟内置系统级能力，默认关闭；开启后常驻本会话，harness 随时可调用（不参与 @ 唤醒）。" +
+                        subtitle = "古龙内置系统级能力，默认关闭；开启后常驻本会话，harness 随时可调用（不参与 @ 唤醒）。" +
                             "标注「需先安装」的能力来自上游包，请到「工具中心 → MCP 能力仓库」按需安装",
                         count = builtinServers.size,
                     )

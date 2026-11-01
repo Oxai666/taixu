@@ -163,17 +163,17 @@ class CapabilityScriptRunnerTest {
             val failure = runCatching { context.javaToJSONConverter.apply(Any()) }.exceptionOrNull()
             assertTrue(failure is EvaluatorException)
             assertTrue(failure!!.message.orEmpty().contains("Java object JSON conversion is disabled"))
-            assertEquals("{\"items\":[1,true,null,{\"text\":\"太墟\"}]}", args.toString())
+            assertEquals("{\"items\":[1,true,null,{\"text\":\"古龙\"}]}", args.toString())
             true to "ok"
         })
 
         val (ok, output) = runner.execute(
-            "var data = {items: [1, true, null, {text: '太墟'}]}; capability.call('host', 'test', data); data;",
+            "var data = {items: [1, true, null, {text: '古龙'}]}; capability.call('host', 'test', data); data;",
             10_000,
         )
 
         assertTrue(output, ok)
-        assertEquals("{\"items\":[1,true,null,{\"text\":\"太墟\"}]}", output)
+        assertEquals("{\"items\":[1,true,null,{\"text\":\"古龙\"}]}", output)
     }
 
     @Test

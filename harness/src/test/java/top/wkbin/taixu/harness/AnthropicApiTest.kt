@@ -81,7 +81,7 @@ class AnthropicApiTest {
         api.chat(
             model(),
             listOf(
-                ApiMessage(role = "system", content = "你是太墟 Agent"),
+                ApiMessage(role = "system", content = "你是古龙 Agent"),
                 ApiMessage(role = "user", content = "hi"),
             ),
         )
@@ -90,7 +90,7 @@ class AnthropicApiTest {
         assertEquals("sk-ant-test", recorded.getHeader("x-api-key"))
         assertEquals("2023-06-01", recorded.getHeader("anthropic-version"))
         val body = recorded.body.readUtf8()
-        assertTrue(body.contains(""""system":"你是太墟 Agent""""))
+        assertTrue(body.contains(""""system":"你是古龙 Agent""""))
         assertFalse(body.contains(""""role":"system""""))
     }
 
@@ -368,7 +368,7 @@ class AnthropicApiTest {
         api.chat(
             model().copy(promptCachingEnabled = true),
             listOf(
-                ApiMessage(role = "system", content = "你是太墟 Agent"),
+                ApiMessage(role = "system", content = "你是古龙 Agent"),
                 ApiMessage(role = "user", content = "first"),
                 ApiMessage(role = "assistant", content = "answer"),
                 ApiMessage(role = "user", content = "next"),

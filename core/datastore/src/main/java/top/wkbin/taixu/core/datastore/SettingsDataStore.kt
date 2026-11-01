@@ -966,7 +966,7 @@ class SettingsDataStore(
     companion object {
         private const val PROTECTED_VALUE_PREFIX = "enc:v1:"
         const val DEFAULT_MAX_CONCURRENT_AGENT_TURNS = 2
-        const val DEFAULT_AGENT_CHAR_NAME = "太墟智枢"
+        const val DEFAULT_AGENT_CHAR_NAME = "古龙智枢"
         const val DEFAULT_AGENT_USER_NAME = "用户"
         const val DEFAULT_BASE_COMMAND_TIMEOUT_SECONDS = 10 * 60
 

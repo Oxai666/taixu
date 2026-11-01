@@ -42,7 +42,7 @@ import kotlinx.coroutines.coroutineScope
 import kotlinx.coroutines.launch
 
 /**
- * 太墟自带 A2UI 骨架屏（shimmer）。
+ * 古龙自带 A2UI 骨架屏（shimmer）。
  *
  * 背景：A2UI 1.0.0-alpha02 的官方 Material3 Catalog 在 Column/Row/List/Card 等容器里
  * 给「数据尚未到达」的子组件画呼吸 + 径向扫光的骨架块，但实现（MaterialA2uiDefaults /

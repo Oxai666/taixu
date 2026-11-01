@@ -4,7 +4,7 @@ import androidx.compose.ui.graphics.Color
 import top.wkbin.taixu.ui.components.RuntimeIconName
 
 /**
- * 太墟设置与全局功能大类划分
+ * 古龙设置与全局功能大类划分
  */
 enum class SettingsSearchCategory(val label: String, val themeColor: Color) {
     AGENT("智能体与 AI 模型", Color(0xFF6366F1)),
@@ -12,7 +12,7 @@ enum class SettingsSearchCategory(val label: String, val themeColor: Color) {
     APPEARANCE("外观、字号与终端", Color(0xFF8B5CF6)),
     SYSTEM_DEV("系统保活与开发者诊断", Color(0xFFF59E0B)),
     WORKSHOP("工坊与离线构建", Color(0xFFEC4899)),
-    CORE_FEATURE("太墟核心直达", Color(0xFF3B82F6)),
+    CORE_FEATURE("古龙核心直达", Color(0xFF3B82F6)),
     ABOUT("关于与官方社区", Color(0xFF06B6D4)),
 }
 

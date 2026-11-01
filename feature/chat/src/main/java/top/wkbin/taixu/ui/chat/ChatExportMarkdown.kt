@@ -27,7 +27,7 @@ object ChatExportMarkdown {
         val timeFormat = SimpleDateFormat("HH:mm", Locale.getDefault())
         val stampFormat = SimpleDateFormat("yyyy-MM-dd HH:mm", Locale.getDefault())
         return buildString {
-            appendLine("# 太墟会话导出")
+            appendLine("# 古龙会话导出")
             appendLine()
             appendLine("- 导出时间：${stampFormat.format(Date(exportedAt))}")
             appendLine("- 消息数：${messages.size}")

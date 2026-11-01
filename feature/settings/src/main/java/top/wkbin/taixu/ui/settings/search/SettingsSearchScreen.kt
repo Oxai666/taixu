@@ -55,7 +55,7 @@ import top.wkbin.taixu.ui.components.RuntimeOutlinedButton
 import top.wkbin.taixu.ui.components.RuntimeTopBar
 
 /**
- * 太墟 · 全局功能与设置选项搜索页面
+ * 古龙 · 全局功能与设置选项搜索页面
  */
 @OptIn(ExperimentalLayoutApi::class)
 @Composable

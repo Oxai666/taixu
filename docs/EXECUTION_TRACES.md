@@ -1,4 +1,4 @@
-# ⚡ 太墟 (TaiXu) — 核心调用链路与执行时序 (Execution Traces)
+# ⚡ 古龙 (TaiXu) — 核心调用链路与执行时序 (Execution Traces)
 
 文件/命令/MCP/PTY 的后端归属及会话关闭顺序见 [执行环境与资源作用域](EXECUTION_ENVIRONMENTS.md)。
 

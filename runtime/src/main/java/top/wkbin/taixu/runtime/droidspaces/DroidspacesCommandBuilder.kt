@@ -146,7 +146,7 @@ class DroidspacesCommandBuilder private constructor(
         // 放任 `cd` 静默失败时，用户只会看到 `can't cd to …`。诊断只写 stderr，退出码 125。
         // `printf` 是 shell 内建，不依赖宿主上缺失的外部文本工具。
         //
-        // 太墟并不是「从不修改用户容器」：上游 `start` 会把 CLI `-B` 按 src/dst 去重后写回
+        // 古龙并不是「从不修改用户容器」：上游 `start` 会把 CLI `-B` 按 src/dst 去重后写回
         // Containers/<name>/container.config，之后移除或停用的存储挂载仍可能留在其中。
         val quotedDir = ShellQuote.of(workingDirectory)
         val body = "cd -- $quotedDir || { " +
@@ -292,7 +292,7 @@ class DroidspacesCommandBuilder private constructor(
             // droidspaces 原样透出，用户可据配置自行创建，而不是被我们猜一个 rootfs 塞进去。
             //
             // TODO: 上游 `start` 会把本次 CLI `-B` 按 src/dst 去重后追加写回
-            // Containers/<name>/container.config。之后在太墟里移除或停用的存储挂载仍可能
+            // Containers/<name>/container.config。之后在古龙里移除或停用的存储挂载仍可能
             // 留在该文件中。后续应与当前挂载对齐；此处不改变 start 的参数与调用时机。
             append("elif ! \$BIN start --name=\"\$NAME\"")
             if (bindFlags.isNotBlank()) append(' ').append(bindFlags)
@@ -321,7 +321,7 @@ class DroidspacesCommandBuilder private constructor(
  *
  * [cliPath] 默认指向官方安装位置；[containerName] 是**用户已创建**的 Droidspaces 容器名。
  *
- * 重要：太墟**不自行创建容器**，也不传 `-r` 覆盖用户已有的 rootfs。容器由用户通过
+ * 重要：古龙**不自行创建容器**，也不传 `-r` 覆盖用户已有的 rootfs。容器由用户通过
  * Droidspaces 创建并持有自己的 rootfs 目标（可能是 ext4 镜像）。用派生名
  * （如 `taixu-<distro>`）会指向一个不存在的容器，或把 PRoot 的 rootfs 目录
  * 硬塞给一个已有镜像型容器，两者都会失败。

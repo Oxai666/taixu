@@ -37,7 +37,7 @@ import top.wkbin.taixu.ui.components.RuntimeIcon
 import top.wkbin.taixu.ui.components.RuntimeIconName
 
 /**
- * 太墟 · 乾坤配置 (TaiXu Settings & Models)
+ * 古龙 · 乾坤配置 (TaiXu Settings & Models)
  */
 @Composable
 fun SettingsScreen(

@@ -85,7 +85,7 @@ private val SegmentSpringSpec = spring<Float>(dampingRatio = 0.5f, stiffness = 3
 // ═══════════════════════════════════════════════════════════════════════════
 
 /**
- * 太墟 · 药丸分段选择器 (Segmented Control)：Material 3 表面 + 弹簧滑块指示。
+ * 古龙 · 药丸分段选择器 (Segmented Control)：Material 3 表面 + 弹簧滑块指示。
  */
 @Composable
 fun <T> RuntimeSegmentedControl(
@@ -207,7 +207,7 @@ fun RuntimeSegmentedControl(
 // ═══════════════════════════════════════════════════════════════════════════
 
 /**
- * 太墟 · 描边文本输入框，委托 Material 3 OutlinedTextField。
+ * 古龙 · 描边文本输入框，委托 Material 3 OutlinedTextField。
  */
 @Composable
 fun RuntimeOutlinedTextField(
@@ -324,7 +324,7 @@ fun RuntimeTextField(
 // ═══════════════════════════════════════════════════════════════════════════
 
 /**
- * 太墟 · 模态底部抽屉，委托 Material 3 ModalBottomSheet。
+ * 古龙 · 模态底部抽屉，委托 Material 3 ModalBottomSheet。
  */
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
@@ -359,7 +359,7 @@ fun RuntimeModalBottomSheet(
 // ═══════════════════════════════════════════════════════════════════════════
 
 /**
- * 太墟 · 上下文菜单，委托 Material 3 DropdownMenu。
+ * 古龙 · 上下文菜单，委托 Material 3 DropdownMenu。
  */
 @Composable
 fun RuntimeDropdownMenu(
@@ -383,7 +383,7 @@ fun RuntimeDropdownMenu(
 }
 
 /**
- * 太墟 · 上下文菜单项：圆角按压高亮。
+ * 古龙 · 上下文菜单项：圆角按压高亮。
  */
 @Composable
 fun RuntimeDropdownMenuItem(
@@ -427,7 +427,7 @@ fun RuntimeDropdownMenuItem(
 // ═══════════════════════════════════════════════════════════════════════════
 
 /**
- * 太墟 · 胶囊搜索栏：左侧搜索图标、BasicTextField 与渐入渐出的一键清空按钮。
+ * 古龙 · 胶囊搜索栏：左侧搜索图标、BasicTextField 与渐入渐出的一键清空按钮。
  */
 @Composable
 fun RuntimeSearchBar(
@@ -473,7 +473,7 @@ fun RuntimeSearchBar(
 // ═══════════════════════════════════════════════════════════════════════════
 
 /**
- * 太墟 · 状态/计数角标，委托 Material 3 Badge。
+ * 古龙 · 状态/计数角标，委托 Material 3 Badge。
  */
 @Composable
 fun RuntimeBadge(
@@ -495,7 +495,7 @@ fun RuntimeBadge(
 // ═══════════════════════════════════════════════════════════════════════════
 
 /**
- * 太墟 · iOS 规范底部抽屉标准顶栏 (RuntimeSheetHeader)。
+ * 古龙 · iOS 规范底部抽屉标准顶栏 (RuntimeSheetHeader)。
  *
  * 遵循 iOS UISheetPresentationController 顶栏规范：
  * - 左侧：取消/关闭动作文本；

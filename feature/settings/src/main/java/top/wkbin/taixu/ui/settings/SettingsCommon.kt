@@ -61,7 +61,7 @@ fun WebChatBridgeDialog(
         title = {
             Row(verticalAlignment = Alignment.CenterVertically, horizontalArrangement = Arrangement.spacedBy(8.dp)) {
                 RuntimeIcon(RuntimeIconName.Globe, Modifier.size(24.dp), tint = MaterialTheme.colorScheme.primary)
-                Text("太墟智枢 Web 协作台")
+                Text("古龙智枢 Web 协作台")
             }
         },
         text = {
@@ -70,7 +70,7 @@ fun WebChatBridgeDialog(
                 verticalArrangement = Arrangement.spacedBy(12.dp),
             ) {
                 Text(
-                    text = "在同一 Wi-Fi / 局域网下，通过电脑浏览器连接太墟智枢，同步处理 Agent 任务、对话与 Linux 工作区文件。",
+                    text = "在同一 Wi-Fi / 局域网下，通过电脑浏览器连接古龙智枢，同步处理 Agent 任务、对话与 Linux 工作区文件。",
                     style = MaterialTheme.typography.bodyMedium,
                 )
 
@@ -117,7 +117,7 @@ fun WebChatBridgeDialog(
                                     TextButton(
                                         onClick = {
                                             val clipboard = context.getSystemService(Context.CLIPBOARD_SERVICE) as ClipboardManager
-                                            clipboard.setPrimaryClip(ClipData.newPlainText("太墟智枢协作地址", status.accessUrl))
+                                            clipboard.setPrimaryClip(ClipData.newPlainText("古龙智枢协作地址", status.accessUrl))
                                             Toast.makeText(context, "已复制基础链接", Toast.LENGTH_SHORT).show()
                                         }
                                     ) { Text("复制") }
@@ -150,7 +150,7 @@ fun WebChatBridgeDialog(
                             Button(
                                 onClick = {
                                     val clipboard = context.getSystemService(Context.CLIPBOARD_SERVICE) as ClipboardManager
-                                    clipboard.setPrimaryClip(ClipData.newPlainText("太墟智枢直连地址", directUrl))
+                                    clipboard.setPrimaryClip(ClipData.newPlainText("古龙智枢直连地址", directUrl))
                                     Toast.makeText(context, "已复制免密直达链接，在电脑浏览器打开即可！", Toast.LENGTH_SHORT).show()
                                 },
                                 modifier = Modifier.fillMaxWidth().padding(top = 4.dp),

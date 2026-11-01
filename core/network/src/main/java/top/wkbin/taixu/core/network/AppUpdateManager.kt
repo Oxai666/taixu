@@ -20,7 +20,7 @@ import java.io.File
 import java.io.FileOutputStream
 
 /**
- * 太墟 · 应用版本更新管理器 (GitHub Releases API)
+ * 古龙 · 应用版本更新管理器 (GitHub Releases API)
  */
 class AppUpdateManager(
     private val context: Context,

@@ -18,7 +18,7 @@ import kotlinx.coroutines.flow.Flow
  * 追加产生、文本非空的 assistant 消息——fork 继承/空占位消息不可作为反馈目标。
  *
  * 并发语义：messageId 唯一 + REPLACE upsert（last-write-wins）。DSH 的严格乐观并发
- * （opaque version + ifVersion）面向多客户端同时写同一反馈的场景；太墟当前单设备
+ * （opaque version + ifVersion）面向多客户端同时写同一反馈的场景；古龙当前单设备
  * 单写者，冲突概率与代价不成立，不做版本字段。
  */
 @Entity(

@@ -1,4 +1,4 @@
-# 🌐 太墟 (TaiXu) — 内置浏览器与 Harness 集成方案 (Browser Design)
+# 🌐 古龙 (TaiXu) — 内置浏览器与 Harness 集成方案 (Browser Design)
 
 > **范围**：在 Android 无 Root TaiXu 内置一个 `in-app WebView`，由 harness 通过 MCP 协议驱动；可同时被桌面 MCP 客户端通过 `adb reverse` 接入。
 > **状态**：v0.9.0-MVP 落地切片（首期实现 in-app 一族 + 文件系统一族）。

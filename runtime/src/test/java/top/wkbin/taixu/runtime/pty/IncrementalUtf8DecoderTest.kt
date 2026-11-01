@@ -7,14 +7,14 @@ class IncrementalUtf8DecoderTest {
     @Test
     fun preservesMultibyteCharacterAcrossChunks() {
         val decoder = IncrementalUtf8Decoder(maxChunkBytes = 8)
-        val bytes = "太墟".toByteArray(Charsets.UTF_8)
+        val bytes = "古龙".toByteArray(Charsets.UTF_8)
 
         val first = decoder.decode(bytes.copyOfRange(0, 2), 2)
         val secondBytes = bytes.copyOfRange(2, bytes.size)
         val second = decoder.decode(secondBytes, secondBytes.size)
 
         assertEquals("", first)
-        assertEquals("太墟", second + decoder.finish())
+        assertEquals("古龙", second + decoder.finish())
     }
 
     @Test

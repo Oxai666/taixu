@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <string name="onboarding_title">准备你的 Linux</string>
-    <string name="onboarding_description">选择喜欢的发行版，太墟会为你下载并准备运行环境。</string>
+    <string name="onboarding_description">选择喜欢的发行版，古龙会为你下载并准备运行环境。</string>
     <string name="onboarding_distribution">Linux 发行版</string>
     <string name="onboarding_mirror">镜像加速线路</string>
     <string name="onboarding_mirror_auto">自动择优线路</string>
@@ -22,6 +22,6 @@
     <string name="onboarding_model_empty">请先刷新或手动填写</string>
     <string name="onboarding_model_id">模型 ID（可手动输入）</string>
     <string name="onboarding_later">稍后配置</string>
-    <string name="onboarding_enter">进入太墟</string>
+    <string name="onboarding_enter">进入古龙</string>
     <string name="onboarding_provider_preset">服务商预设</string>
 </resources>

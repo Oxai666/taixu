@@ -1,4 +1,4 @@
-# 🏗️ 太墟 (TaiXu) — 系统架构与模块拓扑 (Architecture & Modules)
+# 🏗️ 古龙 (TaiXu) — 系统架构与模块拓扑 (Architecture & Modules)
 
 ---
 
@@ -48,7 +48,7 @@ LinuxAIRuntime/
 │   ├── runtime/         # 纯 Kotlin 插件状态机、代次、使用租约与资源排空
 │   └── ui/              # 原生页面贡献、Compose 宿主与受限静态 Web 页面适配
 └── feature/              # Compose UI 业务特性层
-    ├── components/      # 太墟 M3 Expressive 设计规范、通用组件 (RuntimeCard, TopBar, Icons)
+    ├── components/      # 古龙 M3 Expressive 设计规范、通用组件 (RuntimeCard, TopBar, Icons)
     ├── theme/           # Material 3 调色板、字体、主题配置
     ├── home/            # 系统概览：Linux 状态、内存/磁盘/进程实时监控，从侧边导航进入
     ├── chat/            # 默认入口：智枢对话、共享会话抽屉、任务拆解卡片、宽屏双栏布局

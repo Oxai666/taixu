@@ -77,7 +77,7 @@ internal class WebTerminalBridge(
                 } catch (cancellation: CancellationException) {
                     throw cancellation
                 } catch (throwable: Throwable) {
-                    logger.e("太墟智枢 Web 终端请求失败：${exchange.requestURI.path}", throwable)
+                    logger.e("古龙智枢 Web 终端请求失败：${exchange.requestURI.path}", throwable)
                     if (!exchange.isResponseStarted) {
                         runCatching { sendJson(exchange, 500, errorJson(throwable.message ?: "终端请求失败")) }
                     }
@@ -160,7 +160,7 @@ internal class WebTerminalBridge(
                 distroId = distroId,
             )
         } catch (throwable: Throwable) {
-            logger.e("太墟智枢 Web 终端创建失败", throwable)
+            logger.e("古龙智枢 Web 终端创建失败", throwable)
             throw IllegalArgumentException("终端启动失败：${throwable.message ?: "PTY 不可用"}")
         }
 
@@ -171,7 +171,7 @@ internal class WebTerminalBridge(
         }
         handles[id] = handle
         startPump(handle)
-        logger.i("太墟智枢 Web 终端已创建：$id（$label，$columns×$rows，$distroId）")
+        logger.i("古龙智枢 Web 终端已创建：$id（$label，$columns×$rows，$distroId）")
         sendJson(exchange, 200, buildJsonObject {
             put("id", id)
             put("label", handle.label)
@@ -258,7 +258,7 @@ internal class WebTerminalBridge(
             } catch (cancellation: CancellationException) {
                 throw cancellation
             } catch (throwable: Throwable) {
-                logger.e("太墟智枢 Web 终端输出转发异常：${handle.id}", throwable)
+                logger.e("古龙智枢 Web 终端输出转发异常：${handle.id}", throwable)
             }
             closeTerminal(handle.id)
         }
@@ -282,7 +282,7 @@ internal class WebTerminalBridge(
         handle.listeners.forEach { runCatching { it.close() } }
         handle.listeners.clear()
         runCatching { handle.session.close() }
-        logger.i("太墟智枢 Web 终端已关闭：$id（${handle.label}）")
+        logger.i("古龙智枢 Web 终端已关闭：$id（${handle.label}）")
     }
 
     private suspend fun requireTerminal(id: String): WebTerminalHandle =

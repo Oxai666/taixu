@@ -11,7 +11,7 @@ import android.widget.ImageView
 import androidx.core.splashscreen.SplashScreen
 
 /**
- * 太墟启动页动效辅助器。
+ * 古龙启动页动效辅助器。
  * 遵循 Material 3 Expressive 设计规范，提供类似 Gmail 的丝滑启动退场动效：
  * 1. 矢量动画合并完成且数据就绪后立刻退场，绝不无故死等；
  * 2. 中央 Logo 图标向前快速放大穿透并淡出（280ms）；

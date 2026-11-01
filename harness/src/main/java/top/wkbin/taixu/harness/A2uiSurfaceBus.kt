@@ -333,7 +333,7 @@ object A2uiSurfaceBus {
         """[{"version":"v0.9","createSurface":{"surfaceId":"$surfaceId","catalogId":"${A2uiSurfaceContract.CATALOG_ID}"}},
 {"version":"v0.9","updateComponents":{"surfaceId":"$surfaceId","components":[
 {"id":"root","component":"Column","children":["title","table"]},
-{"id":"title","component":"Text","text":"太墟 A2UI"},
+{"id":"title","component":"Text","text":"古龙 A2UI"},
 {"id":"table","component":"Table","columns":["项","值"],"rows":[{"cells":["协议","v0.9"]},{"cells":["目录","Basic + Table"]}]}
 ]}}]"""
 }

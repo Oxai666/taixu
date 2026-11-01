@@ -30,7 +30,7 @@ import androidx.compose.ui.unit.dp
 import kotlin.math.min
 
 /**
- * 太墟 · Git 空状态矢量插图
+ * 古龙 · Git 空状态矢量插图
  *
  * 设计语言：unDraw 极简扁平风格
  *

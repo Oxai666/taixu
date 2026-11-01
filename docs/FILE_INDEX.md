@@ -1,4 +1,4 @@
-# 📚 太墟 (TaiXu) — 关键文件索引速查 (File Index)
+# 📚 古龙 (TaiXu) — 关键文件索引速查 (File Index)
 
 > 用于 AI 编码助手快速定位某个功能/类。详细架构细节见 [`ARCHITECTURE.md`](ARCHITECTURE.md)。
 

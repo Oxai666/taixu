@@ -25,7 +25,7 @@ class ChatExportMarkdownTest {
     @Test
     fun `segments by role with tool summaries`() {
         val md = ChatExportMarkdown.build(conversation(), 9_000L)
-        assertTrue(md.contains("# 太墟会话导出"))
+        assertTrue(md.contains("# 古龙会话导出"))
         assertTrue(md.contains("## [") && md.contains("] 用户"))
         assertTrue(md.contains("帮我看看构建日志"))
         assertTrue(md.contains("调用工具 `base`"))

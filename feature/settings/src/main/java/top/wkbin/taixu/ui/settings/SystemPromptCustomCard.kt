@@ -198,7 +198,7 @@ You are a helpful and expert AI assistant called {{char}}, based on model {{mode
                     value = charNameBuffer,
                     onValueChange = { charNameBuffer = it },
                     label = { Text("模型自称") },
-                    placeholder = { Text("太墟智枢") },
+                    placeholder = { Text("古龙智枢") },
                     modifier = Modifier.weight(1f),
                     singleLine = true,
                     textStyle = MaterialTheme.typography.bodySmall,

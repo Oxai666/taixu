@@ -1,6 +1,6 @@
 # CC-Switch 智能体中枢 — 离线本地插件包
 
-本目录是 `cc-switch` 本地插件的源文件布局，用于打包为可直接导入太墟的本地 `.txplugin`。
+本目录是 `cc-switch` 本地插件的源文件布局，用于打包为可直接导入古龙的本地 `.txplugin`。
 
 ## 用途
 
@@ -38,4 +38,4 @@ python tools/package-cc-switch-plugin.py
 ```
 
 产物将输出至：`dist/plugins/taixu-plugin-cc-switch-v1.0.1-arm64.txplugin`。
-在太墟内通过“插件中心 - 导入本地插件包”选择此文件即可一键导入安装。
+在古龙内通过“插件中心 - 导入本地插件包”选择此文件即可一键导入安装。

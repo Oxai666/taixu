@@ -11,7 +11,7 @@ import org.junit.Assert.*
 import org.junit.Test
 
 class ManagedWebAssetsTest {
-    private val html = "<!doctype html><p>太墟</p>".toByteArray()
+    private val html = "<!doctype html><p>古龙</p>".toByteArray()
     private val hashes get() = mapOf("index.html" to ManagedWebAssets.digest(html))
     private fun source(server: MockWebServer, hashes: Map<String, String> = this.hashes,
         available: () -> Boolean = { true }) = ManagedWebAssets(server.port, "/instance/", hashes,

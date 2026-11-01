@@ -241,7 +241,7 @@ class VirtualDisplayCoordinator(
         VirtualDisplayHud.setStep(step)
         if (!Settings.canDrawOverlays(context)) {
             return "看不到画面：没有「显示在其他应用上层」权限，虚拟屏只在后台跑。" +
-                "请到系统设置里为太墟打开这项权限，然后再让我显示。"
+                "请到系统设置里为古龙打开这项权限，然后再让我显示。"
         }
         if (getDisplayId(sessionId) == null || !showOverlay(sessionId)) {
             return "悬浮窗没有弹出来，所以你看不到它正在做什么。"

@@ -94,7 +94,7 @@ class McpOAuthDiscoveryTest {
         server.start()
         try {
             val client = McpOAuthDiscovery(OkHttpClient())
-                .registerClient(server.url("/register").toString(), "taixu://oauth/mcp", "太墟 (TaiXu)", "mcp:read")
+                .registerClient(server.url("/register").toString(), "taixu://oauth/mcp", "古龙 (TaiXu)", "mcp:read")
             assertEquals("dc-123", client?.clientId)
             assertEquals("s3cret", client?.clientSecret)
             val recorded = server.takeRequest()
@@ -115,7 +115,7 @@ class McpOAuthDiscoveryTest {
         server.start()
         try {
             assertNull(
-                McpOAuthDiscovery(OkHttpClient()).registerClient(server.url("/register").toString(), "taixu://oauth/mcp", "太墟", null),
+                McpOAuthDiscovery(OkHttpClient()).registerClient(server.url("/register").toString(), "taixu://oauth/mcp", "古龙", null),
             )
         } finally {
             server.shutdown()

@@ -87,8 +87,8 @@ import top.wkbin.taixu.feature.components.R
 import androidx.compose.ui.res.stringResource
 
 /**
- * 太墟 (TaiXu) 四大核心中枢导航定义：
- * 太墟（开辟画布）· 智枢（AI 结对）· 工坊（工作区）· 乾坤（设置与模型）
+ * 古龙 (TaiXu) 四大核心中枢导航定义：
+ * 古龙（开辟画布）· 智枢（AI 结对）· 工坊（工作区）· 乾坤（设置与模型）
  */
 enum class MainDestination(val labelRes: Int, val subtitleRes: Int, val icon: RuntimeIconName) {
     Home(R.string.components_nav_home, R.string.components_nav_subtitle_home, RuntimeIconName.NavDashboard),
@@ -98,7 +98,7 @@ enum class MainDestination(val labelRes: Int, val subtitleRes: Int, val icon: Ru
 }
 
 /**
- * 太墟 · 核心底部中枢导航栏（Material 3 NavigationBar）。
+ * 古龙 · 核心底部中枢导航栏（Material 3 NavigationBar）。
  */
 @Composable
 fun RuntimeBottomBar(
@@ -202,7 +202,7 @@ fun RuntimeTopBar(
 }
 
 /**
- * 太墟品牌标志徽章
+ * 古龙品牌标志徽章
  */
 @Composable
 fun TaiXuBrandBadge(size: Dp = 38.dp) {
@@ -256,7 +256,7 @@ fun SectionHeader(
 }
 
 /**
- * 太墟精制卡片组件：支持自适应表面色与细腻描边
+ * 古龙精制卡片组件：支持自适应表面色与细腻描边
  */
 @Composable
 fun RuntimeCard(

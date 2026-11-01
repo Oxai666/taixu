@@ -63,7 +63,7 @@ import top.wkbin.taixu.ui.components.SpotlightGuideOverlay
 import top.wkbin.taixu.ui.components.rememberSpotlightAnchor
 import top.wkbin.taixu.ui.components.spotlightAnchor
 /**
- * 太墟 · 工坊空间 (Workspace Space)
+ * 古龙 · 工坊空间 (Workspace Space)
  * 管理 Linux 隔离工作区、代码工程与文件项目。
  *
  * 本文件仅做装配：Scaffold 骨架 + 各向导/弹窗/卡片组件（见同包 WorkspaceXxx.kt）的编排。

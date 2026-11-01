@@ -48,7 +48,7 @@ object VirtualDisplayHud {
     private const val WINDOW_MAX_HEIGHT_FRACTION = 0.42f
     /** 标题条高度（dp）。 */
     private const val TITLE_BAR_HEIGHT_DP = 36
-    /** 圆角半径（px），与太墟深色卡片风格一致的轻圆角。 */
+    /** 圆角半径（px），与古龙深色卡片风格一致的轻圆角。 */
     private const val CORNER_RADIUS_PX = 28
 
     private val mainHandler = Handler(Looper.getMainLooper())

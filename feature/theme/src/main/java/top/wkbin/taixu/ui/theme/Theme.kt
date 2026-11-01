@@ -148,7 +148,7 @@ val TaiXuShapes = Shapes(
 )
 
 /**
- * 太墟主题：Material 3 Expressive，支持 Monet 动态壁纸取色（系统色板优先，HCT 兜底）
+ * 古龙主题：Material 3 Expressive，支持 Monet 动态壁纸取色（系统色板优先，HCT 兜底）
  * 与曜石/素白静态基调（玄同色板）。
  */
 @Composable

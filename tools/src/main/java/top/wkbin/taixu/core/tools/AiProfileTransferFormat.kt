@@ -75,7 +75,7 @@ object AiProfileTransferFormat {
     }
 
     private fun requireVersion(version: Int) {
-        require(version in 1..SCHEMA_VERSION) { "不支持此配置版本，请使用兼容版本的太墟导出" }
+        require(version in 1..SCHEMA_VERSION) { "不支持此配置版本，请使用兼容版本的古龙导出" }
     }
 
     private fun validateEndpoint(raw: String, prefix: String) {

@@ -27,7 +27,7 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 
 /**
- * 太墟 · 沙箱工坊空状态插图
+ * 古龙 · 沙箱工坊空状态插图
  *
  * 设计：
  * - unDraw 风格，极简扁平矢量

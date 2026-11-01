@@ -69,12 +69,12 @@ import top.wkbin.taixu.ui.components.RuntimeTopBar
 import top.wkbin.taixu.ui.components.StatusBadge
 import top.wkbin.taixu.core.model.CcSwitchDaemonStatus
 /**
- * 太墟 · CC-Switch 智能体中枢主界面
+ * 古龙 · CC-Switch 智能体中枢主界面
  *
  * 核心功能：
  * - 守护进程与反代服务启停监控（端口 19870）
  * - Claude Code / OpenClaw / Hermes / Codex 矩阵管理
- * - 一键热切换各 Agent 的 Provider（支持从太墟本地模型库同步）
+ * - 一键热切换各 Agent 的 Provider（支持从古龙本地模型库同步）
  * - 版本查看与一键升降级
  * - 实时安装与编译构建日志监视（支持一键复制全量报错）
  * - Token 记账与反向代理状态监控
@@ -786,7 +786,7 @@ private fun AdvancedSyncCard(
             verticalAlignment = Alignment.CenterVertically,
         ) {
             Text(
-                text = "与太墟模型库深度互通",
+                text = "与古龙模型库深度互通",
                 style = MaterialTheme.typography.titleSmall.copy(fontWeight = FontWeight.Bold),
                 color = MaterialTheme.colorScheme.onSurface,
             )
@@ -797,7 +797,7 @@ private fun AdvancedSyncCard(
         }
         Spacer(modifier = Modifier.height(6.dp))
         Text(
-            text = "点击可将太墟已配置的模型服务商一键导入为 CC-Switch 的纳管 Provider，无需重复填写 Key 与 Base URL：",
+            text = "点击可将古龙已配置的模型服务商一键导入为 CC-Switch 的纳管 Provider，无需重复填写 Key 与 Base URL：",
             style = MaterialTheme.typography.bodySmall,
             color = MaterialTheme.colorScheme.onSurfaceVariant,
         )
@@ -870,7 +870,7 @@ private fun SwitchProviderDialog(
 
                 if (providers.isEmpty()) {
                     Text(
-                        text = "暂未配置独立的 Provider，可直接从下方太墟模型库选择一键导入并绑定。",
+                        text = "暂未配置独立的 Provider，可直接从下方古龙模型库选择一键导入并绑定。",
                         style = MaterialTheme.typography.bodySmall,
                         color = MaterialTheme.colorScheme.onSurfaceVariant,
                     )
@@ -904,7 +904,7 @@ private fun SwitchProviderDialog(
                 Spacer(modifier = Modifier.height(10.dp))
 
                 Text(
-                    text = "从太墟已存模型一键绑定：",
+                    text = "从古龙已存模型一键绑定：",
                     style = MaterialTheme.typography.labelMedium,
                     fontWeight = FontWeight.SemiBold,
                 )

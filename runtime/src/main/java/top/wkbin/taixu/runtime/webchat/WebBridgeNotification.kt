@@ -6,7 +6,7 @@ import android.app.NotificationManager
 import android.content.Context
 import androidx.core.app.NotificationCompat
 
-/** 太墟智枢 Web 协作台的前台通知（从 WebChatBridgeServer 抽出，保持服务观感不变）。 */
+/** 古龙智枢 Web 协作台的前台通知（从 WebChatBridgeServer 抽出，保持服务观感不变）。 */
 internal class WebBridgeNotification(private val context: Context) {
 
     fun show(url: String, pin: String) {
@@ -15,16 +15,16 @@ internal class WebBridgeNotification(private val context: Context) {
             manager.createNotificationChannel(
                 NotificationChannel(
                     NOTIFICATION_CHANNEL_ID,
-                    "太墟智枢 Web 协作台",
+                    "古龙智枢 Web 协作台",
                     NotificationManager.IMPORTANCE_LOW,
-                ).apply { description = "太墟智枢局域网协作服务"; setShowBadge(false) },
+                ).apply { description = "古龙智枢局域网协作服务"; setShowBadge(false) },
             )
         }
         manager.notify(
             NOTIFICATION_ID,
             NotificationCompat.Builder(context, NOTIFICATION_CHANNEL_ID)
                 .setSmallIcon(R.drawable.stat_notify_sync)
-                .setContentTitle("太墟智枢 Web 协作台运行中")
+                .setContentTitle("古龙智枢 Web 协作台运行中")
                 .setContentText("$url（配对码：$pin）")
                 .setOngoing(true)
                 .setPriority(NotificationCompat.PRIORITY_LOW)

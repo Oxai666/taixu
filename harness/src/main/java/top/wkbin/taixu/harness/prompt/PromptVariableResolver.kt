@@ -21,7 +21,7 @@ object PromptVariableResolver {
         context: Context,
         modelId: String = "",
         modelName: String = "",
-        charName: String = "太墟智枢",
+        charName: String = "古龙智枢",
         userName: String = "用户",
     ): String {
         if (!template.contains("{{")) return template

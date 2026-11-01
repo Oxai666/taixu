@@ -1,7 +1,7 @@
 package top.wkbin.taixu.core.model
 
 /**
- * 太墟支持的系统运行与特权模式。
+ * 古龙支持的系统运行与特权模式。
  */
 enum class ExecutionMode(
     val id: String,

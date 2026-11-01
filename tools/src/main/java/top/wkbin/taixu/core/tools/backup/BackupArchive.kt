@@ -87,7 +87,7 @@ internal object BackupArchive {
     }
 
     fun validateManifest(manifest: LocalBackupManifest) {
-        require(manifest.formatVersion == 1 && manifest.databaseVersion == 54) { "备份版本与当前太墟不兼容" }
+        require(manifest.formatVersion == 1 && manifest.databaseVersion == 54) { "备份版本与当前古龙不兼容" }
         require(manifest.assets.size <= MAX_FILES && manifest.assets.sumOf { it.bytes } <= MAX_BYTES) { "备份体积或文件数量超限" }
         val names = mutableSetOf<String>()
         manifest.assets.forEach { asset ->

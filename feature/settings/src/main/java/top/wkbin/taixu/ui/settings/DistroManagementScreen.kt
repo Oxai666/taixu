@@ -69,7 +69,7 @@ import top.wkbin.taixu.ui.components.StatusBadge
 import top.wkbin.taixu.ui.components.distroIconFor
 
 /**
- * 太墟 · Linux 发行版与沙箱多实例管理 (Distro Management Hub)
+ * 古龙 · Linux 发行版与沙箱多实例管理 (Distro Management Hub)
  */
 @Composable
 fun DistroManagementScreen(

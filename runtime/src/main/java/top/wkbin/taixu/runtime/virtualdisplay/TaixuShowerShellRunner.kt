@@ -9,7 +9,7 @@ import top.wkbin.taixu.runtime.privilege.PrivilegeManager
 /**
  * Shower 客户端库的 shell 执行通道适配器（骨架版）。
  *
- * 身份映射说明：太墟的特权模型只有一条宿主执行通道 [PrivilegeManager.executeShellCommand]，
+ * 身份映射说明：古龙的特权模型只有一条宿主执行通道 [PrivilegeManager.executeShellCommand]，
  * 由当前生效模式决定身份（SHIZUKU = shell uid / ROOT = root uid）。Shower 库的
  * DEFAULT / SHELL / ROOT 三种身份在此统一收敛到该通道：
  * - DEFAULT（pkill 清理等）与 SHELL（cp / app_process 启动）在两种特权模式下语义均正确；

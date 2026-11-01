@@ -44,7 +44,7 @@ private var cachedWallpaperSeed: Color? = null
 fun extractWallpaperSeedColor(context: Context): Color? {
     val wallpaperManager = runCatching { WallpaperManager.getInstance(context) }.getOrNull() ?: return null
 
-    // 1. 优先尝试从真实壁纸 Drawable 获取（太墟已具 MANAGE_EXTERNAL_STORAGE 特权）
+    // 1. 优先尝试从真实壁纸 Drawable 获取（古龙已具 MANAGE_EXTERNAL_STORAGE 特权）
     val colorFromDrawable = runCatching {
         val drawable = wallpaperManager.drawable
         if (drawable != null) {

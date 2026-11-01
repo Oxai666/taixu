@@ -1,6 +1,6 @@
 # Agent2API for TaiXu
 
-上游 Agent2API v3.0.8（Linux ARM64 无界面服务端 + 原版 Web UI）的太墟适配，外加一个 Go 静态适配器
+上游 Agent2API v3.0.8（Linux ARM64 无界面服务端 + 原版 Web UI）的古龙适配，外加一个 Go 静态适配器
 提供宿主签名通道和管理员重设。
 
 执行 `python tools/package-agent2api-plugin.py` 生成可本地导入的

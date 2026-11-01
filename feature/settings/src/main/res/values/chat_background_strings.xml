@@ -8,7 +8,7 @@
     <string name="settings_chat_background_visibility">背景可见度 %1$d%%</string>
     <string name="settings_chat_background_blur">背景模糊 %1$d dp</string>
     <string name="settings_chat_background_preview">聊天背景预览</string>
-    <string name="settings_chat_background_preview_title">太墟 · 智枢</string>
+    <string name="settings_chat_background_preview_title">古龙 · 智枢</string>
     <string name="settings_chat_background_preview_user">帮我整理一下今天的想法。</string>
     <string name="settings_chat_background_preview_assistant">好的，我们从最重要的一件事开始。</string>
 </resources>

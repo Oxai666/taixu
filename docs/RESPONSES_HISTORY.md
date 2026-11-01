@@ -2,7 +2,7 @@
 
 Responses API 的手动上下文需要保留模型的完整输出项。普通正文和推理摘要无法替代原始 reasoning 项，原始消息中的 `phase` 也影响模型对中间进度和最终答复的理解。协议依据：[OpenAI conversation state](https://developers.openai.com/api/docs/guides/conversation-state)。
 
-太墟在 `AssistantText.responsesTurn` 中保存 Responses 的完整 `output`，包括 item ID、函数调用 ID、消息 phase 和不透明的 `encrypted_content`。它随现有 Room `payloadJson` 保存，无数据库表结构迁移；旧消息没有该字段时按普通历史读取。只有工具调用的回合也保存空正文 assistant 条目，作为原生输出的锚点。
+古龙在 `AssistantText.responsesTurn` 中保存 Responses 的完整 `output`，包括 item ID、函数调用 ID、消息 phase 和不透明的 `encrypted_content`。它随现有 Room `payloadJson` 保存，无数据库表结构迁移；旧消息没有该字段时按普通历史读取。只有工具调用的回合也保存空正文 assistant 条目，作为原生输出的锚点。
 
 `ResponsesApi` 从非流式最终响应或 SSE `response.completed` 获取输出。网关省略完成事件里的 output 时，可以使用带连续 output_index 的 `output_item.done`；`output_item.added` 中的部分加密内容不会保存。没有完成事件的流式中断只保留已有正文。仅在完成事件提供正文或工具调用的网关也能正常工作，已有正文增量不会重复发送到 UI。
 

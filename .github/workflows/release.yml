@@ -150,7 +150,7 @@ jobs:
           CHORE=$(echo "$LOG" | grep -Eiv "^- feat|^- fix|^- perf|^- refactor|^- improve" || true)
 
           {
-            echo "## 太墟 $CURRENT_TAG 更新说明"
+            echo "## 古龙 $CURRENT_TAG 更新说明"
             echo ""
             if [ -n "$PREV_TAG" ]; then
               echo "> 本版本包含自 \`$PREV_TAG\` 起的全部变更"
@@ -196,7 +196,7 @@ jobs:
         uses: softprops/action-gh-release@v2
         with:
           tag_name: ${{ env.TARGET_TAG }}
-          name: "太墟 ${{ env.TARGET_TAG }}"
+          name: "古龙 ${{ env.TARGET_TAG }}"
           body_path: release_notes.md
           files: |
             ${{ env.APK_FILE }}

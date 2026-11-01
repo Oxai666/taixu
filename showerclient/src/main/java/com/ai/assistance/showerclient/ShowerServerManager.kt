@@ -122,7 +122,7 @@ object ShowerServerManager {
         val handoff = registerBinderHandoff(appContext)
         try {
             // 6) 用 setsid 把 server 拉到新会话。
-            //    太墟的 HostProcessRunner 在命令结束时会对仍存活的 shell 调 destroy()，
+            //    古龙的 HostProcessRunner 在命令结束时会对仍存活的 shell 调 destroy()，
             //    Android 的实现是 killProcessGroup：server 若留在同一个进程组里会被一起杀掉，
             //    表现为「命令成功但 Binder 永远等不到」。setsid 后即使外层 shell 被回收，
             //    app_process 也不在那个进程组里。stdin/stdout 全部重定向，避免管道被排空超时

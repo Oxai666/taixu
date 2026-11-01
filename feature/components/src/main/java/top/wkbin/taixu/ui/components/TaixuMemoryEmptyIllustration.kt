@@ -32,7 +32,7 @@ import androidx.compose.ui.unit.dp
 import kotlin.math.min
 
 /**
- * 太墟 · 记忆空状态矢量插图
+ * 古龙 · 记忆空状态矢量插图
  *
  * 视觉元素：
  * - 柔和圆形背景

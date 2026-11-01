@@ -84,7 +84,7 @@ import top.wkbin.taixu.ui.workspace.WorkshopScriptEditorScreen
 import top.wkbin.taixu.ui.workspace.WorkshopScriptType
 import top.wkbin.taixu.ui.workspace.WorkshopSettingsScreen
 import top.wkbin.taixu.ui.workspace.WorkshopSigningScreen
-/** 太墟核心导航分发系统：采用 Navigation 3，为每个 Tab 独立维护持久回退栈与状态生命周期 */
+/** 古龙核心导航分发系统：采用 Navigation 3，为每个 Tab 独立维护持久回退栈与状态生命周期 */
 @Composable
 fun TaiXuNavHost(
     globalNavigationBus: GlobalNavigationBus? = null,
