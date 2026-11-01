@@ -1,10 +1,10 @@
 #!/bin/sh
 set -eu
 
-PAYLOAD="${TAIXU_PLUGIN_PAYLOAD:?missing TAIXU_PLUGIN_PAYLOAD}"
+PAYLOAD="${GULONG_PLUGIN_PAYLOAD:?missing GULONG_PLUGIN_PAYLOAD}"
 ARCHIVES="$PAYLOAD/archives"
 CHECKSUMS="$PAYLOAD/checksums/SHA256SUMS"
-TOOL_DIR="${TAIXU_TOOL_DIR:?missing TAIXU_TOOL_DIR}"
+TOOL_DIR="${GULONG_TOOL_DIR:?missing GULONG_TOOL_DIR}"
 ANDROID_HOME="/opt/android-sdk"
 TOOLCHAIN_ROOT="/opt/taixu/toolchains/android"
 JDK_HOME="$TOOLCHAIN_ROOT/jdk"
@@ -24,7 +24,7 @@ need() {
 progress() {
     progress_percent="$1"
     shift
-    printf '[TAIXU_PROGRESS:%s] %s\n' "$progress_percent" "$*"
+    printf '[GULONG_PROGRESS:%s] %s\n' "$progress_percent" "$*"
 }
 
 # Read ELF headers directly instead of depending on the optional `file` package.
@@ -554,18 +554,18 @@ printf '%s\n' 'android.builder.sdkDownload=false' >> /root/.gradle/gradle.proper
 # 持久化环境变量（供终端、PTY与沙箱全生命周期共享）
 mkdir -p /etc/profile.d
 cat << EOF > /etc/profile.d/taixu-android.sh
-# TaiXu Android development environment (managed by android-suite-offline plugin)
+# Gulong Android development environment (managed by android-suite-offline plugin)
 export JAVA_HOME="$JDK_HOME"
 export ANDROID_HOME="$ANDROID_HOME"
 export ANDROID_SDK_ROOT="$ANDROID_HOME"
 export GRADLE_HOME="/opt/gradle-$GRADLE_VERSION"
-export TAIXU_AAPT2_PATH="$ANDROID_HOME/build-tools/$BUILD_TOOLS_VERSION/aapt2"
-export TAIXU_NDK_PATH="$NDK_HOME"
-export TAIXU_NDK_VERSION="r29"
+export GULONG_AAPT2_PATH="$ANDROID_HOME/build-tools/$BUILD_TOOLS_VERSION/aapt2"
+export GULONG_NDK_PATH="$NDK_HOME"
+export GULONG_NDK_VERSION="r29"
 export ANDROID_NDK_HOME="$NDK_HOME"
 export ANDROID_NDK_ROOT="$NDK_HOME"
-export TAIXU_CMAKE_HOME="$TOOL_DIR/cmake"
-export TAIXU_NINJA_HOME="$TOOL_DIR/bin"
+export GULONG_CMAKE_HOME="$TOOL_DIR/cmake"
+export GULONG_NINJA_HOME="$TOOL_DIR/bin"
 export RUSTUP_HOME="/opt/taixu/toolchains/rust"
 export CARGO_HOME="/root/.cargo"
 export PATH="/opt/taixu/bin:/opt/taixu/toolchains/rust/bin:$TOOL_DIR/bin:$TOOL_DIR/cmake/bin:\$JAVA_HOME/bin:\$GRADLE_HOME/bin:/opt/flutter/bin:\$PATH"
@@ -578,9 +578,9 @@ JAVA_HOME=$JDK_HOME
 ANDROID_HOME=$ANDROID_HOME
 ANDROID_SDK_ROOT=$ANDROID_HOME
 GRADLE_HOME=/opt/gradle-$GRADLE_VERSION
-TAIXU_AAPT2_PATH=$ANDROID_HOME/build-tools/$BUILD_TOOLS_VERSION/aapt2
-TAIXU_NDK_PATH=$NDK_HOME
-TAIXU_NDK_VERSION=r29
+GULONG_AAPT2_PATH=$ANDROID_HOME/build-tools/$BUILD_TOOLS_VERSION/aapt2
+GULONG_NDK_PATH=$NDK_HOME
+GULONG_NDK_VERSION=r29
 ANDROID_NDK_HOME=$NDK_HOME
 ANDROID_NDK_ROOT=$NDK_HOME
 RUSTUP_HOME=/opt/taixu/toolchains/rust

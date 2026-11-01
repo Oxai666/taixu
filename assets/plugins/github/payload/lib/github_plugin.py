@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""TaiXu GitHub plugin: allowlisted local operations; no shell or token echo."""
+"""Gulong GitHub plugin: allowlisted local operations; no shell or token echo."""
 import concurrent.futures
 import json
 import os
@@ -166,7 +166,7 @@ class App:
             public = self.data / 'ssh/id_ed25519.pub'
             if not public.exists():
                 raise OperationError('请先生成密钥')
-            self.gh('ssh-key', 'add', str(public), '--title', 'TaiXu Android')
+            self.gh('ssh-key', 'add', str(public), '--title', 'Gulong Android')
             return dict(message='公钥已添加到 GitHub')
         if action == 'repos/list':
             return dict(repos=json.loads(self.gh('repo', 'list', '--limit', '30', '--json', 'nameWithOwner,isPrivate,description')))
@@ -322,7 +322,7 @@ def main():
     if command != 'serve':
         raise SystemExit('用法：gh-ui serve | gh ... | gh-git ...')
     if sys.stdin.isatty():
-        raise SystemExit('请从太墟工具中心启动认证服务')
+        raise SystemExit('请从古龙工具中心启动认证服务')
     try:
         protocol = ServiceProtocol.from_stdin(sys.stdin.buffer)
     except (ValueError, TypeError):

@@ -1,12 +1,12 @@
 #!/bin/sh
-# 太墟本地插件 · Android CLI 与官方技能（android-skills）安装后校验
+# 古龙本地插件 · Android CLI 与官方技能（android-skills）安装后校验
 #
 # 顺序刻意如此：先做静态 ELF / 文件断言，再真正执行一次 CLI，
 # 避免“文件在但根本跑不起来”被记为安装成功。全部步骤都不需要网络。
 set -eu
 
-TOOL_DIR="${TAIXU_TOOL_DIR:-/opt/taixu/tools/android-skills}"
-TOOL_DATA="${TAIXU_TOOL_DATA:-/opt/taixu/data/android-skills}"
+TOOL_DIR="${GULONG_TOOL_DIR:-/opt/taixu/tools/android-skills}"
+TOOL_DATA="${GULONG_TOOL_DATA:-/opt/taixu/data/android-skills}"
 ANDROID_USER_HOME_DIR="$TOOL_DATA/android-user-home"
 SKILLS_COLLECTION="/attachments/skills/android-skills"
 MIN_SKILL_COUNT=33

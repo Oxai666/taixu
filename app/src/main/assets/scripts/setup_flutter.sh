@@ -1,19 +1,19 @@
 #!/bin/sh
 # ==============================================================================
-# TaiXu (LinuxAIRuntime) - Flutter SDK Environment Setup
+# Gulong (LinuxAIRuntime) - Flutter SDK Environment Setup
 # ==============================================================================
 set -e
 
-echo "==> [TaiXu] 正在初始化 Flutter 跨端开发环境..."
+echo "==> [Gulong] 正在初始化 Flutter 跨端开发环境..."
 
 mkdir -p /opt/taixu/locks
 command -v flock >/dev/null 2>&1 || {
-    echo "!! [TaiXu] 缺少 flock，无法安全装配 Flutter 工具链"
+    echo "!! [Gulong] 缺少 flock，无法安全装配 Flutter 工具链"
     exit 1
 }
 exec 9>/opt/taixu/locks/android-toolchain.lock
 flock -x -w 1800 9 || {
-    echo "!! [TaiXu] Android/Flutter 工具链正被构建任务使用，等待超时"
+    echo "!! [Gulong] Android/Flutter 工具链正被构建任务使用，等待超时"
     exit 1
 }
 
@@ -29,16 +29,16 @@ mkdir -p /opt/flutter /usr/local/bin /usr/bin 2>/dev/null || true
 FLUTTER_ARM64_MARKER=/opt/flutter/.taixu-arm64
 
 if [ ! -f "${ANDROID_HOME:-/opt/android-sdk}/platforms/android-34/android.jar" ]; then
-    echo "!! [TaiXu] Flutter APK 构建依赖 Android 核心基础环境 (Platform 34)，请先安装 android-core"
+    echo "!! [Gulong] Flutter APK 构建依赖 Android 核心基础环境 (Platform 34)，请先安装 android-core"
 fi
 
 # 1. 下载 Flutter SDK 压缩包（HTTP Range 分片 + 断点续传）
 if [ ! -f /opt/flutter/bin/flutter ] || [ ! -f "$FLUTTER_ARM64_MARKER" ]; then
-    if [ -n "${TAIXU_FLUTTER_ARCHIVE:-}" ] && [ -s "$TAIXU_FLUTTER_ARCHIVE" ]; then
-        echo "==> [TaiXu] 使用应用内下载器已准备的 Flutter SDK 压缩包：$TAIXU_FLUTTER_ARCHIVE"
-        FLUTTER_ARCHIVE="$TAIXU_FLUTTER_ARCHIVE"
+    if [ -n "${GULONG_FLUTTER_ARCHIVE:-}" ] && [ -s "$GULONG_FLUTTER_ARCHIVE" ]; then
+        echo "==> [Gulong] 使用应用内下载器已准备的 Flutter SDK 压缩包：$GULONG_FLUTTER_ARCHIVE"
+        FLUTTER_ARCHIVE="$GULONG_FLUTTER_ARCHIVE"
     else
-    echo "==> [TaiXu] 正在获取 Flutter stable SDK 发布信息 (固定版本)..."
+    echo "==> [Gulong] 正在获取 Flutter stable SDK 发布信息 (固定版本)..."
     # 固定到特定 tag，避免 latest 每次更新抬高 Gradle/AGP/Kotlin 最低版本要求。
     # 本版本对应的最低工具链：Gradle 8.14+ / AGP 8.11.1+ / Kotlin 2.2.20+。
     FLUTTER_PINNED_TAG="flutter-3.47.1-87-linux"
@@ -47,18 +47,18 @@ if [ ! -f /opt/flutter/bin/flutter ] || [ ! -f "$FLUTTER_ARM64_MARKER" ]; then
     rm -f "$FLUTTER_META"
     curl -fsSL --retry 4 --retry-all-errors --connect-timeout 20 --max-time 120 \
         "$FLUTTER_META_URL" -o "$FLUTTER_META" || {
-        echo "!! [TaiXu] Flutter 发布信息获取失败"
+        echo "!! [Gulong] Flutter 发布信息获取失败"
         exit 1
     }
     command -v jq >/dev/null 2>&1 || {
-        echo "!! [TaiXu] 缺少 jq，无法解析 Flutter 发布索引"
+        echo "!! [Gulong] 缺少 jq，无法解析 Flutter 发布索引"
         exit 1
     }
     FLUTTER_ARCHIVE_REL=$(jq -r '[.assets[] | select(.name | contains("linux_arm64_android_web_sdk"))][0].browser_download_url // empty' "$FLUTTER_META")
     FLUTTER_SHA256=""
     rm -f "$FLUTTER_META"
     [ -n "$FLUTTER_ARCHIVE_REL" ] || {
-        echo "!! [TaiXu] 未找到可用的 Flutter stable Linux SDK"
+        echo "!! [Gulong] 未找到可用的 Flutter stable Linux SDK"
         exit 1
     }
 
@@ -90,7 +90,7 @@ if [ ! -f /opt/flutter/bin/flutter ] || [ ! -f "$FLUTTER_ARM64_MARKER" ]; then
 
     download_flutter_archive() {
         archive_url="$1"
-        echo "==> [TaiXu] 尝试 Flutter SDK 压缩包: $archive_url"
+        echo "==> [Gulong] 尝试 Flutter SDK 压缩包: $archive_url"
         header_file="${FLUTTER_ARCHIVE}.headers"
         curl -fsSL --retry 3 --retry-all-errors --connect-timeout 20 --max-time 60 \
             -r 0-0 -D "$header_file" -o /dev/null "$archive_url" || return 1
@@ -158,17 +158,17 @@ if [ ! -f /opt/flutter/bin/flutter ] || [ ! -f "$FLUTTER_ARM64_MARKER" ]; then
             FLUTTER_SDK_READY=1
             break
         fi
-        echo "!! [TaiXu] Flutter SDK 压缩包下载或校验失败，切换线路"
+        echo "!! [Gulong] Flutter SDK 压缩包下载或校验失败，切换线路"
         rm -f "$FLUTTER_ARCHIVE"
         rm -rf "${FLUTTER_ARCHIVE}.chunks"
     done
     [ "$FLUTTER_SDK_READY" -eq 1 ] || {
-        echo "!! [TaiXu] Flutter SDK 下载失败，未执行 Git 全量克隆"
+        echo "!! [Gulong] Flutter SDK 下载失败，未执行 Git 全量克隆"
         exit 1
     }
     fi
 
-    echo "==> [TaiXu] 正在校验并解压 Flutter SDK..."
+    echo "==> [Gulong] 正在校验并解压 Flutter SDK..."
     FLUTTER_STAGING="/tmp/taixu-flutter-staging"
     rm -rf "$FLUTTER_STAGING"
     mkdir -p "$FLUTTER_STAGING"
@@ -178,33 +178,33 @@ if [ ! -f /opt/flutter/bin/flutter ] || [ ! -f "$FLUTTER_ARM64_MARKER" ]; then
     case "$FLUTTER_ARCHIVE" in
         *.tar.gz|*.tgz|*.gz)
             gzip -t "$FLUTTER_ARCHIVE" || {
-                echo "!! [TaiXu] Flutter SDK gzip 压缩包损坏：$FLUTTER_ARCHIVE"
+                echo "!! [Gulong] Flutter SDK gzip 压缩包损坏：$FLUTTER_ARCHIVE"
                 exit 1
             }
             tar -xzf "$FLUTTER_ARCHIVE" -C "$FLUTTER_STAGING"
             ;;
         *.tar.xz|*.txz|*.xz)
             xz -t "$FLUTTER_ARCHIVE" || {
-                echo "!! [TaiXu] Flutter SDK xz 压缩包损坏：$FLUTTER_ARCHIVE"
+                echo "!! [Gulong] Flutter SDK xz 压缩包损坏：$FLUTTER_ARCHIVE"
                 exit 1
             }
             tar -xJf "$FLUTTER_ARCHIVE" -C "$FLUTTER_STAGING"
             ;;
         *.tar)
             tar -tf "$FLUTTER_ARCHIVE" >/dev/null || {
-                echo "!! [TaiXu] Flutter SDK tar 包损坏：$FLUTTER_ARCHIVE"
+                echo "!! [Gulong] Flutter SDK tar 包损坏：$FLUTTER_ARCHIVE"
                 exit 1
             }
             tar -xf "$FLUTTER_ARCHIVE" -C "$FLUTTER_STAGING"
             ;;
         *)
-            echo "!! [TaiXu] 无法识别 Flutter SDK 压缩格式：$FLUTTER_ARCHIVE"
+            echo "!! [Gulong] 无法识别 Flutter SDK 压缩格式：$FLUTTER_ARCHIVE"
             file "$FLUTTER_ARCHIVE" 2>/dev/null || true
             exit 1
             ;;
     esac
     [ -f "$FLUTTER_STAGING/flutter/bin/flutter" ] || {
-        echo "!! [TaiXu] Flutter SDK 压缩包结构无效"
+        echo "!! [Gulong] Flutter SDK 压缩包结构无效"
         exit 1
     }
     rm -rf /opt/flutter
@@ -223,7 +223,7 @@ if [ -f /opt/flutter/bin/flutter ]; then
     ln -sf /opt/flutter/bin/flutter /usr/bin/flutter 2>/dev/null || true
     ln -sf /opt/flutter/bin/dart /usr/local/bin/dart 2>/dev/null || true
     ln -sf /opt/flutter/bin/dart /usr/bin/dart 2>/dev/null || true
-    echo "==> [TaiXu] Flutter & Dart 软链接配置就绪"
+    echo "==> [Gulong] Flutter & Dart 软链接配置就绪"
     /opt/flutter/bin/flutter config --no-analytics >/dev/null 2>&1 || true
     PUB_HOSTED_URL="$PUB_HOSTED_URL" FLUTTER_STORAGE_BASE_URL="$FLUTTER_STORAGE_BASE_URL" \
         /opt/flutter/bin/flutter precache --android >/dev/null 2>&1 || true
@@ -236,14 +236,14 @@ if [ -f /opt/flutter/bin/flutter ]; then
             mkdir -p "$target_dir" 2>/dev/null || true
             if [ ! -e "$target_dir/gen_snapshot" ]; then
                 ln -sf "$ENGINE_DIR/linux-arm64/gen_snapshot" "$target_dir/gen_snapshot" 2>/dev/null || true
-                echo "==> [TaiXu] 已链接原生 ARM64 gen_snapshot -> $target_dir/gen_snapshot"
+                echo "==> [Gulong] 已链接原生 ARM64 gen_snapshot -> $target_dir/gen_snapshot"
             fi
         done
     fi
 fi
 
 if [ ! -f /opt/flutter/bin/flutter ]; then
-    echo "!! [TaiXu] Flutter SDK 未就位，安装失败"
+    echo "!! [Gulong] Flutter SDK 未就位，安装失败"
     exit 1
 fi
-echo "==> [TaiXu] ✅ Flutter 跨端开发环境配置完成！"
+echo "==> [Gulong] ✅ Flutter 跨端开发环境配置完成！"

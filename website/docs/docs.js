@@ -1,10 +1,10 @@
-/* 太墟使用文档：侧边栏 / 目录 / 上一页下一页 / 搜索 / 主题 */
+/* 古龙使用文档：侧边栏 / 目录 / 上一页下一页 / 搜索 / 主题 */
 (function () {
   "use strict";
 
   // ---------- 页面注册表（顺序即上一页/下一页顺序） ----------
   var PAGES = [
-    { file: "index.html", group: "快速开始", title: "介绍：太墟是什么", keywords: "简介 理念 归墟 智枢 工坊 乾坤 入口 术语 rootfs mcp provider bot 工作流 概念" },
+    { file: "index.html", group: "快速开始", title: "介绍：古龙是什么", keywords: "简介 理念 归墟 智枢 工坊 乾坤 入口 术语 rootfs mcp provider bot 工作流 概念" },
     { file: "download.html", group: "快速开始", title: "下载与安装", keywords: "apk 安装 releases sha-256 未知来源 系统要求 android10 空间 升级 覆盖安装" },
     { file: "quickstart.html", group: "快速开始", title: "快速上手：第一条 AI 任务", keywords: "五分钟 新手 第一次 启程向导 rootfs ubuntu api key deepseek 第一条消息 发消息 任务" },
     { file: "providers.html", group: "模型与服务", title: "配置模型服务商", keywords: "服务商 provider base url api key 密钥 deepseek openai claude anthropic gemini 中转 ollama 本地模型 401 报错 chat completions responses messages" },

@@ -5,7 +5,7 @@
 解释器类（Context.interpreterClass），再用 Kit.newInstanceOrNull 对该 Class 直接调
 getDeclaredConstructor()——Kit 的 catch 列表不含 NPE。一旦 R8 把这个类改名或剥离，
 Class.forName 返回 null，脚本引擎在编译阶段就抛裸 NPE，codemode 在正式版上完全不可用。
-（历史事故：TaiXu v1.3.0 release 包，见 harness/consumer-rules.pro 的 keep 说明。）
+（历史事故：Gulong v1.3.0 release 包，见 harness/consumer-rules.pro 的 keep 说明。）
 
 同时，"混淆确实开着"必须一起校验：如果某次构建恰好把 minify 关掉，keep 类自然还在，
 校验会假绿。因此默认还要断言一个未 keep 的 Rhino 类（Context）在被混淆后已不存在。

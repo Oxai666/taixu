@@ -1,6 +1,6 @@
 #!/bin/sh
 # ==============================================================================
-# TaiXu - pinned Linux AArch64 NDK provisioner
+# Gulong - pinned Linux AArch64 NDK provisioner
 #
 # Installs lzhiyong/termux-ndk as an immutable, checksum-addressed artifact.
 # The upstream directory is intentionally named linux-x86_64 because AGP/NDK
@@ -31,14 +31,14 @@ LOCK_FILE="/opt/taixu/locks/android-toolchain.lock"
 
 mkdir -p /opt/taixu/locks "$TOOLCHAIN_ROOT/ndk/artifacts" "$SDK_HOME/ndk" /tmp
 
-if [ "${TAIXU_TOOLCHAIN_LOCK_HELD:-0}" != "1" ]; then
+if [ "${GULONG_TOOLCHAIN_LOCK_HELD:-0}" != "1" ]; then
     command -v flock >/dev/null 2>&1 || {
-        echo "!! [TaiXu] 缺少 flock，无法安全装配 Android 工具链"
+        echo "!! [Gulong] 缺少 flock，无法安全装配 Android 工具链"
         exit 1
     }
     exec 9>"$LOCK_FILE"
     flock -x -w 1800 9 || {
-        echo "!! [TaiXu] Android 工具链正被构建任务使用，等待超时"
+        echo "!! [Gulong] Android 工具链正被构建任务使用，等待超时"
         exit 1
     }
 fi
@@ -66,11 +66,11 @@ validate_ndk() {
 
 if ! validate_ndk "$NDK_PATH"; then
     if [ -e "$NDK_ARTIFACT_DIR" ]; then
-        echo "!! [TaiXu] ARM64 NDK 不可变制品发生完整性漂移，拒绝原位替换: $NDK_ARTIFACT_DIR"
-        echo "!! [TaiXu] 请先通过诊断/清理流程隔离损坏制品后再装配"
+        echo "!! [Gulong] ARM64 NDK 不可变制品发生完整性漂移，拒绝原位替换: $NDK_ARTIFACT_DIR"
+        echo "!! [Gulong] 请先通过诊断/清理流程隔离损坏制品后再装配"
         exit 1
     fi
-    echo "==> [TaiXu] 正在部署 lzhiyong/termux-ndk $NDK_RELEASE ($NDK_VERSION, Linux AArch64)..."
+    echo "==> [Gulong] 正在部署 lzhiyong/termux-ndk $NDK_RELEASE ($NDK_VERSION, Linux AArch64)..."
     archive="/tmp/$NDK_ARCHIVE_NAME"
     staging="/tmp/taixu-termux-ndk-staging.$$"
     pending="$TOOLCHAIN_ROOT/ndk/artifacts/.pending-$NDK_SHA256-$$"
@@ -79,19 +79,19 @@ if ! validate_ndk "$NDK_PATH"; then
 
     downloaded=0
     for url in $NDK_URLS; do
-        echo "==> [TaiXu] 尝试下载 ARM64 NDK: $url"
+        echo "==> [Gulong] 尝试下载 ARM64 NDK: $url"
         if curl -fL --retry 4 --retry-all-errors --connect-timeout 20 --max-time 1800 \
             "$url" -o "$archive" 2>/dev/null && [ -s "$archive" ]; then
             if echo "$NDK_SHA256  $archive" | sha256sum -c - >/dev/null 2>&1; then
                 downloaded=1
                 break
             fi
-            echo "!! [TaiXu] ARM64 NDK SHA-256 校验失败，切换镜像"
+            echo "!! [Gulong] ARM64 NDK SHA-256 校验失败，切换镜像"
             rm -f "$archive"
         fi
     done
     [ "$downloaded" -eq 1 ] || {
-        echo "!! [TaiXu] lzhiyong/termux-ndk 下载失败"
+        echo "!! [Gulong] lzhiyong/termux-ndk 下载失败"
         exit 1
     }
 
@@ -104,7 +104,7 @@ if ! validate_ndk "$NDK_PATH"; then
     '; then
         :
     else
-        echo "!! [TaiXu] ARM64 NDK 归档包含不安全路径"
+        echo "!! [Gulong] ARM64 NDK 归档包含不安全路径"
         rm -f "$archive"
         exit 1
     fi
@@ -114,14 +114,14 @@ if ! validate_ndk "$NDK_PATH"; then
     rm -f "$archive"
     source_properties=$(find "$staging" -mindepth 2 -maxdepth 4 -type f -name source.properties -print -quit 2>/dev/null || true)
     [ -n "$source_properties" ] || {
-        echo "!! [TaiXu] ARM64 NDK 归档缺少 source.properties"
+        echo "!! [Gulong] ARM64 NDK 归档缺少 source.properties"
         rm -rf "$staging"
         exit 1
     }
     extracted_ndk=$(dirname "$source_properties")
     chmod 755 "$extracted_ndk/toolchains/llvm/prebuilt/linux-x86_64/bin/"* 2>/dev/null || true
     validate_ndk "$extracted_ndk" || {
-        echo "!! [TaiXu] ARM64 NDK ELF、版本或运行验证失败"
+        echo "!! [Gulong] ARM64 NDK ELF、版本或运行验证失败"
         rm -rf "$staging"
         exit 1
     }
@@ -129,7 +129,7 @@ if ! validate_ndk "$NDK_PATH"; then
     mkdir -p "$pending"
     mv "$extracted_ndk" "$pending/ndk"
     validate_ndk "$pending/ndk" || {
-        echo "!! [TaiXu] ARM64 NDK staging 验证失败"
+        echo "!! [Gulong] ARM64 NDK staging 验证失败"
         rm -rf "$staging" "$pending"
         exit 1
     }
@@ -139,7 +139,7 @@ if ! validate_ndk "$NDK_PATH"; then
 fi
 
 validate_ndk "$NDK_PATH" || {
-    echo "!! [TaiXu] 固定 ARM64 NDK 不可用: $NDK_PATH"
+    echo "!! [Gulong] 固定 ARM64 NDK 不可用: $NDK_PATH"
     exit 1
 }
 
@@ -148,7 +148,7 @@ validate_ndk "$NDK_PATH" || {
 if [ -e "$NDK_SDK_VIEW" ] && [ ! -L "$NDK_SDK_VIEW" ]; then
     displaced="$SDK_HOME/ndk/.replaced-non-taixu-$NDK_VERSION-$(date +%s)"
     mv "$NDK_SDK_VIEW" "$displaced"
-    echo "==> [TaiXu] 已隔离同版本的非太墟 NDK: $displaced"
+    echo "==> [Gulong] 已隔离同版本的非古龙 NDK: $displaced"
 fi
 sdk_link_tmp="$SDK_HOME/ndk/.taixu-$NDK_VERSION-$$"
 rm -f "$sdk_link_tmp"
@@ -158,12 +158,12 @@ ln -sfn "$NDK_PATH" "$TOOLCHAIN_ROOT/ndk/current"
 
 env_tmp="${NDK_ENV_FILE}.tmp.$$"
 cat > "$env_tmp" << EOF
-export TAIXU_NDK_PATH="$NDK_PATH"
-export TAIXU_NDK_VERSION="$NDK_VERSION"
-export TAIXU_NDK_SHA256="$NDK_SHA256"
+export GULONG_NDK_PATH="$NDK_PATH"
+export GULONG_NDK_VERSION="$NDK_VERSION"
+export GULONG_NDK_SHA256="$NDK_SHA256"
 export ANDROID_NDK_HOME="$NDK_PATH"
 export ANDROID_NDK_ROOT="$NDK_PATH"
-export TAIXU_LLVM_STRIP_PATH="$NDK_PATH/toolchains/llvm/prebuilt/linux-x86_64/bin/llvm-strip"
+export GULONG_LLVM_STRIP_PATH="$NDK_PATH/toolchains/llvm/prebuilt/linux-x86_64/bin/llvm-strip"
 EOF
 mv -f "$env_tmp" "$NDK_ENV_FILE"
 
@@ -173,7 +173,7 @@ mv -f "$env_tmp" "$NDK_ENV_FILE"
 mkdir -p /root/.gradle/init.d
 init_tmp="/root/.gradle/init.d/taixu-android-ndk.gradle.tmp.$$"
 cat > "$init_tmp" << EOF
-// Managed by TaiXu. Local policy only; never downloaded from a remote catalog.
+// Managed by Gulong. Local policy only; never downloaded from a remote catalog.
 def taixuNdkPath = '$NDK_PATH'
 def taixuAndroidPluginIds = [
     'com.android.application',
@@ -189,7 +189,7 @@ gradle.beforeProject { project ->
             def androidExtension = project.extensions.findByName('android')
             if (androidExtension != null && androidExtension.hasProperty('ndkPath')) {
                 androidExtension.ndkPath = taixuNdkPath
-                project.logger.info("TaiXu ARM64 NDK: " + taixuNdkPath)
+                project.logger.info("Gulong ARM64 NDK: " + taixuNdkPath)
             }
         }
     }
@@ -202,7 +202,7 @@ gradle.projectsEvaluated {
             def effective = androidExtension.ndkPath == null ? '' : new File(androidExtension.ndkPath.toString()).canonicalPath
             def expected = new File(taixuNdkPath).canonicalPath
             if (effective != expected) {
-                throw new GradleException("TaiXu blocked Android NDK path drift: " + effective + " != " + expected)
+                throw new GradleException("Gulong blocked Android NDK path drift: " + effective + " != " + expected)
             }
         }
     }
@@ -210,4 +210,4 @@ gradle.projectsEvaluated {
 EOF
 mv -f "$init_tmp" /root/.gradle/init.d/taixu-android-ndk.gradle
 
-echo "==> [TaiXu] ✅ 固定 ARM64 NDK: $NDK_PATH"
+echo "==> [Gulong] ✅ 固定 ARM64 NDK: $NDK_PATH"

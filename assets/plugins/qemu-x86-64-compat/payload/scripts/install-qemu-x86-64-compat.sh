@@ -1,13 +1,13 @@
 #!/bin/sh
 set -eu
 
-PAYLOAD="${TAIXU_PLUGIN_PAYLOAD:?missing TAIXU_PLUGIN_PAYLOAD}"
+PAYLOAD="${GULONG_PLUGIN_PAYLOAD:?missing GULONG_PLUGIN_PAYLOAD}"
 ARCHIVES="$PAYLOAD/archives"
-TOOL_DIR="${TAIXU_TOOL_DIR:?missing TAIXU_TOOL_DIR}"
+TOOL_DIR="${GULONG_TOOL_DIR:?missing GULONG_TOOL_DIR}"
 COMPAT_ROOT="/opt/taixu/compat/x86_64"
 
 need() { test -s "$1" || { echo "missing offline resource: ${2:-$1}" >&2; exit 2; }; }
-progress() { percent="$1"; shift; printf '[TAIXU_PROGRESS:%s] %s\n' "$percent" "$*"; }
+progress() { percent="$1"; shift; printf '[GULONG_PROGRESS:%s] %s\n' "$percent" "$*"; }
 elf_bytes() { od -An -t x1 "$@" 2>/dev/null | tr -d ' \n'; }
 is_aarch64_elf() { test "$(elf_bytes -j 18 -N 2 "$1")" = "b700"; }
 is_x86_64_elf() { test "$(elf_bytes -j 18 -N 2 "$1")" = "3e00"; }

@@ -4,8 +4,8 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="theme-color" content="#fafafa">
-  <meta name="description" content="太墟工具与 MCP：内置工具一览、添加 MCP 服务器（STDIO / HTTP）、按需发现与 @ 提及、工具不可用排查清单。">
-  <title>工具与 MCP · 太墟使用文档</title>
+  <meta name="description" content="古龙工具与 MCP：内置工具一览、添加 MCP 服务器（STDIO / HTTP）、按需发现与 @ 提及、工具不可用排查清单。">
+  <title>工具与 MCP · 古龙使用文档</title>
   <link rel="icon" href="../assets/favicon.png">
   <script>(function(){try{var t=localStorage.getItem('taixu-theme');if(t!=='dark'&&t!=='light')t=matchMedia('(prefers-color-scheme: dark)').matches?'dark':'light';document.documentElement.setAttribute('data-theme',t);}catch(e){}})();</script>
   <link rel="stylesheet" href="../styles.css">
@@ -15,9 +15,9 @@
 <body>
   <a class="skip-link" href="#main">跳到主要内容</a>
   <header class="doc-header">
-    <a class="brand" href="../index.html" aria-label="返回太墟首页">
+    <a class="brand" href="../index.html" aria-label="返回古龙首页">
       <span class="brand-mark"><img src="../assets/taixu-logo.png" alt=""></span>
-      <span class="brand-name">太墟</span><span class="brand-roman">TAIXU</span>
+      <span class="brand-name">古龙</span><span class="brand-roman">GULONG</span>
     </a>
     <button class="doc-search-btn" type="button" data-search-open>
       <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><circle cx="11" cy="11" r="7"/><path d="m20 20-3.5-3.5"/></svg>
@@ -59,17 +59,17 @@
       <p>此外，AI 始终可以使用<strong>文件读写</strong>与<strong>命令执行</strong>（在 Linux 沙箱内）这两项基础能力。</p>
 
       <h2>什么是 MCP</h2>
-      <p>MCP（Model Context Protocol）是一个开放协议，让任意程序把自己「注册成 AI 的工具」。你可以把现成的 MCP 服务器接进太墟，比如文件系统、浏览器、笔记软件等社区工具。</p>
+      <p>MCP（Model Context Protocol）是一个开放协议，让任意程序把自己「注册成 AI 的工具」。你可以把现成的 MCP 服务器接进古龙，比如文件系统、浏览器、笔记软件等社区工具。</p>
 
       <h2>添加一个 MCP 服务器</h2>
       <ol class="steps">
         <li><b>拿到服务器配置</b><p>通常是一段 JSON 或两个关键信息：<strong>启动命令</strong>（STDIO 类型）或 <strong>URL</strong>（HTTP 类型）。</p></li>
-        <li><b>在太墟中添加</b><p>「乾坤 → MCP / 工具」中新增服务器：STDIO 类型填命令与参数（在 Linux 沙箱内运行）；HTTP 类型填地址，支持 Streamable HTTP 与旧版 SSE，需要登录的服务支持 OAuth。</p></li>
+        <li><b>在古龙中添加</b><p>「乾坤 → MCP / 工具」中新增服务器：STDIO 类型填命令与参数（在 Linux 沙箱内运行）；HTTP 类型填地址，支持 Streamable HTTP 与旧版 SSE，需要登录的服务支持 OAuth。</p></li>
         <li><b>启用并验证</b><p>保存后启用该服务器，回到智枢问一句「你现在有哪些工具？」，确认列表里出现了新工具。</p></li>
       </ol>
       <div class="callout callout-tip">
         <b>按需发现</b><br>
-        工具很多时不必担心：太墟支持按需发现，AI 会先查询有哪些工具、再挑选合适的调用，无需全部手动开启。
+        工具很多时不必担心：古龙支持按需发现，AI 会先查询有哪些工具、再挑选合适的调用，无需全部手动开启。
       </div>
 
       <h2>@ 提及：按轮裁剪工具</h2>
@@ -96,7 +96,7 @@
   </div>
 
   <footer class="doc-footer">
-    <p>© <span data-year></span> <a href="../index.html">太墟 TaiXu</a> · 问题与建议欢迎到 <a href="https://github.com/taixu-lab/taixu/issues" target="_blank" rel="noreferrer">GitHub Issues</a> 反馈</p>
+    <p>© <span data-year></span> <a href="../index.html">古龙 Gulong</a> · 问题与建议欢迎到 <a href="https://github.com/taixu-lab/taixu/issues" target="_blank" rel="noreferrer">GitHub Issues</a> 反馈</p>
   </footer>
 </body>
 </html>

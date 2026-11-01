@@ -77,13 +77,13 @@ def build_plugin():
         "schemaVersion": 1,
         "id": "rtk-suite-offline",
         "name": "RTK 终端命令优化器",
-        "description": "太墟内置 Agent 终端命令重写优化套件（ARM64 Linux 离线包），支持智能重写 git/cargo/find/grep 等命令并压缩输出，减少大体积结果的 Token 消耗。",
+        "description": "古龙内置 Agent 终端命令重写优化套件（ARM64 Linux 离线包），支持智能重写 git/cargo/find/grep 等命令并压缩输出，减少大体积结果的 Token 消耗。",
         "dependencies": [],
         "launchType": "command",
         "version": "1.0.0",
         "latestVersion": "1.0.0",
         "enabled": True,
-        "publisher": "TaiXu",
+        "publisher": "Gulong",
         "category": "DEVELOPER_TOOL",
         "architectures": ["ARM64"],
         "permissions": ["WORKSPACE_READ", "WORKSPACE_WRITE"],
@@ -92,12 +92,12 @@ def build_plugin():
         "offlineOnly": True,
         "installMethod": "LOCAL_PACKAGE",
         "installSteps": [
-            "/bin/sh \"$TAIXU_PLUGIN_PAYLOAD/scripts/install-rtk.sh\""
+            "/bin/sh \"$GULONG_PLUGIN_PAYLOAD/scripts/install-rtk.sh\""
         ],
         "uninstallSteps": [
-            "/bin/sh \"$TAIXU_PLUGIN_PAYLOAD/scripts/uninstall-rtk.sh\""
+            "/bin/sh \"$GULONG_PLUGIN_PAYLOAD/scripts/uninstall-rtk.sh\""
         ],
-        "verifyCommand": "/bin/sh \"$TAIXU_PLUGIN_PAYLOAD/scripts/verify-rtk.sh\"",
+        "verifyCommand": "/bin/sh \"$GULONG_PLUGIN_PAYLOAD/scripts/verify-rtk.sh\"",
         "launchCommand": "rtk --version",
         "commandLinks": ["rtk"],
         "environment": {
@@ -123,11 +123,11 @@ def build_plugin():
     install_script = """#!/bin/sh
 set -eu
 
-PAYLOAD="${TAIXU_PLUGIN_PAYLOAD:?missing TAIXU_PLUGIN_PAYLOAD}"
-TOOL_DIR="${TAIXU_TOOL_DIR:?missing TAIXU_TOOL_DIR}"
+PAYLOAD="${GULONG_PLUGIN_PAYLOAD:?missing GULONG_PLUGIN_PAYLOAD}"
+TOOL_DIR="${GULONG_TOOL_DIR:?missing GULONG_TOOL_DIR}"
 
 need() { test -s "$1" || { echo "missing offline resource: ${2:-$1}" >&2; exit 2; }; }
-progress() { percent="$1"; shift; printf '[TAIXU_PROGRESS:%s] %s\\n' "$percent" "$*"; }
+progress() { percent="$1"; shift; printf '[GULONG_PROGRESS:%s] %s\\n' "$percent" "$*"; }
 
 need "$PAYLOAD/checksums/SHA256SUMS"
 need "$PAYLOAD/bin/rtk"
@@ -157,7 +157,7 @@ progress 100 "[VERIFY] RTK 终端命令优化插件已就绪"
     uninstall_script = """#!/bin/sh
 set -eu
 
-TOOL_DIR="${TAIXU_TOOL_DIR:?missing TAIXU_TOOL_DIR}"
+TOOL_DIR="${GULONG_TOOL_DIR:?missing GULONG_TOOL_DIR}"
 
 rm -f /opt/taixu/bin/rtk
 rm -f "$TOOL_DIR/bin/rtk"

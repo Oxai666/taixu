@@ -1,11 +1,11 @@
 #!/bin/sh
 # ==============================================================================
-# TaiXu (LinuxAIRuntime) - Rust & Android JNI Cross Compilation Suite Setup
+# Gulong (LinuxAIRuntime) - Rust & Android JNI Cross Compilation Suite Setup
 # 支持 Rust ARM64 独立开发包拉取、aarch64-linux-android 交叉编译目标库与 NDK Linker 预绑定
 # ==============================================================================
 set -e
 
-echo "==> [TaiXu] 正在初始化 Rust & Android JNI 交叉编译开发环境..."
+echo "==> [Gulong] 正在初始化 Rust & Android JNI 交叉编译开发环境..."
 
 RUST_HOME="/opt/taixu/toolchains/rust"
 mkdir -p "$RUST_HOME" /usr/local/bin /usr/bin /tmp /root/.cargo 2>/dev/null || true
@@ -24,9 +24,9 @@ https://static.rust-lang.org/dist/rust-std-${RUST_VERSION}-aarch64-linux-android
 download_rust_core() {
     rm -f /tmp/rust-core.tar.gz
     for url in $RUST_DIST_URLS; do
-        echo "==> [TaiXu] 正在拉取 Rust ${RUST_VERSION} ARM64 工具链 ($url)..."
+        echo "==> [Gulong] 正在拉取 Rust ${RUST_VERSION} ARM64 工具链 ($url)..."
         if curl -fsSL -m 300 "$url" -o /tmp/rust-core.tar.gz 2>/dev/null && [ -s /tmp/rust-core.tar.gz ]; then
-            echo "==> [TaiXu] 正在安装 Rust 独立开发包到 $RUST_HOME..."
+            echo "==> [Gulong] 正在安装 Rust 独立开发包到 $RUST_HOME..."
             rm -rf /tmp/taixu-rust-core
             mkdir -p /tmp/taixu-rust-core
             tar -xzf /tmp/rust-core.tar.gz -C /tmp/taixu-rust-core --strip-components=1
@@ -45,7 +45,7 @@ download_rust_core() {
 download_rust_android_target() {
     rm -f /tmp/rust-android.tar.gz
     for url in $RUST_STD_ANDROID_URLS; do
-        echo "==> [TaiXu] 正在拉取 Rust aarch64-linux-android 交叉编译目标库 ($url)..."
+        echo "==> [Gulong] 正在拉取 Rust aarch64-linux-android 交叉编译目标库 ($url)..."
         if curl -fsSL -m 180 "$url" -o /tmp/rust-android.tar.gz 2>/dev/null && [ -s /tmp/rust-android.tar.gz ]; then
             rm -rf /tmp/taixu-rust-android
             mkdir -p /tmp/taixu-rust-android
@@ -62,7 +62,7 @@ download_rust_android_target() {
 
 if [ ! -x "$RUST_HOME/bin/rustc" ] || [ ! -x "$RUST_HOME/bin/cargo" ]; then
     if ! download_rust_core; then
-        echo "==> [TaiXu] ⚠️ 独立 Rust 归档拉取受限，尝试通过 rustup 快速装配..."
+        echo "==> [Gulong] ⚠️ 独立 Rust 归档拉取受限，尝试通过 rustup 快速装配..."
         export RUSTUP_DIST_SERVER=https://mirrors.tuna.tsinghua.edu.cn/rustup
         export RUSTUP_UPDATE_ROOT=https://mirrors.tuna.tsinghua.edu.cn/rustup/rustup
         curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | sh -s -- -y --profile minimal --default-toolchain stable
@@ -99,11 +99,11 @@ done
 # 写入持久化环境变量
 mkdir -p /etc/profile.d
 cat << 'EOF' > /etc/profile.d/taixu-rust.sh
-# TaiXu Rust development environment
+# Gulong Rust development environment
 export RUSTUP_HOME="/opt/taixu/toolchains/rust"
 export CARGO_HOME="/root/.cargo"
 export PATH="/opt/taixu/toolchains/rust/bin:/opt/taixu/bin:$PATH"
 EOF
 chmod 644 /etc/profile.d/taixu-rust.sh 2>/dev/null || true
 
-echo "==> [TaiXu] ✅ Rust & Android JNI 交叉编译开发环境配置完成！"
+echo "==> [Gulong] ✅ Rust & Android JNI 交叉编译开发环境配置完成！"

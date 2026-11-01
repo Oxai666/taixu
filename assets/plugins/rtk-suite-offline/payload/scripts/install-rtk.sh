@@ -1,11 +1,11 @@
 #!/bin/sh
 set -eu
 
-PAYLOAD="${TAIXU_PLUGIN_PAYLOAD:?missing TAIXU_PLUGIN_PAYLOAD}"
-TOOL_DIR="${TAIXU_TOOL_DIR:?missing TAIXU_TOOL_DIR}"
+PAYLOAD="${GULONG_PLUGIN_PAYLOAD:?missing GULONG_PLUGIN_PAYLOAD}"
+TOOL_DIR="${GULONG_TOOL_DIR:?missing GULONG_TOOL_DIR}"
 
 need() { test -s "$1" || { echo "missing offline resource: ${2:-$1}" >&2; exit 2; }; }
-progress() { percent="$1"; shift; printf '[TAIXU_PROGRESS:%s] %s\n' "$percent" "$*"; }
+progress() { percent="$1"; shift; printf '[GULONG_PROGRESS:%s] %s\n' "$percent" "$*"; }
 
 need "$PAYLOAD/checksums/SHA256SUMS"
 need "$PAYLOAD/bin/rtk"

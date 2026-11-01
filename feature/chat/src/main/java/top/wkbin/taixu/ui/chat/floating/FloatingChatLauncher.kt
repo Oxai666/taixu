@@ -30,7 +30,7 @@ import top.wkbin.taixu.ui.components.RuntimeTextButton
 
 /** Keeps permission/result state alive when the workbench sheet closes. */
 @Composable
-internal fun rememberFloatingChatLauncher(): (() -> Unit)? {
+fun rememberFloatingChatLauncher(): (() -> Unit)? {
     val context = LocalContext.current
     val activity = floatingChatActivity(context) ?: return null
     val lifecycle = LocalLifecycleOwner.current.lifecycle

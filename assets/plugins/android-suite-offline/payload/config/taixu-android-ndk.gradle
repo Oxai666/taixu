@@ -1,6 +1,6 @@
-// Managed by TaiXu. Prefer the active toolchain environment and fall back to
+// Managed by Gulong. Prefer the active toolchain environment and fall back to
 // the standard local offline-suite path.
-def taixuNdkPath = System.getenv('TAIXU_NDK_PATH') ?:
+def taixuNdkPath = System.getenv('GULONG_NDK_PATH') ?:
     System.getenv('ANDROID_NDK_HOME') ?:
     '/opt/taixu/toolchains/android/ndk'
 def taixuNdkProperties = new Properties()
@@ -23,7 +23,7 @@ gradle.beforeProject { project ->
             def androidExtension = project.extensions.findByName('android')
             if (androidExtension != null && androidExtension.hasProperty('ndkPath')) {
                 androidExtension.ndkPath = taixuNdkPath
-                project.logger.info('TaiXu ARM64 NDK: ' + taixuNdkPath)
+                project.logger.info('Gulong ARM64 NDK: ' + taixuNdkPath)
             }
         }
     }
@@ -38,13 +38,13 @@ gradle.projectsEvaluated {
             def expected = new File(taixuNdkPath).canonicalPath
             if (effective != expected) {
                 throw new GradleException(
-                    'TaiXu blocked Android NDK path drift: ' + effective + ' != ' + expected
+                    'Gulong blocked Android NDK path drift: ' + effective + ' != ' + expected
                 )
             }
             if (taixuNdkVersion && androidExtension.hasProperty('ndkVersion')) {
                 def declared = androidExtension.ndkVersion == null ? '' : androidExtension.ndkVersion.toString()
             if (declared && taixuNdkVersion && declared != taixuNdkVersion) {
-                project.logger.warn('TaiXu aligning project NDK version ' + declared + ' -> ' + taixuNdkVersion)
+                project.logger.warn('Gulong aligning project NDK version ' + declared + ' -> ' + taixuNdkVersion)
                 androidExtension.ndkVersion = taixuNdkVersion
             }
             }
@@ -60,9 +60,9 @@ gradle.projectsEvaluated {
                 if (abiFilters.isEmpty()) {
                     abiFilters.add('arm64-v8a')
                 }
-                project.logger.info('TaiXu ARM64 ABI filters: ' + abiFilters)
+                project.logger.info('Gulong ARM64 ABI filters: ' + abiFilters)
             } catch (Throwable t) {
-                project.logger.warn('TaiXu ABI filter injection skipped: ' + t.message)
+                project.logger.warn('Gulong ABI filter injection skipped: ' + t.message)
             }
         }
     }

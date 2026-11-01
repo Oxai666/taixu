@@ -1,5 +1,5 @@
 /*
- * TaiXu 注入式 hook 运行时（阶段 1）。
+ * Gulong 注入式 hook 运行时（阶段 1）。
  *
  * 约束：ES5 语法（无反引号 / 无模板字符串 / 无箭头函数 / 无 let-const），
  * 单 IIFE，幂等（window.__taixuHooks 守卫），仅顶层 frame。

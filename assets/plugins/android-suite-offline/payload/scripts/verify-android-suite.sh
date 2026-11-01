@@ -47,7 +47,7 @@ if is_aarch64_elf /opt/taixu/bin/adb; then
     :
 else
     # /opt/taixu/bin/adb 为智能连接包装脚本，校验底层真实 ELF
-    REAL_ADB="${TAIXU_TOOL_DIR:-/opt/taixu/tools/android-suite-offline}/bin/adb"
+    REAL_ADB="${GULONG_TOOL_DIR:-/opt/taixu/tools/android-suite-offline}/bin/adb"
     test -x "$REAL_ADB" || REAL_ADB="/opt/android-sdk/platform-tools/adb"
     require_executable "$REAL_ADB"
     require_aarch64 "$REAL_ADB"
@@ -114,4 +114,4 @@ if [ -f /opt/taixu/bin/zipalign ]; then
     require_aarch64 /opt/taixu/bin/zipalign
 fi
 
-echo "TaiXu Android ARM64 offline suite is ready"
+echo "Gulong Android ARM64 offline suite is ready"

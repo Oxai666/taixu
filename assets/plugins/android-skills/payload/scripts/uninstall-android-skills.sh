@@ -1,16 +1,16 @@
 #!/bin/sh
-# 太墟本地插件 · Android CLI 与官方技能（android-skills）卸载脚本
+# 古龙本地插件 · Android CLI 与官方技能（android-skills）卸载脚本
 #
 # 只清理本插件下发的文件：
 #   - android 包装层与引导器（工具目录由安装框架随后整体删除）
 #   - /opt/taixu/bin/android 命令入口
 #   - /attachments/skills/android-skills/ 技能集合（绝不触碰用户其它技能）
-# 保留 $TAIXU_TOOL_DATA：其中的 android-user-home 是 CLI 运行时缓存
+# 保留 $GULONG_TOOL_DATA：其中的 android-user-home 是 CLI 运行时缓存
 #（解包后的 main.jar 与 JRE，约 70 MB）。需要释放空间时请显式删除该目录。
 set -eu
 
-TOOL_DIR="${TAIXU_TOOL_DIR:-/opt/taixu/tools/android-skills}"
-TOOL_DATA="${TAIXU_TOOL_DATA:-/opt/taixu/data/android-skills}"
+TOOL_DIR="${GULONG_TOOL_DIR:-/opt/taixu/tools/android-skills}"
+TOOL_DATA="${GULONG_TOOL_DATA:-/opt/taixu/data/android-skills}"
 
 rm -f /opt/taixu/bin/android
 rm -f "$TOOL_DIR/bin/android"

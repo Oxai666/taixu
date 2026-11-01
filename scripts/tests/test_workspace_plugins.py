@@ -163,8 +163,8 @@ class RetrievalTests(unittest.TestCase):
     def test_offline_install_and_installed_runtime(self):
         tool = self.base / 'installed'
         payload = LIB.parent
-        environment = {**os.environ, 'TAIXU_TOOL_DIR': str(tool),
-                       'TAIXU_PLUGIN_PAYLOAD': str(payload)}
+        environment = {**os.environ, 'GULONG_TOOL_DIR': str(tool),
+                       'GULONG_PLUGIN_PAYLOAD': str(payload)}
         subprocess.run(['/bin/sh', str(payload / 'scripts/install.sh')],
                        env=environment, check=True, capture_output=True)
         self.assertTrue(os.access(tool / 'bin/local-rag', os.X_OK))

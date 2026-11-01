@@ -1,18 +1,18 @@
 #!/bin/sh
 # ==============================================================================
-# TaiXu (LinuxAIRuntime) - JADX-CLI Reverse Engineering Suite Setup
+# Gulong (LinuxAIRuntime) - JADX-CLI Reverse Engineering Suite Setup
 # 加固版：多镜像重试下载、解包产物完整性校验（bin + lib）、Java 运行时预检。
 # ==============================================================================
 set -e
 
-echo "==> [TaiXu] 正在初始化 JADX-CLI 逆向审计工具包..."
+echo "==> [Gulong] 正在初始化 JADX-CLI 逆向审计工具包..."
 
 mkdir -p /opt/jadx /usr/local/bin /usr/bin /tmp 2>/dev/null || true
 
 # Use the APK-bundled JDK-jar unzip adapter when the rootfs has no native
 # unzip/BusyBox. This keeps reverse-engineering setup independent of dpkg.
-if ! command -v unzip >/dev/null 2>&1 && [ -x "${TAIXU_TOOL_DIR:-/opt/taixu/tools}/unzip" ]; then
-    ln -sf "${TAIXU_TOOL_DIR:-/opt/taixu/tools}/unzip" /usr/local/bin/unzip 2>/dev/null || true
+if ! command -v unzip >/dev/null 2>&1 && [ -x "${GULONG_TOOL_DIR:-/opt/taixu/tools}/unzip" ]; then
+    ln -sf "${GULONG_TOOL_DIR:-/opt/taixu/tools}/unzip" /usr/local/bin/unzip 2>/dev/null || true
     export PATH="/usr/local/bin:/usr/bin:$PATH"
 fi
 
@@ -29,17 +29,17 @@ if command -v java >/dev/null 2>&1 || [ -x /usr/lib/jvm/java-17-openjdk-arm64/bi
     JAVA_OK=1
 fi
 if [ "$JAVA_OK" -ne 1 ]; then
-    echo "==> [TaiXu] ⚠️ 未检测到 Java 运行时，JADX 需要 JVM 才能运行。"
-    echo "==> [TaiXu] 💡 请确保已装配「Android & 移动全栈开发套件 → Android 核心基础环境」(OpenJDK 17)。"
+    echo "==> [Gulong] ⚠️ 未检测到 Java 运行时，JADX 需要 JVM 才能运行。"
+    echo "==> [Gulong] 💡 请确保已装配「Android & 移动全栈开发套件 → Android 核心基础环境」(OpenJDK 17)。"
 fi
 
 # 下载 + 解压（含产物校验，失败自动重试一轮）
 download_and_extract() {
     rm -f /tmp/jadx.zip
     for url in $JADX_URLS; do
-        echo "==> [TaiXu] 正在拉取 JADX-CLI ${JADX_VERSION} ($url)..."
+        echo "==> [Gulong] 正在拉取 JADX-CLI ${JADX_VERSION} ($url)..."
         if curl -fsSL -m 300 "$url" -o /tmp/jadx.zip 2>/dev/null && [ -s /tmp/jadx.zip ]; then
-            echo "==> [TaiXu] 下载完成 ($(wc -c < /tmp/jadx.zip) 字节)，正在解压到 /opt/jadx/..."
+            echo "==> [Gulong] 下载完成 ($(wc -c < /tmp/jadx.zip) 字节)，正在解压到 /opt/jadx/..."
             rm -rf /opt/jadx/bin /opt/jadx/lib
             if (unzip -qo /tmp/jadx.zip -d /opt/jadx/ 2>/dev/null || \
                 python3 -c 'import zipfile; zipfile.ZipFile("/tmp/jadx.zip").extractall("/opt/jadx/")' 2>/dev/null || \
@@ -49,7 +49,7 @@ download_and_extract() {
                     rm -f /tmp/jadx.zip
                     return 0
                 fi
-                echo "==> [TaiXu] ⚠️ 解压产物不完整 (缺少 bin/jadx 或 lib/jadx-*.jar)，尝试下一个镜像..."
+                echo "==> [Gulong] ⚠️ 解压产物不完整 (缺少 bin/jadx 或 lib/jadx-*.jar)，尝试下一个镜像..."
             fi
             rm -f /tmp/jadx.zip
         fi
@@ -59,7 +59,7 @@ download_and_extract() {
 
 if [ ! -x /opt/jadx/bin/jadx ] || ! ls /opt/jadx/lib/jadx-*.jar >/dev/null 2>&1; then
     if ! download_and_extract; then
-        echo "==> [TaiXu] ❌ JADX 下载失败：所有镜像均不可用，请检查网络后重新装配（可稍后在终端执行 /bin/sh /opt/taixu/scripts/setup_jadx.sh 重试）"
+        echo "==> [Gulong] ❌ JADX 下载失败：所有镜像均不可用，请检查网络后重新装配（可稍后在终端执行 /bin/sh /opt/taixu/scripts/setup_jadx.sh 重试）"
         exit 1
     fi
 fi
@@ -69,7 +69,7 @@ if [ -f /opt/jadx/bin/jadx ]; then
     chmod +x /opt/jadx/bin/jadx 2>/dev/null || true
     ln -sf /opt/jadx/bin/jadx /usr/local/bin/jadx 2>/dev/null || true
     ln -sf /opt/jadx/bin/jadx /usr/bin/jadx 2>/dev/null || true
-    echo "==> [TaiXu] JADX-CLI 软链接配置就绪 ($(ls /opt/jadx/lib/jadx-*.jar 2>/dev/null | head -1))"
+    echo "==> [Gulong] JADX-CLI 软链接配置就绪 ($(ls /opt/jadx/lib/jadx-*.jar 2>/dev/null | head -1))"
 fi
 
-echo "==> [TaiXu] ✅ JADX 逆向分析工具包配置完成！"
+echo "==> [Gulong] ✅ JADX 逆向分析工具包配置完成！"

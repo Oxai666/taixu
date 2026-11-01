@@ -47,7 +47,7 @@ guest() {
         "PROOT_TMP_DIR=$location" "TMPDIR=$location" "PROOT_L2S_DIR=$rootfs/.l2s"
     [ "$mode" != disabled ] || set -- "$@" PROOT_NO_SECCOMP=1
     timeout -s KILL 20 env "$@" "$proot" --kill-on-exit --link2symlink -L --sysvipc \
-        --kernel-release=6.17.0-TaiXu --change-id=0:0 -r "$rootfs" \
+        --kernel-release=6.17.0-Gulong --change-id=0:0 -r "$rootfs" \
         -b /dev -b /proc -b /sys -b /system -b /apex \
         -b "$rootfs/.l2s:$rootfs/.l2s" -b "$cache/data:/workspace" \
         -b "$location:/tmp" -w /workspace /bin/sh -c "$workload"

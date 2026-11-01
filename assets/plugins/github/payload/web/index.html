@@ -1,7 +1,7 @@
 <!doctype html>
 <html lang="zh-CN"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
-<title>GitHub · 太墟</title><link rel="stylesheet" href="theme.css"><link rel="stylesheet" href="app.css"><script src="app.js" defer></script></head>
-<body><main><header><span class="badge">TAIXU / GITHUB</span><h1>代码，从这里连接。</h1><p>连接账号、配置 SSH，在手机上完成 Git 与 PR 工作流。</p></header>
+<title>GitHub · 古龙</title><link rel="stylesheet" href="theme.css"><link rel="stylesheet" href="app.css"><script src="app.js" defer></script></head>
+<body><main><header><span class="badge">GULONG / GITHUB</span><h1>代码，从这里连接。</h1><p>连接账号、配置 SSH，在手机上完成 Git 与 PR 工作流。</p></header>
 <div id="notice" role="status">正在连接插件服务…请先在工具中心启动 GitHub 服务，关闭本页面不会停止后台任务。</div>
 <section><h2>01　连接 GitHub</h2><p id="account">尚未读取连接状态</p>
 <label>Personal access token<input id="token" type="password" autocomplete="off" placeholder="github_pat_… 或 ghp_…"></label>
@@ -19,4 +19,4 @@
 <button data-action="repo/commit-push">创建新分支、提交全部修改并推送</button><p class="hint">此操作会包含该仓库中全部未忽略的修改。执行前请检查文件；推送失败会保留本地分支和提交，可在终端继续处理。</p></section>
 <section><h2>05　创建 Pull Request</h2><label>PR 标题<input id="title" maxlength="150"></label><label>变更说明<textarea id="body" rows="4" maxlength="450"></textarea></label><button data-action="pr/create">为当前分支创建 PR</button></section>
 <section><h2>操作结果</h2><pre id="result" aria-live="polite">还没有执行操作。</pre></section>
-<footer>插件页面通过太墟消息桥调用绑定服务。写操作需要原生确认；Token、私钥不回传到页面。</footer></main></body></html>
+<footer>插件页面通过古龙消息桥调用绑定服务。写操作需要原生确认；Token、私钥不回传到页面。</footer></main></body></html>

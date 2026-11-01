@@ -8,16 +8,16 @@ FLUTTER_HOME="$COMPAT_ROOT/flutter"
 JAVA_HOME="$COMPAT_ROOT/jdk-17"
 ANDROID_HOME="$COMPAT_ROOT/android-sdk"
 
-[ "$(uname -m)" = "x86_64" ] || { echo "==> [TaiXu QEMU Flutter] ❌ 当前并非 x86_64 QEMU Guest"; exit 126; }
-[ -x "$JAVA_HOME/bin/java" ] || { echo "==> [TaiXu QEMU Flutter] ❌ 缺少 $JAVA_HOME/bin/java"; exit 127; }
+[ "$(uname -m)" = "x86_64" ] || { echo "==> [Gulong QEMU Flutter] ❌ 当前并非 x86_64 QEMU Guest"; exit 126; }
+[ -x "$JAVA_HOME/bin/java" ] || { echo "==> [Gulong QEMU Flutter] ❌ 缺少 $JAVA_HOME/bin/java"; exit 127; }
 java_lib=$(find "$JAVA_HOME" \( -type f -o -type l \) -name libjvm.so -print -quit 2>/dev/null || true)
-[ -n "$java_lib" ] || { echo "==> [TaiXu QEMU Flutter] ❌ 未找到 JVM 原生库 (libjvm.so)"; exit 126; }
+[ -n "$java_lib" ] || { echo "==> [Gulong QEMU Flutter] ❌ 未找到 JVM 原生库 (libjvm.so)"; exit 126; }
 machine=$(od -An -t x1 -j 18 -N 2 "$java_lib" 2>/dev/null | tr -d '[:space:]')
-[ "$machine" = "3e00" ] || { echo "==> [TaiXu QEMU Flutter] ❌ JDK 不是 x86_64 ELF: $JAVA_HOME/bin/java"; exit 126; }
+[ "$machine" = "3e00" ] || { echo "==> [Gulong QEMU Flutter] ❌ JDK 不是 x86_64 ELF: $JAVA_HOME/bin/java"; exit 126; }
 for binary in "$FLUTTER_HOME/bin/cache/dart-sdk/bin/dart" "$ANDROID_HOME/build-tools/35.0.0/aapt2"; do
-    [ -x "$binary" ] || { echo "==> [TaiXu QEMU Flutter] ❌ 缺少 $binary"; exit 127; }
+    [ -x "$binary" ] || { echo "==> [Gulong QEMU Flutter] ❌ 缺少 $binary"; exit 127; }
     machine=$(od -An -t x1 -j 18 -N 2 "$binary" 2>/dev/null | tr -d '[:space:]')
-    [ "$machine" = "3e00" ] || { echo "==> [TaiXu QEMU Flutter] ❌ 主机工具不是 x86_64 ELF: $binary"; exit 126; }
+    [ "$machine" = "3e00" ] || { echo "==> [Gulong QEMU Flutter] ❌ 主机工具不是 x86_64 ELF: $binary"; exit 126; }
 done
 
 export JAVA_HOME ANDROID_HOME
@@ -43,14 +43,14 @@ fi
 printf 'sdk.dir=%s\nflutter.sdk=%s\n' "$ANDROID_HOME" "$FLUTTER_HOME" >> "$TMP_PROPERTIES"
 mv -f "$TMP_PROPERTIES" "$LOCAL_PROPERTIES"
 
-echo "==> [TaiXu QEMU Flutter] 拉取 Dart 依赖"
-if [ "${TAIXU_OFFLINE:-0}" = "1" ]; then
+echo "==> [Gulong QEMU Flutter] 拉取 Dart 依赖"
+if [ "${GULONG_OFFLINE:-0}" = "1" ]; then
     "$FLUTTER_HOME/bin/flutter" pub get --offline --verbose
 else
     "$FLUTTER_HOME/bin/flutter" pub get --verbose
 fi
-echo "==> [TaiXu QEMU Flutter] 构建 Android ARM64 APK"
-if [ "${TAIXU_OFFLINE:-0}" = "1" ]; then
+echo "==> [Gulong QEMU Flutter] 构建 Android ARM64 APK"
+if [ "${GULONG_OFFLINE:-0}" = "1" ]; then
     exec "$FLUTTER_HOME/bin/flutter" build apk --debug --target-platform android-arm64 --offline --verbose
 else
     exec "$FLUTTER_HOME/bin/flutter" build apk --debug --target-platform android-arm64 --verbose

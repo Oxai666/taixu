@@ -1,6 +1,6 @@
 #!/bin/sh
 # ==============================================================================
-# TaiXu (LinuxAIRuntime) - Self-Adaptive Gradle Wrapper
+# Gulong (LinuxAIRuntime) - Self-Adaptive Gradle Wrapper
 # ==============================================================================
 DIR="$(cd "$(dirname "$0")" && pwd)"
 

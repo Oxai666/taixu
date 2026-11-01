@@ -1,5 +1,5 @@
 #!/bin/sh
-# 太墟本地插件 · Android CLI 与官方技能（android-skills）安装配方
+# 古龙本地插件 · Android CLI 与官方技能（android-skills）安装配方
 #
 # 设计要点（均为实测结论，详见 UPSTREAM.md 与 docs/ANDROID_SKILLS_PLUGIN.md）：
 #   - linux_arm64/android 只是引导器（约 3.97 MiB），缺少 android-cli 时会联网下载
@@ -7,12 +7,12 @@
 #   - 首次运行会就地解包内嵌安装（main.jar + 自带 JRE，约 70 MB）到
 #     $ANDROID_USER_HOME/cli/bundles/<sha>/；该解包不联网，因此这里主动触发一次，
 #     避免把耗时算进 60 秒超时的 verifyCommand。
-#   - 33 个官方技能落到 /attachments/skills/android-skills/，即太墟技能自动发现的扫描根。
+#   - 33 个官方技能落到 /attachments/skills/android-skills/，即古龙技能自动发现的扫描根。
 set -eu
 
-PAYLOAD="${TAIXU_PLUGIN_PAYLOAD:?missing TAIXU_PLUGIN_PAYLOAD}"
-TOOL_DIR="${TAIXU_TOOL_DIR:?missing TAIXU_TOOL_DIR}"
-TOOL_DATA="${TAIXU_TOOL_DATA:?missing TAIXU_TOOL_DATA}"
+PAYLOAD="${GULONG_PLUGIN_PAYLOAD:?missing GULONG_PLUGIN_PAYLOAD}"
+TOOL_DIR="${GULONG_TOOL_DIR:?missing GULONG_TOOL_DIR}"
+TOOL_DATA="${GULONG_TOOL_DATA:?missing GULONG_TOOL_DATA}"
 
 ANDROID_USER_HOME_DIR="$TOOL_DATA/android-user-home"
 SKILLS_ROOT="/attachments/skills"
@@ -21,7 +21,7 @@ SKILLS_STAGING="$SKILLS_ROOT/android-skills.staging"
 SKILLS_PREVIOUS="$SKILLS_ROOT/android-skills.previous"
 MIN_SKILL_COUNT=33
 
-progress() { printf '[TAIXU_PROGRESS:%s] %s\n' "$1" "$2"; }
+progress() { printf '[GULONG_PROGRESS:%s] %s\n' "$1" "$2"; }
 fail() { echo "$1" >&2; exit 1; }
 need() { test -s "$1" || fail "missing offline resource: ${2:-$1}"; }
 

@@ -1,7 +1,7 @@
 #!/bin/sh
 set -eu
 
-TOOL_DIR="${TAIXU_TOOL_DIR:-/opt/taixu/tools/cc-switch}"
+TOOL_DIR="${GULONG_TOOL_DIR:-/opt/taixu/tools/cc-switch}"
 
 # 1. Verify executable wrapper exists
 if [ ! -f "/opt/taixu/bin/cc-switch-daemon" ] && [ ! -f "$TOOL_DIR/bin/cc-switch-daemon" ]; then

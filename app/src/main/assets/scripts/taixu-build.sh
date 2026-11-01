@@ -6,28 +6,28 @@ workshop_android_home="${ANDROID_HOME:-}"
 workshop_android_sdk_root="${ANDROID_SDK_ROOT:-}"
 workshop_gradle_home="${GRADLE_HOME:-}"
 workshop_flutter_home="${FLUTTER_HOME:-}"
-workshop_ndk_path="${TAIXU_NDK_PATH:-}"
+workshop_ndk_path="${GULONG_NDK_PATH:-}"
 workshop_android_ndk_home="${ANDROID_NDK_HOME:-}"
-workshop_aapt2_path="${TAIXU_AAPT2_PATH:-}"
-workshop_cmake_home="${TAIXU_CMAKE_HOME:-}"
-workshop_ninja_home="${TAIXU_NINJA_HOME:-}"
+workshop_aapt2_path="${GULONG_AAPT2_PATH:-}"
+workshop_cmake_home="${GULONG_CMAKE_HOME:-}"
+workshop_ninja_home="${GULONG_NINJA_HOME:-}"
 workshop_gradle_user_home="${GRADLE_USER_HOME:-}"
 workshop_pub_cache="${PUB_CACHE:-}"
-workshop_tool_dir="${TAIXU_TOOL_DIR:-}"
+workshop_tool_dir="${GULONG_TOOL_DIR:-}"
 if test -f /etc/profile.d/taixu-android.sh; then . /etc/profile.d/taixu-android.sh; fi
 test -z "$workshop_java_home" || JAVA_HOME="$workshop_java_home"
 test -z "$workshop_android_home" || ANDROID_HOME="$workshop_android_home"
 test -z "$workshop_android_sdk_root" || ANDROID_SDK_ROOT="$workshop_android_sdk_root"
 test -z "$workshop_gradle_home" || GRADLE_HOME="$workshop_gradle_home"
 test -z "$workshop_flutter_home" || FLUTTER_HOME="$workshop_flutter_home"
-test -z "$workshop_ndk_path" || TAIXU_NDK_PATH="$workshop_ndk_path"
+test -z "$workshop_ndk_path" || GULONG_NDK_PATH="$workshop_ndk_path"
 test -z "$workshop_android_ndk_home" || ANDROID_NDK_HOME="$workshop_android_ndk_home"
-test -z "$workshop_aapt2_path" || TAIXU_AAPT2_PATH="$workshop_aapt2_path"
-test -z "$workshop_cmake_home" || TAIXU_CMAKE_HOME="$workshop_cmake_home"
-test -z "$workshop_ninja_home" || TAIXU_NINJA_HOME="$workshop_ninja_home"
+test -z "$workshop_aapt2_path" || GULONG_AAPT2_PATH="$workshop_aapt2_path"
+test -z "$workshop_cmake_home" || GULONG_CMAKE_HOME="$workshop_cmake_home"
+test -z "$workshop_ninja_home" || GULONG_NINJA_HOME="$workshop_ninja_home"
 test -z "$workshop_gradle_user_home" || GRADLE_USER_HOME="$workshop_gradle_user_home"
 test -z "$workshop_pub_cache" || PUB_CACHE="$workshop_pub_cache"
-test -z "$workshop_tool_dir" || TAIXU_TOOL_DIR="$workshop_tool_dir"
+test -z "$workshop_tool_dir" || GULONG_TOOL_DIR="$workshop_tool_dir"
 if test -z "${JAVA_HOME:-}" && test -x /opt/taixu/toolchains/android/jdk/bin/java; then
     JAVA_HOME=/opt/taixu/toolchains/android/jdk
 elif test -z "${JAVA_HOME:-}"; then
@@ -37,36 +37,36 @@ ANDROID_HOME="${ANDROID_HOME:-/opt/android-sdk}"
 ANDROID_SDK_ROOT="${ANDROID_SDK_ROOT:-$ANDROID_HOME}"
 GRADLE_HOME="${GRADLE_HOME:-/opt/gradle-8.14.2}"
 FLUTTER_HOME="${FLUTTER_HOME:-/opt/flutter}"
-if [ -z "${TAIXU_CMAKE_HOME:-}" ] || [ ! -x "$TAIXU_CMAKE_HOME/bin/cmake" ]; then
+if [ -z "${GULONG_CMAKE_HOME:-}" ] || [ ! -x "$GULONG_CMAKE_HOME/bin/cmake" ]; then
     if [ -x /opt/taixu/tools/android-ndk/cmake/bin/cmake ]; then
-        TAIXU_CMAKE_HOME="/opt/taixu/tools/android-ndk/cmake"
+        GULONG_CMAKE_HOME="/opt/taixu/tools/android-ndk/cmake"
     elif [ -x /opt/taixu/tools/android-suite-offline/cmake/bin/cmake ]; then
-        TAIXU_CMAKE_HOME="/opt/taixu/tools/android-suite-offline/cmake"
+        GULONG_CMAKE_HOME="/opt/taixu/tools/android-suite-offline/cmake"
     else
-        TAIXU_CMAKE_HOME="${TAIXU_CMAKE_HOME:-/opt/taixu/tools/android-suite-offline/cmake}"
+        GULONG_CMAKE_HOME="${GULONG_CMAKE_HOME:-/opt/taixu/tools/android-suite-offline/cmake}"
     fi
 fi
-if [ -z "${TAIXU_NINJA_HOME:-}" ] || [ ! -x "$TAIXU_NINJA_HOME/ninja" ]; then
+if [ -z "${GULONG_NINJA_HOME:-}" ] || [ ! -x "$GULONG_NINJA_HOME/ninja" ]; then
     if [ -x /opt/taixu/tools/android-ndk/bin/ninja ]; then
-        TAIXU_NINJA_HOME="/opt/taixu/tools/android-ndk/bin"
+        GULONG_NINJA_HOME="/opt/taixu/tools/android-ndk/bin"
     elif [ -x /opt/taixu/tools/android-suite-offline/bin/ninja ]; then
-        TAIXU_NINJA_HOME="/opt/taixu/tools/android-suite-offline/bin"
+        GULONG_NINJA_HOME="/opt/taixu/tools/android-suite-offline/bin"
     else
-        TAIXU_NINJA_HOME="${TAIXU_NINJA_HOME:-/opt/taixu/tools/android-suite-offline/bin}"
+        GULONG_NINJA_HOME="${GULONG_NINJA_HOME:-/opt/taixu/tools/android-suite-offline/bin}"
     fi
 fi
 GRADLE_USER_HOME="${GRADLE_USER_HOME:-/root/.gradle}"
-TAIXU_TOOL_DIR="${TAIXU_TOOL_DIR:-/opt/taixu/tools}"
-export ANDROID_HOME ANDROID_SDK_ROOT GRADLE_HOME JAVA_HOME FLUTTER_HOME TAIXU_CMAKE_HOME TAIXU_NINJA_HOME TAIXU_TOOL_DIR
+GULONG_TOOL_DIR="${GULONG_TOOL_DIR:-/opt/taixu/tools}"
+export ANDROID_HOME ANDROID_SDK_ROOT GRADLE_HOME JAVA_HOME FLUTTER_HOME GULONG_CMAKE_HOME GULONG_NINJA_HOME GULONG_TOOL_DIR
 export GRADLE_USER_HOME
-export PATH="/opt/taixu/bin:$JAVA_HOME/bin:$GRADLE_HOME/bin:$FLUTTER_HOME/bin:$TAIXU_CMAKE_HOME/bin:$TAIXU_NINJA_HOME:$ANDROID_HOME/platform-tools:$ANDROID_HOME/cmdline-tools/latest/bin:$PATH"
+export PATH="/opt/taixu/bin:$JAVA_HOME/bin:$GRADLE_HOME/bin:$FLUTTER_HOME/bin:$GULONG_CMAKE_HOME/bin:$GULONG_NINJA_HOME:$ANDROID_HOME/platform-tools:$ANDROID_HOME/cmdline-tools/latest/bin:$PATH"
 # Internal build scripts may call `gradle`/`flutter` by name. Mark this
 # process so the console wrappers pass those calls to the already-validated
 # fixed toolchain instead of recursively invoking this entrypoint.
-export TAIXU_BUILD_ENGINE=1
+export GULONG_BUILD_ENGINE=1
 
-fail() { echo "[TaiXu Build] ERROR: $*" >&2; exit 10; }
-warn() { echo "[TaiXu Build] WARN: $*" >&2; }
+fail() { echo "[Gulong Build] ERROR: $*" >&2; exit 10; }
+warn() { echo "[Gulong Build] WARN: $*" >&2; }
 need_file() { test -e "$1" || fail "缺少 $2: $1"; }
 need_exec() { test -x "$1" || fail "缺少可执行文件 $2: $1"; }
 verify_artifact() {
@@ -126,7 +126,7 @@ keep_project_arm64_only() {
         case "$abi" in
             arm64-v8a) ;;
             armeabi-v7a|x86|x86_64)
-                echo "[TaiXu Build] 清理非 ARM64 生成目录: lib/$abi"
+                echo "[Gulong Build] 清理非 ARM64 生成目录: lib/$abi"
                 rm -rf -- "$abi_dir"
                 ;;
         esac
@@ -135,7 +135,7 @@ keep_project_arm64_only() {
 
 check_project_toolchain_declarations() {
     project="$1"
-    ndk_home="${TAIXU_NDK_PATH:-${ANDROID_NDK_HOME:-/opt/taixu/toolchains/android/ndk}}"
+    ndk_home="${GULONG_NDK_PATH:-${ANDROID_NDK_HOME:-/opt/taixu/toolchains/android/ndk}}"
     expected_ndk=$(sed -n 's/^[[:space:]]*Pkg\.Revision[[:space:]]*=[[:space:]]*//p' "$ndk_home/source.properties" 2>/dev/null | head -n 1 || true)
     declared_ndk=$(grep -RhsE 'ndkVersion[^0-9]*[0-9]+(\.[0-9]+)+' "$project"/*.gradle "$project"/*.gradle.kts "$project"/app/*.gradle "$project"/app/*.gradle.kts "$project"/android/app/*.gradle "$project"/android/app/*.gradle.kts 2>/dev/null |
         sed -n 's/.*ndkVersion[^0-9]*\([0-9][0-9.]*\).*/\1/p' | head -n 1 || true)
@@ -144,7 +144,7 @@ check_project_toolchain_declarations() {
     fi
     declared_cmake=$(grep -RhsE 'cmake[^\n]*version[^0-9]*[0-9]+(\.[0-9]+)+' "$project"/*.gradle "$project"/*.gradle.kts "$project"/app/*.gradle "$project"/app/*.gradle.kts "$project"/android/app/*.gradle "$project"/android/app/*.gradle.kts 2>/dev/null |
         sed -n 's/.*version[^0-9]*\([0-9][0-9.]*\).*/\1/p' | head -n 1 || true)
-    expected_cmake=$(${TAIXU_CMAKE_HOME:-/opt/taixu/tools/android-suite-offline/cmake}/bin/cmake --version 2>/dev/null |
+    expected_cmake=$(${GULONG_CMAKE_HOME:-/opt/taixu/tools/android-suite-offline/cmake}/bin/cmake --version 2>/dev/null |
         sed -n 's/^cmake version[[:space:]]*//p' | head -n 1 || true)
     if test -n "$declared_cmake" && test -n "$expected_cmake" && test "$declared_cmake" != "$expected_cmake"; then
         warn "项目声明 CMake $declared_cmake，构建将按工坊当前 CMake $expected_cmake 执行"
@@ -161,7 +161,7 @@ doctor() {
     kind=$(detect_project "$project")
     check_project_toolchain_declarations "$project"
     analyze_args=""
-    test "${TAIXU_OFFLINE:-0}" = 1 && analyze_args="--offline"
+    test "${GULONG_OFFLINE:-0}" = 1 && analyze_args="--offline"
     need_file "$ANDROID_HOME/platforms/android-34/android.jar" "Android Platform 34"
     has_native=0
     if test -f "$project/CMakeLists.txt" || test -f "$project/app/CMakeLists.txt" || test -d "$project/app/src/main/cpp" || test -d "$project/app/src/main/jni"; then
@@ -171,16 +171,16 @@ doctor() {
     fi
 
     if [ "$has_native" = 1 ]; then
-        need_exec "$TAIXU_CMAKE_HOME/bin/cmake" "CMake"
-        need_exec "$TAIXU_NINJA_HOME/ninja" "Ninja"
+        need_exec "$GULONG_CMAKE_HOME/bin/cmake" "CMake"
+        need_exec "$GULONG_NINJA_HOME/ninja" "Ninja"
     fi
-    aapt2="${TAIXU_AAPT2_PATH:-$ANDROID_HOME/build-tools/35.0.0/aapt2}"
+    aapt2="${GULONG_AAPT2_PATH:-$ANDROID_HOME/build-tools/35.0.0/aapt2}"
     need_exec "$aapt2" "ARM64 AAPT2"
     check_java_arch "$JAVA_HOME/bin/java" b700 "JDK 17"
     check_elf_machine "$aapt2" b700 "AAPT2"
-    TAIXU_AAPT2_PATH="$aapt2"
-    export TAIXU_AAPT2_PATH
-    ndk="${TAIXU_NDK_PATH:-${ANDROID_NDK_HOME:-/opt/taixu/toolchains/android/ndk}}"
+    GULONG_AAPT2_PATH="$aapt2"
+    export GULONG_AAPT2_PATH
+    ndk="${GULONG_NDK_PATH:-${ANDROID_NDK_HOME:-/opt/taixu/toolchains/android/ndk}}"
     if [ "$has_native" = 1 ] || [ -f "$ndk/source.properties" ]; then
         need_file "$ndk/source.properties" "固定 ARM64 NDK"
         ndk_clang=$(find "$ndk/toolchains/llvm/prebuilt" \( -type f -o -type l \) -name clang -print -quit 2>/dev/null)
@@ -189,10 +189,10 @@ doctor() {
         need_exec "$ndk_strip" "ARM64 NDK llvm-strip"
         check_elf_machine "$ndk_clang" b700 "NDK clang"
         check_elf_machine "$ndk_strip" b700 "NDK llvm-strip"
-        TAIXU_NDK_PATH="$ndk"
+        GULONG_NDK_PATH="$ndk"
         ANDROID_NDK_HOME="$ndk"
         ANDROID_NDK_ROOT="$ndk"
-        export TAIXU_NDK_PATH ANDROID_NDK_HOME ANDROID_NDK_ROOT
+        export GULONG_NDK_PATH ANDROID_NDK_HOME ANDROID_NDK_ROOT
         managed_ndk_policy=/opt/taixu/scripts/taixu-android-ndk.gradle
         if test -f "$managed_ndk_policy"; then
             mkdir -p "$GRADLE_USER_HOME/init.d"
@@ -203,7 +203,7 @@ doctor() {
     touch "$gradle_properties"
     grep -Fqx 'android.builder.sdkDownload=false' "$gradle_properties" 2>/dev/null ||
         printf '%s\n' 'android.builder.sdkDownload=false' >> "$gradle_properties"
-    # Release 签名策略：仅在宿主注入 TAIXU_KEYSTORE_* 环境变量时生效，debug 构建零影响。
+    # Release 签名策略：仅在宿主注入 GULONG_KEYSTORE_* 环境变量时生效，debug 构建零影响。
     if test -f /opt/taixu/scripts/taixu-release-signing.gradle; then
         cp /opt/taixu/scripts/taixu-release-signing.gradle "$GRADLE_USER_HOME/init.d/taixu-release-signing.gradle"
     fi
@@ -224,7 +224,7 @@ doctor() {
     if test -f "$wrapper"; then
         wrapper_version=$(sed -n 's#.*gradle-\([0-9][0-9.]*\)-bin\.zip.*#\1#p' "$wrapper" | head -n 1)
         if test -n "$wrapper_version" && test "$wrapper_version" != "8.14.2"; then
-            warn "项目 Gradle Wrapper=$wrapper_version，本地基准=8.14.2；太墟构建入口将优先使用本地 Gradle"
+            warn "项目 Gradle Wrapper=$wrapper_version，本地基准=8.14.2；古龙构建入口将优先使用本地 Gradle"
         fi
     fi
     compile_sdk=$(grep -RhsE 'compileSdk(Version)?[[:space:]]*[=( ]+[0-9]+' "$project"/*.gradle "$project"/*.gradle.kts "$project"/app/*.gradle "$project"/app/*.gradle.kts 2>/dev/null | grep -Eo '[0-9]+' | head -n 1)
@@ -251,7 +251,7 @@ doctor() {
     elif test "$kind" = unknown; then
         warn "无法识别项目类型，将只检查通用 Android 工具链"
     fi
-    if test "${TAIXU_OFFLINE:-0}" = 1; then
+    if test "${GULONG_OFFLINE:-0}" = 1; then
         if test "$kind" = flutter; then
             test -d "${PUB_CACHE:-/opt/taixu/cache/flutter-pub}/hosted" ||
                 fail "离线模式缺少 Flutter Pub 缓存，请先在线解析依赖"
@@ -264,13 +264,13 @@ doctor() {
         /bin/sh /opt/taixu/scripts/taixu-build-analyze.sh "$project" "$analyze_args" ||
             fail "项目兼容分析失败"
     fi
-    echo "[TaiXu Build] OK: ARM64 构建环境已就绪 ($kind)"
+    echo "[Gulong Build] OK: ARM64 构建环境已就绪 ($kind)"
 }
 
 qemu_doctor() {
     project="$1"
     compat=/opt/taixu/compat/x86_64
-    test "$(uname -m)" = x86_64 || fail "--qemu 必须由太墟应用启动隔离 QEMU PRoot 会话，普通 ARM64 终端不能直接切换"
+    test "$(uname -m)" = x86_64 || fail "--qemu 必须由古龙应用启动隔离 QEMU PRoot 会话，普通 ARM64 终端不能直接切换"
     need_exec "$compat/jdk-17/bin/java" "QEMU x86_64 JDK"
     need_exec "$compat/android-sdk/build-tools/35.0.0/aapt2" "QEMU x86_64 AAPT2"
     check_java_arch "$compat/jdk-17/bin/java" 3e00 "QEMU JDK"
@@ -303,14 +303,14 @@ qemu_doctor() {
     if test -n "$compile_sdk" && test "$compile_sdk" -gt 34; then
         fail "项目 compileSdk=$compile_sdk，高于 QEMU 环境 Android Platform 34；请先由 Agent 对齐项目或安装对应平台资源"
     fi
-    echo "[TaiXu Build] OK: QEMU x86_64 隔离构建环境已就绪"
+    echo "[Gulong Build] OK: QEMU x86_64 隔离构建环境已就绪"
 }
 
 run_android() {
     project="$1"
     shift
     qemu=0
-    offline="${TAIXU_OFFLINE:-0}"
+    offline="${GULONG_OFFLINE:-0}"
     task=assembleDebug
     for arg in "$@"; do
         if test "$arg" = "--qemu"; then qemu=1; elif test "$arg" = "--offline"; then offline=1; else task="$arg"; fi
@@ -318,8 +318,8 @@ run_android() {
     keep_project_arm64_only "$project"
     if test "$qemu" = 1; then
         qemu_doctor "$project" || return $?
-        export TAIXU_BUILD_ENGINE=1
-        if test "$offline" = 1; then export TAIXU_OFFLINE=1; fi
+        export GULONG_BUILD_ENGINE=1
+        if test "$offline" = 1; then export GULONG_OFFLINE=1; fi
         /bin/sh /opt/taixu/scripts/build_android_qemu.sh "$project" "$task"; status=$?
         test "$status" -eq 0 || return "$status"
         apk=$(find "$project" -type f -name '*.apk' ! -name '*unaligned*' -exec ls -t {} + 2>/dev/null | head -n 1)
@@ -329,8 +329,8 @@ run_android() {
     fi
     doctor "$project" || return $?
     # The normal path is deliberately ARM64 and does not silently switch ABI.
-    export TAIXU_BUILD_ENGINE=1
-    if test "$offline" = 1; then export TAIXU_OFFLINE=1; fi
+    export GULONG_BUILD_ENGINE=1
+    if test "$offline" = 1; then export GULONG_OFFLINE=1; fi
     /bin/sh /opt/taixu/scripts/build_android.sh "$project" "$task"; status=$?
     test "$status" -eq 0 || return "$status"
     apk=$(find "$project" -type f -name '*.apk' ! -name '*unaligned*' -exec ls -t {} + 2>/dev/null | head -n 1)
@@ -342,7 +342,7 @@ run_flutter() {
     project="$1"
     shift
     qemu=0
-    offline="${TAIXU_OFFLINE:-0}"
+    offline="${GULONG_OFFLINE:-0}"
     target="apk --debug --target-platform android-arm64"
     custom=""
     for arg in "$@"; do
@@ -352,8 +352,8 @@ run_flutter() {
     keep_project_arm64_only "$project"
     if test "$qemu" = 1; then
         qemu_doctor "$project" || return $?
-        export TAIXU_BUILD_ENGINE=1
-        if test "$offline" = 1; then export TAIXU_OFFLINE=1; fi
+        export GULONG_BUILD_ENGINE=1
+        if test "$offline" = 1; then export GULONG_OFFLINE=1; fi
         /bin/sh /opt/taixu/scripts/build_flutter_qemu.sh "$project"; status=$?
         test "$status" -eq 0 || return "$status"
         apk=$(find "$project" -type f -name '*.apk' ! -name '*unaligned*' -exec ls -t {} + 2>/dev/null | head -n 1)
@@ -362,8 +362,8 @@ run_flutter() {
         return 0
     fi
     doctor "$project" || return $?
-    export TAIXU_BUILD_ENGINE=1
-    if test "$offline" = 1; then export TAIXU_OFFLINE=1; fi
+    export GULONG_BUILD_ENGINE=1
+    if test "$offline" = 1; then export GULONG_OFFLINE=1; fi
     /bin/sh /opt/taixu/scripts/build_flutter.sh "$project" "$target"; status=$?
     test "$status" -eq 0 || return "$status"
     apk=$(find "$project" -type f -name '*.apk' ! -name '*unaligned*' -exec ls -t {} + 2>/dev/null | head -n 1)

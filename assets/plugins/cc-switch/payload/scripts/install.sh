@@ -3,9 +3,9 @@ set -e
 
 echo "[*] Installing CC-Switch Agent Hub..."
 
-TOOL_DIR="${TAIXU_TOOL_DIR:-/opt/taixu/tools/cc-switch}"
-DATA_DIR="${TAIXU_TOOL_DATA:-$TOOL_DIR/data}"
-PAYLOAD="${TAIXU_PLUGIN_PAYLOAD:-/opt/taixu/imports/cc-switch/payload}"
+TOOL_DIR="${GULONG_TOOL_DIR:-/opt/taixu/tools/cc-switch}"
+DATA_DIR="${GULONG_TOOL_DATA:-$TOOL_DIR/data}"
+PAYLOAD="${GULONG_PLUGIN_PAYLOAD:-/opt/taixu/imports/cc-switch/payload}"
 
 mkdir -p "$TOOL_DIR/bin"
 mkdir -p "$TOOL_DIR/lib"
@@ -134,7 +134,7 @@ fi
 if [ -f "$SERVER_BIN" ]; then
     chmod 755 "$SERVER_BIN" 2>/dev/null || true
     pkill -9 -f cc-switch-server 2>/dev/null || killall -9 cc-switch-server 2>/dev/null || true
-    echo "[TaiXu cc-switch-daemon] Starting CC-Switch on $HOST:$PORT (DATA_DIR=$DATA_DIR, HOME=$HOME)..."
+    echo "[Gulong cc-switch-daemon] Starting CC-Switch on $HOST:$PORT (DATA_DIR=$DATA_DIR, HOME=$HOME)..."
     exec "$SERVER_BIN"
 else
     echo "Error: cc-switch-server ELF binary not found at $SERVER_BIN" >&2

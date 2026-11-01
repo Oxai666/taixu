@@ -4,8 +4,8 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="theme-color" content="#f7f7f8">
-  <meta name="description" content="太墟插件开发指南：.txplugin v2 PROCESS 与 WEB 包、作者 CLI、严格 SemVer、SHA-256 完整性、安装事务与页面授权。">
-  <title>插件开发指南 · 太墟 TaiXu</title>
+  <meta name="description" content="古龙插件开发指南：.txplugin v2 PROCESS 与 WEB 包、作者 CLI、严格 SemVer、SHA-256 完整性、安装事务与页面授权。">
+  <title>插件开发指南 · 古龙 Gulong</title>
   <link rel="icon" href="assets/favicon.png">
   <script>
     (function () {
@@ -23,7 +23,7 @@
 <body class="docs-page">
   <a class="skip-link" href="#main">跳到主要内容</a>
   <header class="site-header" data-header>
-    <a class="brand" href="index.html" aria-label="返回太墟首页"><span class="brand-mark"><img src="assets/taixu-logo.png" alt=""></span><span class="brand-name">太墟</span><span class="brand-roman">TAIXU</span></a>
+    <a class="brand" href="index.html" aria-label="返回古龙首页"><span class="brand-mark"><img src="assets/taixu-logo.png" alt=""></span><span class="brand-name">古龙</span><span class="brand-roman">GULONG</span></a>
     <button class="menu-toggle" type="button" aria-label="打开导航" aria-expanded="false" data-menu-toggle><span></span><span></span></button>
     <nav class="site-nav" aria-label="主导航" data-nav>
       <a href="index.html">首页</a>
@@ -40,9 +40,9 @@
 
   <main id="main" class="docs-main">
     <section class="docs-hero reveal">
-      <div class="section-index">TAIXU PLUGIN GUIDE / SCHEMA 2</div>
-      <h1>把你的工具，<br>装进太墟。</h1>
-      <p>用自包含的 <code>.txplugin</code> 把命令、SDK、服务或 Web 页面带进太墟。新插件推荐使用 v2，旧版 v1 工具包继续兼容。本页按当前源码整理，安装包能力以所用版本为准。</p>
+      <div class="section-index">GULONG PLUGIN GUIDE / SCHEMA 2</div>
+      <h1>把你的工具，<br>装进古龙。</h1>
+      <p>用自包含的 <code>.txplugin</code> 把命令、SDK、服务或 Web 页面带进古龙。新插件推荐使用 v2，旧版 v1 工具包继续兼容。本页按当前源码整理，安装包能力以所用版本为准。</p>
     </section>
 
     <div class="docs-layout">
@@ -75,7 +75,7 @@
   "schemaVersion": 2,
   "id": "hello-arm64",
   "name": "Hello ARM64",
-  "description": "TaiXu 本地插件示例",
+  "description": "Gulong 本地插件示例",
   "version": "1.0.0",
   "launchType": "command",
   "architectures": ["ARM64"],
@@ -83,7 +83,7 @@
   "offlineOnly": true,
   "installMethod": "LOCAL_PACKAGE",
   "installSteps": [
-    "printf '#!/bin/sh\\necho hello\\n' &gt; \"$TAIXU_TOOL_DIR/bin/hello\"; chmod 755 \"$TAIXU_TOOL_DIR/bin/hello\""
+    "printf '#!/bin/sh\\necho hello\\n' &gt; \"$GULONG_TOOL_DIR/bin/hello\"; chmod 755 \"$GULONG_TOOL_DIR/bin/hello\""
   ],
   "launchCommand": "hello",
   "verifyCommand": "hello",
@@ -106,15 +106,15 @@
           <h2>04 / 从零制作 Hello 插件</h2>
           <p>也可以把脚本放在 <code>payload/bin/hello</code>，并用下面的步骤替换上例的 <code>installSteps</code>：</p>
           <pre><code>#!/bin/sh
-echo "hello from TaiXu"</code></pre>
+echo "hello from Gulong"</code></pre>
           <p>安装步骤必须创建工具目录并恢复执行权限：</p>
           <pre><code>"installSteps": [
-  "test -f \"$TAIXU_PLUGIN_PAYLOAD/bin/hello\"",
-  "mkdir -p \"$TAIXU_TOOL_DIR/bin\"",
-  "cp \"$TAIXU_PLUGIN_PAYLOAD/bin/hello\" \"$TAIXU_TOOL_DIR/bin/hello\"",
-  "chmod 755 \"$TAIXU_TOOL_DIR/bin/hello\""
+  "test -f \"$GULONG_PLUGIN_PAYLOAD/bin/hello\"",
+  "mkdir -p \"$GULONG_TOOL_DIR/bin\"",
+  "cp \"$GULONG_PLUGIN_PAYLOAD/bin/hello\" \"$GULONG_TOOL_DIR/bin/hello\"",
+  "chmod 755 \"$GULONG_TOOL_DIR/bin/hello\""
 ]</code></pre>
-          <p>安装器提供 <code>TAIXU_TOOL_ID</code>、<code>TAIXU_TOOL_DIR</code>、<code>TAIXU_TOOL_DATA</code> 和本地插件专用的 <code>TAIXU_PLUGIN_PAYLOAD</code>。v2 按原始字节校验，不自动修复脚本换行或 BOM；请保存为 UTF-8、LF 换行。</p>
+          <p>安装器提供 <code>GULONG_TOOL_ID</code>、<code>GULONG_TOOL_DIR</code>、<code>GULONG_TOOL_DATA</code> 和本地插件专用的 <code>GULONG_PLUGIN_PAYLOAD</code>。v2 按原始字节校验，不自动修复脚本换行或 BOM；请保存为 UTF-8、LF 换行。</p>
         </section>
 
         <section id="package" class="reveal">
@@ -141,7 +141,7 @@ echo "hello from TaiXu"</code></pre>
         <section id="runtime" class="reveal">
           <h2>07 / 精简 RootFS 与大型依赖</h2>
           <p>不要假设系统带有 <code>unzip</code>、<code>xz</code>、<code>file</code>、<code>readelf</code>、<code>jq</code>、Python 或 Node。优先使用 <code>.tar.gz</code>，并通过 SHA-256 校验归档。</p>
-          <pre><code>archive="$TAIXU_PLUGIN_PAYLOAD/archives/flutter-arm64.tar.gz"
+          <pre><code>archive="$GULONG_PLUGIN_PAYLOAD/archives/flutter-arm64.tar.gz"
 test -s "$archive"
 printf '%s  %s\n' "&lt;SHA256&gt;" "$archive" | sha256sum -c -
 rm -rf /opt/flutter.staging
@@ -158,9 +158,9 @@ is_aarch64_elf() {
         <section id="progress" class="reveal">
           <h2>08 / 实时百分比与安装日志</h2>
           <p>插件脚本可以输出单调递增的结构化相对进度，应用会映射到完整安装进度条：</p>
-          <pre><code>[TAIXU_PROGRESS:47] [EXTRACT] 正在解压 Android NDK r29
-[TAIXU_PROGRESS:75] [COMMAND] 正在配置 ADB
-[TAIXU_PROGRESS:98] [VERIFY] 正在执行最终验证</code></pre>
+          <pre><code>[GULONG_PROGRESS:47] [EXTRACT] 正在解压 Android NDK r29
+[GULONG_PROGRESS:75] [COMMAND] 正在配置 ADB
+[GULONG_PROGRESS:98] [VERIFY] 正在执行最终验证</code></pre>
           <p>推荐使用 <code>[COPY]</code>、<code>[EXTRACT]</code>、<code>[COMMAND]</code>、<code>[VERIFY]</code> 标签。不要启用 <code>set -x</code>，它可能把 Token、代理或环境变量写入日志。</p>
         </section>
 
@@ -183,9 +183,9 @@ is_aarch64_elf() {
     <div class="wrap">
       <div class="footer-inner">
         <div class="footer-brand">
-          <strong>太墟</strong>
-          <span>TAIXU / LINUX AI RUNTIME</span>
-          <p class="footer-tagline">于太墟中立极，于方寸间创世。</p>
+          <strong>古龙</strong>
+          <span>GULONG / LINUX AI RUNTIME</span>
+          <p class="footer-tagline">于古龙中立极，于方寸间创世。</p>
         </div>
         <nav class="footer-links" aria-label="页脚导航">
           <a href="docs/index.html">使用文档</a>
@@ -195,7 +195,7 @@ is_aarch64_elf() {
           <a href="https://github.com/taixu-lab/taixu/issues" target="_blank" rel="noreferrer">Issues</a>
         </nav>
       </div>
-      <div class="footer-bottom">© <span data-year></span> TaiXu Project. Open source on GitHub.</div>
+      <div class="footer-bottom">© <span data-year></span> Gulong Project. Open source on GitHub.</div>
     </div>
   </footer>
 </body>

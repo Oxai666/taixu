@@ -2,7 +2,7 @@
 const $ = id => document.getElementById(id);
 let sequence = 0, pending = null, busy = false;
 function request(action, text) {
-  if (!window.taixuPlugin) return Promise.reject(new Error('请在太墟插件管理页面中打开。完整原版面板请使用外部浏览器入口。'));
+  if (!window.taixuPlugin) return Promise.reject(new Error('请在古龙插件管理页面中打开。完整原版面板请使用外部浏览器入口。'));
   if (pending) return Promise.reject(new Error('上一次请求尚未完成'));
   if (sequence >= 240) return Promise.reject(new Error('页面请求配额即将用尽，请关闭后重新打开。后台服务会继续运行。'));
   return new Promise((resolve, reject) => {

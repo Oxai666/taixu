@@ -27,7 +27,7 @@ set -u
 
 CMD="${1:-}"
 ID="${2:-}"
-REGISTRY="${TAIXU_MCP_NPM_REGISTRY:-https://registry.npmmirror.com}"
+REGISTRY="${GULONG_MCP_NPM_REGISTRY:-https://registry.npmmirror.com}"
 MARKER_DIR="/opt/taixu/mcp"
 MARKER="$MARKER_DIR/$ID.ok"
 

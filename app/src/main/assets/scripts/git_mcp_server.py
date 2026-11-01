@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Dependency-free Git MCP server for the TaiXu sandbox."""
+"""Dependency-free Git MCP server for the Gulong sandbox."""
 import argparse
 import json
 import os

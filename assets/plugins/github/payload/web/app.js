@@ -5,7 +5,7 @@ let pending = null;
 let busy = false;
 let currentJob = null;
 function request(action, text) {
-  if (!window.taixuPlugin) return Promise.reject(new Error('请在更新后的太墟 GitHub Web 插件页面中打开。'));
+  if (!window.taixuPlugin) return Promise.reject(new Error('请在更新后的古龙 GitHub Web 插件页面中打开。'));
   if (pending) return Promise.reject(new Error('上一次请求尚未完成'));
   if (sequence >= 240) return Promise.reject(new Error('本页请求配额即将用尽，请关闭并重新打开此页面。工具中心的服务与后台任务会继续运行。'));
   return new Promise((resolve, reject) => {
@@ -29,7 +29,7 @@ async function refresh() {
   $('publicKey').value = status.publicKey;
   $('repoRoot').textContent = '仓库目录：' + status.repositoryRoot + '；终端可用 gh 与 gh-git 命令。';
   const missing = Object.entries(status.dependencies).filter(([,ok]) => !ok).map(([name]) => name);
-  $('notice').textContent = missing.length ? '缺少运行依赖：' + missing.join(', ') + '。请在 Linux 中安装后再操作。' : '服务已连接。表单写入会弹出太墟原生确认。';
+  $('notice').textContent = missing.length ? '缺少运行依赖：' + missing.join(', ') + '。请在 Linux 中安装后再操作。' : '服务已连接。表单写入会弹出古龙原生确认。';
 }
 function form(action) {
   const body = {};

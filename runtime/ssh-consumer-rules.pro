@@ -2,7 +2,7 @@
 -keep class com.jcraft.jsch.** { *; }
 -keep class org.bouncycastle.** { *; }
 
-# Optional desktop integrations bundled in JSch. TaiXu uses password/publickey
+# Optional desktop integrations bundled in JSch. Gulong uses password/publickey
 # authentication, without Pageant, Kerberos, junixsocket or Log4j2 adapters.
 # Match the absent optional types precisely; SSH/crypto missing classes still fail R8.
 -dontwarn com.sun.jna.Memory

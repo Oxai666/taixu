@@ -201,7 +201,7 @@
     },
     {
       "id": "feature.browser", "path": "feature/browser",
-      "requires": ["core.browser", "core.datastore", "runtime.browser", "feature.theme", "plugin.ui"]
+      "requires": ["core.browser", "core.datastore", "runtime.browser", "feature.theme", "plugin.ui", "feature.chat"]
     },
     {
       "id": "feature.git", "path": "feature/git",

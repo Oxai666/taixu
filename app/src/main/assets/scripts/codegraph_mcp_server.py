@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 """
-Dependency-free CodeGraph MCP Server for the TaiXu / LinuxAIRuntime sandbox.
+Dependency-free CodeGraph MCP Server for the Gulong / LinuxAIRuntime sandbox.
 
 Indexes workspace symbols, call hierarchies, inheritance, and dependencies into SQLite.
 Exposes MCP tools for single-step structural code intelligence (codegraph_explore,

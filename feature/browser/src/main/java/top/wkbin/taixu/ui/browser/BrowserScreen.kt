@@ -52,6 +52,7 @@ import top.wkbin.taixu.ui.components.RuntimeIcon
 import top.wkbin.taixu.ui.components.RuntimeIconName
 import top.wkbin.taixu.ui.components.RuntimeIconButton
 import top.wkbin.taixu.ui.components.RuntimeTopBar
+import top.wkbin.taixu.ui.chat.floating.rememberFloatingChatLauncher
 import top.wkbin.taixu.ui.browser.network.NetworkTimelineSheet
 import top.wkbin.taixu.ui.browser.snapshot.SnapshotSheet
 import androidx.compose.runtime.collectAsState
@@ -192,6 +193,7 @@ private fun BrowserStatusBar(
     networkCount: Int,
     onExit: (() -> Unit)? = null,
 ) {
+    val openFloatingChat = rememberFloatingChatLauncher()  // 悬浮小窗入口，直接在此取，免穿参
     Surface(
         color = MaterialTheme.colorScheme.surfaceContainerLow.copy(alpha = 0.65f),
         modifier = Modifier.fillMaxWidth(),
@@ -204,7 +206,6 @@ private fun BrowserStatusBar(
             verticalAlignment = Alignment.CenterVertically,
             horizontalArrangement = Arrangement.spacedBy(2.dp, Alignment.Start),
         ) {
-            // 1. 共浏览状态：AI 是否与用户共享浏览（点击切换）
             val coTint = if (coBrowsingEnabled) Color(0xFF3F8FFF) else Color(0xFFFF8F3F)
             BrowserStatusItem(
                 icon = if (coBrowsingEnabled) RuntimeIconName.Visibility else RuntimeIconName.VisibilityOff,
@@ -214,7 +215,6 @@ private fun BrowserStatusBar(
                 onClick = onCoBrowsingToggle,
             )
             StatusDivider()
-            // 2. 页面快照入口（Agent 视角的元素树）
             BrowserStatusItem(
                 icon = RuntimeIconName.Search,
                 label = "快照",
@@ -222,7 +222,6 @@ private fun BrowserStatusBar(
                 onClick = onShowSnapshot,
             )
             StatusDivider()
-            // 3. 网络时间线入口（请求流 + Hook 命中，agent 操作可视化）
             BrowserStatusItem(
                 icon = RuntimeIconName.Network,
                 label = "网络 $networkCount",
@@ -230,7 +229,7 @@ private fun BrowserStatusBar(
                 onClick = onShowNetwork,
             )
             StatusDivider()
-            // 4. 标签页胶囊
+            openFloatingChat?.let { BrowserStatusItem(icon = RuntimeIconName.Chat, label = "AI 小窗", tint = MaterialTheme.colorScheme.primary, onClick = it); StatusDivider() }
             if (tabs.isEmpty()) {
                 BrowserStatusItem(
                     icon = RuntimeIconName.Globe,

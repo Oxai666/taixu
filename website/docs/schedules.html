@@ -4,8 +4,8 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="theme-color" content="#fafafa">
-  <meta name="description" content="太墟定时计划与后台运行：一次性 / 间隔 / 每日计划设置、后台执行与通知审批、电池优化建议、为什么任务可能被系统推迟。">
-  <title>定时计划与后台运行 · 太墟使用文档</title>
+  <meta name="description" content="古龙定时计划与后台运行：一次性 / 间隔 / 每日计划设置、后台执行与通知审批、电池优化建议、为什么任务可能被系统推迟。">
+  <title>定时计划与后台运行 · 古龙使用文档</title>
   <link rel="icon" href="../assets/favicon.png">
   <script>(function(){try{var t=localStorage.getItem('taixu-theme');if(t!=='dark'&&t!=='light')t=matchMedia('(prefers-color-scheme: dark)').matches?'dark':'light';document.documentElement.setAttribute('data-theme',t);}catch(e){}})();</script>
   <link rel="stylesheet" href="../styles.css">
@@ -15,9 +15,9 @@
 <body>
   <a class="skip-link" href="#main">跳到主要内容</a>
   <header class="doc-header">
-    <a class="brand" href="../index.html" aria-label="返回太墟首页">
+    <a class="brand" href="../index.html" aria-label="返回古龙首页">
       <span class="brand-mark"><img src="../assets/taixu-logo.png" alt=""></span>
-      <span class="brand-name">太墟</span><span class="brand-roman">TAIXU</span>
+      <span class="brand-name">古龙</span><span class="brand-roman">GULONG</span>
     </a>
     <button class="doc-search-btn" type="button" data-search-open>
       <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><circle cx="11" cy="11" r="7"/><path d="m20 20-3.5-3.5"/></svg>
@@ -57,20 +57,20 @@
 
       <h2>后台运行与通知审批</h2>
       <ul>
-        <li>长任务运行期间，太墟会以<strong>前台服务</strong>方式保活，并在通知栏显示进度。</li>
+        <li>长任务运行期间，古龙会以<strong>前台服务</strong>方式保活，并在通知栏显示进度。</li>
         <li>流程走到<strong>人工审批</strong>节点时，会发送系统通知——点开通知即可批准或拒绝，不必守在屏幕前。</li>
-        <li>应用被系统杀掉后，未完成的运行记录仍在；重新打开太墟可以恢复继续。</li>
+        <li>应用被系统杀掉后，未完成的运行记录仍在；重新打开古龙可以恢复继续。</li>
       </ul>
 
       <h2>提高后台成功率的三个设置</h2>
       <ol class="steps">
         <li><b>允许通知</b><p>否则审批通知和进度提示都收不到。</p></li>
-        <li><b>关闭太墟的电池优化</b><p>系统设置 → 应用 → 太墟 → 电池 → 允许后台活动 / 不受限制（不同厂商叫法不同）。国产系统的「省电策略」建议设为「无限制」。</p></li>
+        <li><b>关闭古龙的电池优化</b><p>系统设置 → 应用 → 古龙 → 电池 → 允许后台活动 / 不受限制（不同厂商叫法不同）。国产系统的「省电策略」建议设为「无限制」。</p></li>
         <li><b>保持网络稳定</b><p>涉及云端模型与远程仓库的计划任务，建议在 Wi-Fi 环境执行。</p></li>
       </ol>
 
       <h2>为什么任务没有准点执行？</h2>
-      <p>Android 的后台调度是「尽量按时」而不是「绝对准时」：省电策略、息屏深度休眠、厂商自启动管理都可能把执行推迟几分钟甚至更久。这是系统机制，不是太墟出了问题。对策：</p>
+      <p>Android 的后台调度是「尽量按时」而不是「绝对准时」：省电策略、息屏深度休眠、厂商自启动管理都可能把执行推迟几分钟甚至更久。这是系统机制，不是古龙出了问题。对策：</p>
       <ul>
         <li>完成上面三个设置；</li>
         <li>对时间敏感的任务，接受 ±几分钟的弹性；</li>
@@ -90,7 +90,7 @@
   </div>
 
   <footer class="doc-footer">
-    <p>© <span data-year></span> <a href="../index.html">太墟 TaiXu</a> · 问题与建议欢迎到 <a href="https://github.com/taixu-lab/taixu/issues" target="_blank" rel="noreferrer">GitHub Issues</a> 反馈</p>
+    <p>© <span data-year></span> <a href="../index.html">古龙 Gulong</a> · 问题与建议欢迎到 <a href="https://github.com/taixu-lab/taixu/issues" target="_blank" rel="noreferrer">GitHub Issues</a> 反馈</p>
   </footer>
 </body>
 </html>

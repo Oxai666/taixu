@@ -4,8 +4,8 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="theme-color" content="#f7f7f8">
-  <meta name="description" content="太墟项目模板制作教程：template.json、动态字段、1:1 模板预览图、随身构造脚本、ZIP 导入与分享规范。">
-  <title>项目模板制作教程 · 太墟 TaiXu</title>
+  <meta name="description" content="古龙项目模板制作教程：template.json、动态字段、1:1 模板预览图、随身构造脚本、ZIP 导入与分享规范。">
+  <title>项目模板制作教程 · 古龙 Gulong</title>
   <link rel="icon" href="assets/favicon.png">
   <script>
     (function () {
@@ -23,7 +23,7 @@
 <body class="docs-page">
   <a class="skip-link" href="#main">跳到主要内容</a>
   <header class="site-header" data-header>
-    <a class="brand" href="index.html" aria-label="返回太墟首页"><span class="brand-mark"><img src="assets/taixu-logo.png" alt=""></span><span class="brand-name">太墟</span><span class="brand-roman">TAIXU</span></a>
+    <a class="brand" href="index.html" aria-label="返回古龙首页"><span class="brand-mark"><img src="assets/taixu-logo.png" alt=""></span><span class="brand-name">古龙</span><span class="brand-roman">GULONG</span></a>
     <button class="menu-toggle" type="button" aria-label="打开导航" aria-expanded="false" data-menu-toggle><span></span><span></span></button>
     <nav class="site-nav" aria-label="主导航" data-nav>
       <a href="index.html">首页</a>
@@ -40,7 +40,7 @@
 
   <main id="main" class="docs-main">
     <section class="docs-hero reveal">
-      <div class="section-index">TAIXU PROJECT TEMPLATE GUIDE / SCHEMA 1</div>
+      <div class="section-index">GULONG PROJECT TEMPLATE GUIDE / SCHEMA 1</div>
       <h1>把一套工程，<br>变成可分享的起点。</h1>
       <p>一个 ZIP 就能携带工程骨架、动态字段、统一方形预览图，以及需要用户明确授权的构造脚本。这里记录的是当前模板导入器、表单渲染器和物化引擎的真实约束。</p>
     </section>
@@ -65,7 +65,7 @@
 │   └── after-create.sh
 └── app/
     ├── build.gradle.kts
-    └── src/main/java/TAIXU_PACKAGE_PATH/
+    └── src/main/java/GULONG_PACKAGE_PATH/
         └── MainActivity.kt.template</code></pre>
           <ul><li>最多 5000 个 ZIP 条目。</li><li>单文件最大 16 MiB。</li><li>总解压体积最大 128 MiB。</li><li>绝对路径、Windows 盘符和包含 <code>..</code> 的越界路径会被拒绝。</li></ul>
         </section>
@@ -130,7 +130,7 @@
   "mode": "{{buildMode}}"
 }</code></pre>
           <p>生成时会替换变量并移除末尾的 <code>.template</code>。任意需要替换的文本都建议使用该后缀；Java、Kotlin、Dart、JSON、YAML、TOML、Shell、Python、JavaScript、C/C++ 等常见文本格式也会自动识别。</p>
-          <p>包目录使用 <code>TAIXU_PACKAGE_PATH</code>，创建时会替换为包名对应的目录层级。不要使用以下划线开头的占位目录，否则可能被 Android AAPT 忽略。变量生成的路径会再次规范化，越界路径会被拒绝。若文件中残留未声明的 <code>{{unknownVariable}}</code>，创建会直接失败。</p>
+          <p>包目录使用 <code>GULONG_PACKAGE_PATH</code>，创建时会替换为包名对应的目录层级。不要使用以下划线开头的占位目录，否则可能被 Android AAPT 忽略。变量生成的路径会再次规范化，越界路径会被拒绝。若文件中残留未声明的 <code>{{unknownVariable}}</code>，创建会直接失败。</p>
         </section>
 
         <section id="preview" class="reveal">
@@ -145,19 +145,19 @@
   "beforeCreate": "template-hooks/before-create.sh",
   "afterCreate": "template-hooks/after-create.sh"
 }</code></pre>
-          <p>脚本不会在导入、查看或导出时执行。创建工程时，太墟会显示脚本内容，只有用户明确勾选授权后才执行。</p>
-          <ul><li>脚本必须位于 <code>template-hooks/</code>，单个最大 1 MiB。</li><li>在 Linux 沙箱的新工程目录中运行，单阶段最长 60 秒。</li><li><code>beforeCreate</code> 在复制模板文件前执行，<code>afterCreate</code> 在物化后执行。</li><li>工程路径为 <code>TAIXU_PROJECT_DIR</code>。</li><li>变量以 <code>TAIXU_VAR_&lt;大写变量名&gt;</code> 传入。</li><li>非零退出会终止创建，并把错误输出返回界面。</li></ul>
+          <p>脚本不会在导入、查看或导出时执行。创建工程时，古龙会显示脚本内容，只有用户明确勾选授权后才执行。</p>
+          <ul><li>脚本必须位于 <code>template-hooks/</code>，单个最大 1 MiB。</li><li>在 Linux 沙箱的新工程目录中运行，单阶段最长 60 秒。</li><li><code>beforeCreate</code> 在复制模板文件前执行，<code>afterCreate</code> 在物化后执行。</li><li>工程路径为 <code>GULONG_PROJECT_DIR</code>。</li><li>变量以 <code>GULONG_VAR_&lt;大写变量名&gt;</code> 传入。</li><li>非零退出会终止创建，并把错误输出返回界面。</li></ul>
           <pre><code>#!/bin/sh
 set -eu
 mkdir -p generated
-printf '%s\n' "$TAIXU_VAR_PROJECTNAME" &gt; generated/project-name.txt</code></pre>
+printf '%s\n' "$GULONG_VAR_PROJECTNAME" &gt; generated/project-name.txt</code></pre>
         </section>
 
         <section id="validation" class="reveal">
           <h2>08 / 模板自带结果校验</h2>
           <pre><code>"validation": {
-  "requiredFiles": ["app/src/main/java/TAIXU_PACKAGE_PATH/MainHook.kt"],
-  "forbiddenFiles": ["app/src/main/java/TAIXU_PACKAGE_PATH/LegacyHook.kt"],
+  "requiredFiles": ["app/src/main/java/GULONG_PACKAGE_PATH/MainHook.kt"],
+  "forbiddenFiles": ["app/src/main/java/GULONG_PACKAGE_PATH/LegacyHook.kt"],
   "contentRules": [
     {
       "path": "app/src/main/assets/xposed_init",
@@ -220,9 +220,9 @@ zip -r ../my-android-template.zip .</code></pre>
     <div class="wrap">
       <div class="footer-inner">
         <div class="footer-brand">
-          <strong>太墟</strong>
-          <span>TAIXU / LINUX AI RUNTIME</span>
-          <p class="footer-tagline">于太墟中立极，于方寸间创世。</p>
+          <strong>古龙</strong>
+          <span>GULONG / LINUX AI RUNTIME</span>
+          <p class="footer-tagline">于古龙中立极，于方寸间创世。</p>
         </div>
         <nav class="footer-links" aria-label="页脚导航">
           <a href="docs/index.html">使用文档</a>
@@ -232,7 +232,7 @@ zip -r ../my-android-template.zip .</code></pre>
           <a href="https://github.com/taixu-lab/taixu/issues" target="_blank" rel="noreferrer">Issues</a>
         </nav>
       </div>
-      <div class="footer-bottom">© <span data-year></span> TaiXu Project. Open source on GitHub.</div>
+      <div class="footer-bottom">© <span data-year></span> Gulong Project. Open source on GitHub.</div>
     </div>
   </footer>
 </body>

@@ -1,5 +1,5 @@
 #!/bin/sh
-# 太墟 android 包装层（android-skills 插件）
+# 古龙 android 包装层（android-skills 插件）
 #
 # 职责：
 #   1. 固定插件自有的 ANDROID_USER_HOME —— android-cli 载荷与首次解包缓存
@@ -9,8 +9,8 @@
 #   3. exec 真正的引导器（$TOOL_DIR/lib/android-launcher），不自指、不构成回环。
 set -eu
 
-TOOL_DIR="${TAIXU_TOOL_DIR:-/opt/taixu/tools/android-skills}"
-TOOL_DATA="${TAIXU_TOOL_DATA:-/opt/taixu/data/android-skills}"
+TOOL_DIR="${GULONG_TOOL_DIR:-/opt/taixu/tools/android-skills}"
+TOOL_DATA="${GULONG_TOOL_DATA:-/opt/taixu/data/android-skills}"
 LAUNCHER="$TOOL_DIR/lib/android-launcher"
 DEFAULT_USER_HOME="$TOOL_DATA/android-user-home"
 

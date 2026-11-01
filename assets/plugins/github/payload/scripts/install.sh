@@ -9,25 +9,25 @@ for command in python3 git ssh ssh-keygen; do
 done
 test -x /usr/bin/python3
 /usr/bin/python3 -I -c 'import sys; assert sys.version_info >= (3, 9), "Python 3.9 or newer required"'
-test "$(od -An -t x1 -N 4 "$TAIXU_PLUGIN_PAYLOAD/vendor/gh" | tr -d ' \n')" = 7f454c46
-test "$(od -An -t x1 -j 18 -N 2 "$TAIXU_PLUGIN_PAYLOAD/vendor/gh" | tr -d ' \n')" = b700
-printf '[TAIXU_PROGRESS:20] [COPY] 复制官方 gh 与配置服务\n'
-mkdir -p "$TAIXU_TOOL_DIR/bin" "$TAIXU_TOOL_DIR/lib" "$TAIXU_TOOL_DIR/web" "$TAIXU_TOOL_DATA"
-chmod 700 "$TAIXU_TOOL_DATA"
-cp "$TAIXU_PLUGIN_PAYLOAD/vendor/gh" "$TAIXU_TOOL_DIR/lib/gh"
-cp "$TAIXU_PLUGIN_PAYLOAD/vendor/LICENSE" "$TAIXU_TOOL_DIR/lib/gh-LICENSE"
+test "$(od -An -t x1 -N 4 "$GULONG_PLUGIN_PAYLOAD/vendor/gh" | tr -d ' \n')" = 7f454c46
+test "$(od -An -t x1 -j 18 -N 2 "$GULONG_PLUGIN_PAYLOAD/vendor/gh" | tr -d ' \n')" = b700
+printf '[GULONG_PROGRESS:20] [COPY] 复制官方 gh 与配置服务\n'
+mkdir -p "$GULONG_TOOL_DIR/bin" "$GULONG_TOOL_DIR/lib" "$GULONG_TOOL_DIR/web" "$GULONG_TOOL_DATA"
+chmod 700 "$GULONG_TOOL_DATA"
+cp "$GULONG_PLUGIN_PAYLOAD/vendor/gh" "$GULONG_TOOL_DIR/lib/gh"
+cp "$GULONG_PLUGIN_PAYLOAD/vendor/LICENSE" "$GULONG_TOOL_DIR/lib/gh-LICENSE"
 for entry in github_plugin.py service_protocol.py; do
-    cp "$TAIXU_PLUGIN_PAYLOAD/lib/$entry" "$TAIXU_TOOL_DIR/lib/$entry"
+    cp "$GULONG_PLUGIN_PAYLOAD/lib/$entry" "$GULONG_TOOL_DIR/lib/$entry"
 done
 for entry in gh gh-ui gh-git; do
-    cp "$TAIXU_PLUGIN_PAYLOAD/bin/$entry" "$TAIXU_TOOL_DIR/bin/$entry"
-    chmod 755 "$TAIXU_TOOL_DIR/bin/$entry"
+    cp "$GULONG_PLUGIN_PAYLOAD/bin/$entry" "$GULONG_TOOL_DIR/bin/$entry"
+    chmod 755 "$GULONG_TOOL_DIR/bin/$entry"
 done
 for entry in index.html app.js app.css; do
-    cp "$TAIXU_PLUGIN_PAYLOAD/web/$entry" "$TAIXU_TOOL_DIR/web/$entry"
+    cp "$GULONG_PLUGIN_PAYLOAD/web/$entry" "$GULONG_TOOL_DIR/web/$entry"
 done
-chmod 755 "$TAIXU_TOOL_DIR/lib/gh"
-printf '[TAIXU_PROGRESS:80] [VERIFY] 验证 gh 可执行文件\n'
-"$TAIXU_TOOL_DIR/lib/gh" --version
-/usr/bin/python3 -I -c 'import ast,sys; ast.parse(open(sys.argv[1], encoding="utf-8").read())' "$TAIXU_TOOL_DIR/lib/github_plugin.py"
-printf '[TAIXU_PROGRESS:100] [VERIFY] 安装完成，请在插件详情启动服务并打开管理页面\n'
+chmod 755 "$GULONG_TOOL_DIR/lib/gh"
+printf '[GULONG_PROGRESS:80] [VERIFY] 验证 gh 可执行文件\n'
+"$GULONG_TOOL_DIR/lib/gh" --version
+/usr/bin/python3 -I -c 'import ast,sys; ast.parse(open(sys.argv[1], encoding="utf-8").read())' "$GULONG_TOOL_DIR/lib/github_plugin.py"
+printf '[GULONG_PROGRESS:100] [VERIFY] 安装完成，请在插件详情启动服务并打开管理页面\n'
